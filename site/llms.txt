@@ -1,7 +1,7 @@
 ## Bayes and Law: Evidence, Expected Utility and Machines in the Courtroom
 
 - [Bayes and Law: Evidence, Expected Utility and Machines in the Courtroom](https://vsokolov.org/books/bayes_law/index.html.md): by Nick Polson and Vadim Sokolov (2026). A casebook for law students on reasoning under uncertainty: priors, likelihood ratios, standards of proof as decision thresholds, the classic fallacies, and the statistics, economics and machines that now enter the courtroom, taught through leading English, American and comparative cases. Keywords: Bayesian reasoning in law, likelihood ratio, weight of evidence, standards of proof, decision theory, expected utility, forensic statistics, prosecutor's fallacy, statistics as evidence, law and economics, artificial intelligence and law, algorithmic fairness.
-- [How to cite](https://doi.org/10.5281/zenodo.24138404): DOI 10.5281/zenodo.24138404 for version 1.0.0; the BibTeX entry is on the book page
+- [How to cite](https://doi.org/10.5281/zenodo.24138404): DOI 10.5281/zenodo.24138404 for version 1.0.0 (10.5281/zenodo.24138403 for all versions); the BibTeX entry is on the book page
 - [The book as a PDF](https://github.com/VadimSokolov/bayes_law/releases/download/v1.0.0/bayes_law.pdf): 463 pages, CC BY 4.0
 - [Source on GitHub](https://github.com/VadimSokolov/bayes_law/tree/v1.0.0): the LaTeX source, code and bibliography
 - [Report an error or ask a question](https://github.com/VadimSokolov/bayes_law/issues): the issues of the book's repository on GitHub

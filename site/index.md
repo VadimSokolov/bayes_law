@@ -2,7 +2,7 @@
 
 By Nick Polson and Vadim Sokolov.
 
-[![PDF](https://vsokolov.org/books/icon-pdf.svg)](https://github.com/VadimSokolov/bayes_law/releases/download/v1.0.0/bayes_law.pdf "PDF") [![Source on GitHub](https://vsokolov.org/books/icon-github.svg)](https://github.com/VadimSokolov/bayes_law/tree/v1.0.0 "Source on GitHub")
+[![PDF](https://vsokolov.org/books/icon-pdf.svg)](https://github.com/VadimSokolov/bayes_law/releases/download/v1.0.0/bayes_law.pdf "PDF") [![Source on GitHub](https://vsokolov.org/books/icon-github.svg)](https://github.com/VadimSokolov/bayes_law/tree/v1.0.0 "Source on GitHub") [![DOI 10.5281/zenodo.24138404](https://zenodo.org/badge/DOI/10.5281/zenodo.24138404.svg)](https://doi.org/10.5281/zenodo.24138404)
 
 ## Description
 
