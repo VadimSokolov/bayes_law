@@ -1,0 +1,142 @@
+\chapter{Bayesian Stories}
+\label{ch:stories}
+
+\section{Why stories}
+
+Trials are won and lost on stories. Counsel open by telling the jury what happened; witnesses are examined to fill in episodes; closing speeches weave the evidence into a narrative that makes sense of it all. Psychological research supports what advocates know. Pennington and Hastie's story model of juror decision making found that jurors construct a narrative from the evidence, evaluate competing narratives by their coverage of the evidence, their coherence and their uniqueness, and choose the verdict that best fits the story they accept \citep{pennington1991}. Wagenaar, van Koppen and Crombag argued that Dutch criminal courts reason by anchored narratives, stories whose episodes are anchored in common sense generalisations \citep{wagenaar1993}. Ronald Allen and Michael Pardo have argued that the law's standards of proof are best understood as comparisons of the relative plausibility of the parties' explanations, rather than as probability thresholds \citep{allen2019}.\index{story model}\index{relative plausibility}
+
+To many lawyers, stories and probabilities seem opposed. Probability is atomistic, treating each item of evidence separately, while stories are holistic. Probability needs numbers, while stories need sense. In our paper with Shiva Maharaj, \emph{Bayesian Stories: Turning Narratives into Evidence}, we argued that the opposition is false \citep{polson_maharaj_stories}. A story is a generative model: a hypothesis about how the evidence came to be. Comparing stories is Bayesian model comparison, and the criteria of the story model, coverage, coherence and uniqueness, correspond to the likelihood, the prior and the concentration of the posterior. This chapter develops the theory and applies it to the murder of Meredith Kercher.
+
+\section{Stories as generative models}
+
+A story $S$ specifies a sequence of events and the causal relations among them. Given $S$, the evidence $E$ has a probability $\Prob(E\given S)$, which may be high if the story predicts the evidence or low if it requires coincidences. Stories have free parameters: the precise times of events, the routes people took, the motives that drove them. Let $\phi$ denote these. Then
+\begin{equation}
+\Prob(E\given S) = \int \Prob(E\given S, \phi)\,\pi(\phi\given S)\,d\phi .
+\end{equation}
+Given two stories, the weight of evidence for one over the other, in decibans as in Chapter~\ref{ch:odds}, is ten times the base ten log of the Bayes factor,
+\begin{equation}
+W(S_1/S_2 : E) = 10\log_{10} \frac{\Prob(E\given S_1)}{\Prob(E\given S_2)},
+\end{equation}
+and the posterior odds of the stories are the prior odds, based on how plausible each story is before the evidence, multiplied by the Bayes factor.\index{story!as generative model}
+
+This simple formulation captures the three criteria of the story model.
+
+\paragraph{Coverage} A story that explains more of the evidence has higher likelihood. Evidence the story does not explain must be attributed to coincidence, error or some side process, each of which has low probability. A story that leaves a bloodstain unexplained pays for it with a factor equal to the probability of the stain arising by chance.
+
+\paragraph{Coherence} A story whose episodes fit together, whose actors behave in ways consistent with their motives and with common sense, has high prior probability. A story that requires a person to act against his interests, or events to happen in an unusual order, has low prior probability. Coherence is a property of $\pi(S)$ and of $\pi(\phi\given S)$.
+
+\paragraph{Uniqueness} If two stories explain the evidence equally well, neither should be accepted with confidence. In Bayesian terms, the posterior is spread across stories, and the probability of any one of them is limited by the existence of the others. Uniqueness is the requirement that the posterior concentrate on one story.
+
+The Bayesian theory adds two things the psychological model lacks. It gives a common scale on which coverage and coherence trade off: a story that explains one more item at the cost of one more improbable assumption gains or loses depending on the ratio of the probabilities involved. And it penalises stories with many free parameters, through the integral over $\phi$. A story that can be adjusted to fit any evidence has a diffuse prior over its parameters, and its marginal likelihood is low because most of its versions do not fit. This is the Bayesian Occam's razor applied to narratives.\index{Occam's razor}
+
+\section{Stories and the burden of proof}
+
+How do stories relate to the standards of proof? In a criminal case the prosecution offers a story $S_p$ in which the defendant is guilty. The defence need not offer any story, but usually offers one or more, $S_{d,1}, S_{d,2},\ldots$, in which he is innocent. The posterior probability of guilt is
+\begin{equation}
+\Prob(G\given E) = \frac{\sum_{S \in \mathcal{G}} \Prob(E\given S)\pi(S)}{\sum_{S\in \mathcal{G}\cup\mathcal{I}} \Prob(E\given S)\pi(S)},
+\end{equation}
+where $\mathcal{G}$ is the set of all stories in which the defendant is guilty and $\mathcal{I}$ those in which he is innocent. This shows why the defence need not prove any story: it suffices that the innocent stories collectively carry enough weight. It also shows the danger of comparing only the stories the parties present. If the prosecution's story is improbable and the defence's story is more improbable still, a naive comparison favours conviction, while a full analysis, including stories nobody told, might not. Lord Brandon's warning in \emph{The Popi M} that a court need not choose between two improbable explanations applies here \citep{popim1985}.
+
+Allen and Pardo's relative plausibility theory says the fact finder should compare the best explanation offered by each side. In a civil case, find for the party whose explanation is more plausible; in a criminal case, convict only if the prosecution's explanation is plausible and there is no plausible explanation consistent with innocence. This is close to the Bayesian theory when one story on each side dominates. It departs from it when the probability is spread across many stories, because the sum over stories can favour one side even when the single best story favours the other.
+
+\section{Hybrid theories}
+
+Bex, van Koppen, Prakken and Verheij developed a hybrid theory combining stories with arguments, in which stories explain the evidence and arguments support or attack the generalisations on which stories depend \citep{bex2010}. Vlek and colleagues proposed building Bayesian networks from scenarios, using idioms for common narrative structures \citep{vlek2014}. Our view is complementary: arguments are claims about likelihoods and priors, and a full Bayesian analysis requires both a set of stories and a set of arguments about their probabilities. The Bayesian theory says how the arguments should be weighed once they are made.
+
+\section{The murder of Meredith Kercher}
+
+\begin{casebox}{The Perugia case}
+Meredith Kercher, a British exchange student, was found dead in her locked bedroom in a house she shared in Perugia, Italy, on 2 November 2007. She had been sexually assaulted and stabbed. Her housemate Amanda Knox, an American student, and Knox's boyfriend Raffaele Sollecito were arrested within days, as was Patrick Lumumba, a bar owner whom Knox named during a night interrogation; Lumumba was released when his alibi was confirmed. Rudy Guede, a local man whose DNA and bloody prints were found in the room, was arrested in Germany. Guede, tried separately under a fast track procedure, was convicted and eventually sentenced to sixteen years. Knox and Sollecito were convicted in December 2009, acquitted on appeal in October 2011 after court appointed experts criticised the DNA evidence, had the acquittal annulled by the Court of Cassation in 2013, were convicted again in Florence in 2014, and were definitively acquitted by the Court of Cassation in March 2015, which cited serious flaws in the investigation. Knox's conviction for falsely accusing Lumumba was later the subject of proceedings in Strasbourg, where in 2019 the European Court of Human Rights found that Italy had violated her rights during the interrogation \citep{knox2019}. After that judgment the calunnia conviction was retried in Florence, where Knox was reconvicted in June 2024 (a three year sentence, already served), and the Court of Cassation upheld it on 23 January 2025, ending the case.
+\end{casebox}
+
+The Kercher case is ideal for a theory of stories for three reasons. It produced multiple fully reasoned judgments, because Italian courts must give written reasons (\emph{motivazione}) for their verdicts, and these reasons are in effect competing stories. The physical evidence was abundant, contested and subject to independent expert review, so the likelihood ratios of key items can be discussed with some care. And it has been analysed by statisticians, most recently in the comparison of Wigmore charts, Bayesian networks and chain event graphs by Dawid, Kadane, Mortera, Smith and colleagues discussed in Chapter~\ref{ch:classic} \citep{dawid2024kercher}.
+
+\subsection{The stories}
+
+We consider three families of stories.
+\begin{description}
+\item[$S_1$: Guede alone] Guede entered the house, possibly through the window of another room after breaking it with a rock, encountered Kercher, assaulted and killed her, and left. Knox and Sollecito were at Sollecito's flat.
+\item[$S_2$: Guede with Knox and Sollecito] All three were in the house; the assault and killing involved all three; afterwards Knox and Sollecito cleaned some traces and staged the broken window to suggest a burglary.
+\item[$S_3$: Knox and Sollecito without Guede] Included for completeness; the extensive evidence of Guede's presence gives it negligible likelihood, and no court accepted it.
+\end{description}
+The prosecution's story in the trials was a member of $S_2$; the defence's was $S_1$. Within each family the stories differ in detail: the motive offered for $S_2$ changed over the course of the proceedings, and the timing of the attack varied between versions.
+
+\subsection{The evidence}
+
+We focus on the items most discussed. For each we ask how probable it is under $S_1$ and under $S_2$, and report an illustrative weight of evidence in decibans. These numbers are not findings; they are the kind of numbers a careful analyst might defend, and their purpose is to show how the theory structures the argument. Readers will disagree with some of them, and the exercises invite that disagreement.
+
+\paragraph{Guede's traces} Guede's DNA was found inside the victim and on her bag and clothing, and his bloody hand and shoe prints were in the room. This evidence is expected under both $S_1$ and $S_2$, since both have Guede in the room. Its weight for $S_1$ versus $S_2$ is about zero. It decisively excludes $S_3$.
+
+\paragraph{Absence of Knox's traces in the bedroom} Despite extensive testing, no reliable trace of Knox was identified in the room where the murder occurred, which was full of Guede's traces. Under $S_2$, with three people involved in a violent struggle, one would expect some trace of each participant; under $S_1$ none is expected. The probability of finding no trace of a participant in such a room after such an attack, if she were there, is low, though not negligible if she was careful or the collection was poor. A weight of perhaps ten to fifteen decibans for $S_1$ is defensible.
+
+\paragraph{The kitchen knife} A knife from Sollecito's kitchen was found to have Knox's DNA on the handle, expected since she used his kitchen, and on the blade a trace that the police laboratory attributed to Kercher. The court appointed experts on appeal (Conti and Vecchiotti) found that the testing did not follow the internationally recommended precautions for low copy number samples and concluded that the result was unreliable and that contamination could not be excluded. The knife did not match some of the wounds or a bloody imprint on the bed sheet. In the terms of equation~\eqref{eq:lowtemplate} in Chapter~\ref{ch:bf}, the likelihood ratio is bounded by the reciprocal of the probability of contamination or misattribution, $1/c$. If $c$ is one in fifty, the weight for $S_2$ is at most about seventeen decibans; if the result is unreliable, it is close to zero. The question is how likely the reported result is under $S_1$, and given a low copy number sample tested without the standard controls in a laboratory that processed many items from the same victim, it is not negligible.
+
+\paragraph{The bra clasp} A clasp cut from the victim's bra was collected from the floor of the room forty six days after the murder, having been moved and left in place during earlier searches, and was found to carry a trace attributed to Sollecito among a mixture of several contributors. The appeal experts emphasised the long delay, the evident disturbance of the scene and the handling of the item. Under $S_1$, the probability of a trace attributed to Sollecito appearing on an item collected so late from a heavily disturbed scene, where he had been present as the boyfriend of a housemate, is again bounded below by the contamination probability. Its weight for $S_2$ is modest and uncertain.
+
+\paragraph{The broken window} The prosecution argued that the window of a second bedroom had been broken from inside to stage a burglary, citing glass on top of scattered clothing and the height and difficulty of the climb. The defence argued that Guede had a history of entering buildings by breaking windows, and that the climb was feasible. Under $S_1$ the broken window is part of the burglary; under $S_2$ it is staging. Each side's argument concerns the likelihood of details given each story. A weight near zero, with wide uncertainty, seems fair.
+
+\paragraph{Knox's statements} During a long night interrogation, without a lawyer and with a police interpreter, Knox signed statements placing herself in the house and naming Lumumba, an innocent man, as the killer. She retracted them within hours in writing. The statements are the most contested evidence in the case. Knox was denied a lawyer at the 5:45am interview; in April 2008 the Court of Cassation ruled that the statements could not be used against her on the murder charge, though they remained usable on the charge of falsely accusing Lumumba, and the European Court later found a violation on the same ground; we keep them in the analysis to show how such evidence would be weighed. Under $S_2$, a statement placing her at the scene is a partial confession. Under $S_1$, it is a false statement produced by interrogation pressure, a phenomenon well documented in the literature on false confessions (Chapter~\ref{ch:evidence}). The fact that the statement named an innocent man with an alibi, that is, that it was false in a central particular, is evidence about its reliability. Its weight is a matter of judgment; a careful analyst would discount it heavily, and the European Court's later finding about the interrogation supports that discount.
+
+\paragraph{Behaviour} Much was made at trial of Knox's demeanour: doing cartwheels at the police station, kissing Sollecito outside the house. Behaviour of this kind is common among innocent and guilty people under stress, and its likelihood ratio is close to one. Its prominence at trial is an example of the vivid evidence that people overweight (Chapter~\ref{ch:evidence}).
+
+\paragraph{Mixed DNA in the bathroom} Mixed DNA of Knox and the victim was found in the bathroom the two shared. Under both stories this is expected; its weight is near zero.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{p{4.6cm}r}
+\toprule
+Item & Weight for $S_1$ over $S_2$ (db)\\
+\midrule
+Guede's traces & $0$\\
+No reliable Knox trace in bedroom & $+10$ to $+15$\\
+Kitchen knife trace & $-17$ to $0$\\
+Bra clasp trace & $-10$ to $0$\\
+Broken window & $-5$ to $+5$\\
+Interrogation statements & $-5$ to $0$\\
+Demeanour & $0$\\
+Mixed DNA in shared bathroom & $0$\\
+\midrule
+Total & $-27$ to $+20$\\
+\bottomrule
+\end{tabular}
+\caption{Illustrative weights of evidence for the lone assailant story against the joint story in the Kercher case. Ranges reflect uncertainty about contamination and reliability. The total adds the weights, which assumes the items are conditionally independent given each story. Not findings of fact.}
+\label{tab:kercher}
+\end{table}
+
+\subsection{The prior}
+
+The prior compares the plausibility of the stories before the specific evidence. $S_1$ is a burglary that turned into sexual assault and murder by a man whom the defence and press reports described as having a history of breaking into buildings (alleged break-ins, not a burglary conviction). $S_2$ is a joint sexual assault and murder by a young woman with no history of violence, her boyfriend of one week with no history of violence, and a man the woman barely knew, with no clear motive for the two students. The base rate of violent crimes committed jointly by previously non violent young people with a near stranger is low. We take the prior odds of $S_1$ against $S_2$ at more than ten to one, ten decibans or more.
+
+\subsection{The posterior}
+
+Combining a prior of ten decibans with Table~\ref{tab:kercher}, the posterior weight for $S_1$ over $S_2$ ranges from about $-17$ to $+30$ decibans, depending on how one assesses the knife and the clasp. The posterior probability of $S_2$ ranges from about one in a thousand to about ninety eight per cent. This is a large range, and that is the point. The case turned almost entirely on the reliability of two DNA results, the knife trace (a low copy number result) and the bra clasp trace (a mixture), which the appeal experts criticised for contamination, handling and mixture interpretation. Both were processed by the same laboratory, so their weights share a contamination mechanism and are not independent; the sum of the weights is a rough guide only. If they were reliable, the joint story is plausible. If they were not, the evidence for it largely disappears. A trial that focused on the probability of contamination, rather than on the rarity of the profiles or on the defendants' demeanour, would have been addressing the question on which everything depended.
+
+The Italian courts' trajectory can be read in these terms. The first trial court accepted the DNA results and placed weight on behaviour; its posterior favoured $S_2$. The appeal court in 2011, having heard independent experts, concluded that the DNA results were unreliable, which collapsed the case. The Court of Cassation in 2013 criticised the appeal court for, among other things, its treatment of the evidence and its refusal to test a further trace, and sent the case back. The Florence court in 2014 accepted the prosecution's story again. The Court of Cassation in 2015 acquitted definitively, emphasising failures in the investigation. Each court was implicitly assigning different values to the same few likelihood ratios. A Bayesian analysis cannot say which court was right without settling the contamination question, but it can say exactly which question needed settling.
+
+\section{Lessons from Perugia}
+
+Three lessons generalise.
+
+First, the theory of stories identifies the pivotal evidence. Most of the evidence in Perugia was neutral between the stories, however dramatic it seemed. The analysis shows that two items carried the case and that their weight depended on the probability of contamination. A court, or an investigator, should direct resources to the pivotal parameter.
+
+Second, the theory exposes the asymmetric treatment of evidence. Evidence of presence in the shared house, a mixed trace in the bathroom or Knox's DNA on a knife from her boyfriend's kitchen, was presented as incriminating, though it was predicted equally by innocence. Evidence of absence, the lack of Knox's traces in the murder room, was given little weight, though it was predicted far better by innocence. A likelihood ratio analysis treats presence and absence symmetrically.
+
+Third, the theory shows how procedure shapes inference. Under the civil law system, judges and lay assessors deliberate together and must give reasons. The reasons make the implied likelihoods visible and open to appellate review, which is why we can analyse the case at all. The repeated reversals suggest both the value of that transparency and the danger of a system in which each level of court can reweigh the evidence. We return to the comparison with the common law jury in Chapter~\ref{ch:commoncivil}.
+
+\section{Stories and machines}
+
+Large language models are, among other things, story machines. Given a set of facts, they can generate fluent narratives that explain them. This raises an obvious possibility and an obvious danger. The possibility is that a model could generate the set of stories $\mathcal{G}\cup\mathcal{I}$ more completely than human advocates, including stories neither side thought to tell, and so help guard against the error of comparing only two improbable explanations. The danger is that fluent narratives are persuasive in proportion to their coherence, not their likelihood, and a model optimised to produce plausible text is not optimised to produce probable explanations. The Bayesian theory of stories suggests a discipline: every machine generated story should be scored by its likelihood for each item of evidence, with the scores made explicit and open to challenge. Chapter~\ref{ch:pleadings} develops a related generative approach for civil pleadings and Chapter~\ref{ch:lindleyai} for adjudication more generally.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Show that if a story $S$ has a free parameter $\phi$ with a uniform prior on an interval of length $L$, and the evidence is consistent with $S$ only for $\phi$ in a subinterval of length $\ell$, then the marginal likelihood is reduced by the factor $\ell/L$. Interpret this as an Occam penalty for a flexible story.
+\item Recompute the Kercher posterior with your own weights for each item in Table~\ref{tab:kercher}. Which item is most influential for your conclusion?
+\item The knife trace was a low copy number result and was not retested. Suppose a retest would have confirmed the result with probability $0.9$ if it were genuine and with probability $0.2$ if it were contamination. What is the value of information of the retest, in the sense of Chapter~\ref{ch:standards}, for a court with threshold $0.95$?
+\item Pennington and Hastie list coverage, coherence and uniqueness. Map each onto the marginal likelihood, the prior or the posterior.
+\item Write a short closing speech for each side in a case of your choice, then score each speech by the weights it implicitly assigns to the evidence. Are the speeches coherent?
+\item Is there a case in which the relative plausibility theory and the Bayesian theory give different verdicts? Construct one.
+\end{enumerate}
+
+\section*{Further reading}
+Our paper sets out the theory in more detail \citep{polson_maharaj_stories}. Pennington and Hastie \citep{pennington1991} and Allen and Pardo \citep{allen2019} are the main alternatives. The Dawid et al.\ comparison is the best recent statistical treatment of the Kercher evidence \citep{dawid2024kercher}.

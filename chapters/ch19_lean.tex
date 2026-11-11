@@ -1,0 +1,137 @@
+\chapter{Verification: Lean, Catala and Machine Checked Law}
+\label{ch:lean}
+
+\section{What it means to check an argument}
+
+A mathematical proof is an argument that a conclusion follows from premises by steps each of which is valid. For most of history proofs were checked by people, and errors survived in published work for years. In the last two decades interactive theorem provers have changed this. In a system such as Lean, a proof is written in a formal language and checked step by step by a small program, the kernel, whose correctness can itself be scrutinised \citep{demoura2021}. The community library mathlib contains a large and growing body of formalised mathematics \citep{mathlib2020}. Research mathematicians have used Lean to verify new results whose informal proofs were difficult to check, and large collaborative projects formalise major theorems, such as the Liquid Tensor Experiment, completed in Lean in July 2022 (its first half was announced in May 2021) \citep{lte2022}. Machine learning systems that propose proof steps, checked by Lean, have reached silver-medal level at the 2024 International Mathematical Olympiad: AlphaProof, working in Lean, solved three of the six problems, and a separate geometry system, AlphaGeometry 2, solved a fourth \citep{deepmind2024}. The model of work that emerges is a division of labour: humans, or machines, propose arguments, and a verifier checks them.\index{Lean}\index{theorem proving}
+
+This chapter asks whether the same division of labour can be applied to legal decisions. A judgment is also an argument from premises, the facts found and the law, to a conclusion, the order. Parts of that argument are logical or arithmetical: the application of a statutory formula, the satisfaction of the elements of a claim, the computation of damages or of a likelihood ratio. Other parts are not: the finding of facts, the interpretation of open textured words, the weighing of competing values. Our thesis is that verification can certify the first kind of step, and that doing so would make legal decisions more accurate and more transparent, while the second kind remains for human judgment, made explicit as premises.
+
+\section{Lean in brief}
+
+Lean is a functional programming language and a proof assistant based on dependent type theory. Propositions are types, and a proof of a proposition is a term of that type (a small piece of code); the kernel checks that the term has the claimed type. Users write proofs interactively, using tactics (commands that build the term step by step), and the system reports what remains to be proved. Definitions, theorems and proofs live in files that can be compiled and checked by anyone.
+
+A simple example shows the flavour. The following defines when a precaution is required under the Hand formula of Chapter~\ref{ch:tort}, and proves that in a stylised version of \emph{Carroll Towing} the precaution was required.
+
+\begin{lstlisting}[language=Lean, caption={The Hand formula as a Lean proposition.}]
+def handNegligent (B P L : ℚ) : Prop := B < P * L
+
+theorem carroll_example :
+    handNegligent 50 (1/10) 1000 := by
+  unfold handNegligent
+  norm_num
+\end{lstlisting}
+
+The theorem says that a burden of fifty is less than a probability of one tenth times a loss of one thousand, and \texttt{norm\_num} checks the arithmetic. Nothing here is deep. The point is that once the premises are stated, the conclusion is certified by a checker that does not care who wins.
+
+\section{Rules as code}
+
+\subsection{Statutes as logic programs}
+
+The idea of writing statutes as programs is old. In 1986 Sergot, Sadri, Kowalski and colleagues translated much of the British Nationality Act 1981 into Prolog, a logic programming language, and showed that the program could answer questions about who was a British citizen \citep{sergot1986}. The exercise exposed ambiguities and gaps in the statute that drafters had not noticed: cases in which the rules did not determine an answer, or determined conflicting ones. Translating law into a formal language is a way of finding its bugs.\index{rules as code}\index{British Nationality Act}
+
+Sarah Lawsky has argued that statutes, especially tax statutes, are naturally written in default logic, in which general rules are subject to exceptions that are themselves subject to exceptions \citep{lawsky2017}. A deduction is allowed unless an exception applies, unless the exception is itself excepted. Ordinary programming languages express this structure awkwardly, and translations that do not respect it introduce errors.
+
+\subsection{Catala}
+
+Catala is a programming language designed by Denis Merigoux, Nicolas Chataing and Jonathan Protzenko for writing law as code \citep{merigoux2021}. Its central feature is default logic: a Catala program mirrors the structure of the statute, with each article translated into code placed next to the text, and exceptions written as exceptions. Catala has been used to encode parts of the US tax code and French family benefits law. The French public finance administration has worked with its developers. When the Catala translation of a provision disagreed with the existing implementation used by the administration, the discrepancy revealed an error in the implementation.\index{Catala}
+
+Catala illustrates the affinity between code based legal systems and formalisation discussed in Chapter~\ref{ch:commoncivil}. A code is a text with a structure that can be mirrored. A body of precedent is a collection of decisions whose principles must first be extracted, a task closer to machine learning than to translation.
+
+\subsection{Verified computation of entitlements}
+
+For the many legal decisions that consist of applying a formula, the computation of a tax liability, a benefit entitlement, a child support amount, a pension, formal encoding offers a clear gain. The citizen can see the rules applied, the administration can test its systems against the law, and errors in software that silently deny entitlements can be detected. The scandal in the Netherlands over the childcare benefits system, in which automated risk assessment and rigid rules led to thousands of families being wrongly accused of fraud and required to repay benefits, is a warning of what happens when rules are coded badly and their outputs are not challengeable \citep{hadwick2022}.
+
+\section{Verifying legal arguments}
+
+\subsection{The structure of a claim}
+
+A cause of action has elements, all of which must be proved. A judgment for the claimant asserts that each element was found. A formalisation of the cause of action as a proposition, the conjunction of its elements, allows a checker to verify that the findings support the judgment. If the court found duty, breach and damage but made no finding on causation, a checker would refuse to certify a judgment for the claimant.
+
+\begin{lstlisting}[language=Lean, caption={Elements of negligence as a structure; a judgment requires every element.}]
+structure Findings where
+  duty : Prop
+  breach : Prop
+  causation : Prop
+  damage : Prop
+
+def liable (f : Findings) : Prop :=
+  f.duty ∧ f.breach ∧ f.causation ∧ f.damage
+
+theorem liable_of_findings (f : Findings)
+    (h1 : f.duty) (h2 : f.breach)
+    (h3 : f.causation) (h4 : f.damage) :
+    liable f := ⟨h1, h2, h3, h4⟩
+\end{lstlisting}
+
+The example is trivial, but real causes of action come with exceptions and defences, and real judgments in complex cases make hundreds of findings. Appellate courts spend much of their time checking whether a trial judge's findings support the order made. A machine check of the logical structure would not decide whether the findings were right, but would catch judgments that do not follow from their own findings.
+
+\subsection{Defeasibility}
+
+Legal rules are defeasible: a general rule yields to an exception when the exception's conditions are met. Gordon's Pleadings Game of Chapter~\ref{ch:pleadings} was built on a nonmonotonic logic for exactly this reason. In a proof assistant, defeasibility can be represented by making exceptions explicit hypotheses: the theorem says that the rule applies provided no listed exception holds, and a proof must establish that each exception fails. The burden of proof is represented by which party must supply which proofs. This is more cumbersome than default logic, but it makes the structure explicit.
+
+\section{Verifying Bayes factors}
+
+The Bayesian arguments of this book have the same two layer structure. The premises are probabilities and utilities: a random match probability, a contamination rate, a prior based on the size of a population, a ratio of losses. These are matters of judgment and evidence. The conclusions are computed: a likelihood ratio, a posterior, a decision. The computation can be verified.\index{Bayes factor!verification}
+
+\begin{lstlisting}[language=Lean, caption={Odds form of Bayes and a decision certificate.}]
+def postOdds (priorOdds bf : ℚ) : ℚ := priorOdds * bf
+
+def convict (priorOdds bf threshOdds : ℚ) : Prop :=
+  postOdds priorOdds bf > threshOdds
+
+theorem island_example :
+    ¬ convict (1/100000) (1/(1/1000000 + 1/1000)) 19 := by
+  unfold convict postOdds
+  norm_num
+\end{lstlisting}
+
+The theorem states that, with prior odds of one in one hundred thousand, a Bayes factor computed as the reciprocal of a random match probability of one in a million plus a laboratory error rate of one in a thousand, and a criminal threshold at odds of nineteen to one, a conviction would not be warranted. (The Bayes factor $1/(p+e)$ used here is an approximation to $1/(p+e(1-p))$, where $p$ is the random match probability and $e$ the error rate; see the DNA-with-error discussion in Chapter~\ref{ch:bf}.) Lean proves this negation, because the posterior odds are about one in a hundred, far below nineteen. Had we stated the positive claim, the proof would have failed, and a failed proof certifies nothing by itself; it is the proof of the negation that certifies that, on these premises, the evidence does not reach the standard. A prosecutor who claimed otherwise would have to change a premise, and the change would be visible.
+
+More useful than point calculations are interval certificates. If the premises are given as ranges, for instance a contamination probability between one in ten thousand and one in a hundred, a verified computation can establish bounds on the posterior over the whole range. A theorem of the form \emph{for every value of the contamination rate in this interval, the posterior odds exceed nineteen} is a robust conclusion of the kind Chapter~\ref{ch:bf} recommended, with the robustness itself verified.
+
+\section{What cannot be verified}
+
+\subsection{Facts}
+
+Verification certifies that conclusions follow from premises. It cannot certify the premises. Whether the witness was telling the truth, whether the sample was contaminated, whether the defendant knew of the risk, these are questions of fact, answered by evidence and judgment. A verified judgment built on false findings is a verified falsehood. The Bayesian framework at least makes the factual premises explicit, as probabilities and likelihoods, so that they can be contested; verification ensures that the contest is about those premises and not about the arithmetic.
+
+\subsection{Open texture}
+
+H. L. A. Hart observed that legal rules have a core of settled meaning and a penumbra of uncertainty \citep{hart1961}. A rule forbidding vehicles in the park clearly applies to cars, and its application to bicycles, roller skates or airplanes is uncertain. Whether a case falls within the penumbra is a question of interpretation, which depends on the purpose of the rule and on values. Formalisation cannot settle such questions. It can only take an interpretation as a premise. A formal system that forces every term to have a crisp definition will either be wrong in penumbral cases or will need to leave terms undefined, to be filled in by a judge.\index{open texture}
+
+\subsection{Discretion and values}
+
+Many legal decisions involve discretion: sentencing within a range, the award of costs, the exercise of equitable remedies, the balancing of rights. These are decisions under uncertainty with utilities that reflect values. Lindley's view, to which Chapter~\ref{ch:lindleyai} returns, was that utilities are the part of the decision that people must supply. Verification can check that a decision maximises expected utility given stated probabilities and utilities, but the utilities themselves are premises.
+
+\section{Machines that propose and machines that check}
+
+The success of formal mathematics with machine learning suggests a model for law. A language model, trained on legal texts, proposes an argument: the relevant rules, the findings needed, the inference to a conclusion. A formal system checks the logical and arithmetical steps against encoded law. A human judge supplies and takes responsibility for the factual findings, the interpretation of open textured terms and the utilities. Each component does what it does well. Language models are fluent but unreliable; formal checkers are reliable but narrow; judges are accountable but slow and expensive. Combining them could make legal reasoning faster without making it less trustworthy.\index{autoformalisation}
+
+The main obstacle is the translation of law into formal language, autoformalisation, which is difficult and error prone. Errors in translation are errors in the premises, and they are hard to detect because the formal version looks authoritative. The Dutch benefits scandal and the British Post Office Horizon scandal, in which faulty accounting software led to the wrongful prosecution of hundreds of sub postmasters on the presumption that the computer was right, show the danger of trusting computer outputs without scrutiny of how they were produced \citep{bates2019,hamilton2021}. A verified system is only as good as its specification. The English common law presumption that computer evidence is reliable, which the Horizon cases made notorious, is itself a prior that should be revisited: the reliability of a system is an empirical question, and the likelihood ratio of its output depends on its error rate.\index{Post Office Horizon}
+
+\section{A proposal}
+
+We propose three modest uses of verification in legal decision making, each of which could be adopted now.
+
+First, statutory computations that determine entitlements or liabilities should be published as code, in a language such as Catala, alongside the statute, with the administration's software tested against the published code. Citizens and their advisers could run the code on their own facts.
+
+Second, forensic likelihood ratios and posterior calculations presented in court should be accompanied by a machine checkable specification of their inputs and computation, so that the other side, or the court, can verify the arithmetic and explore the effect of changing the inputs. This is a formal version of the transparency the Court of Appeal required in \emph{R v T}, a judgment otherwise sceptical of likelihood ratios built on weak data (Chapter~\ref{ch:odds}).
+
+Third, appellate courts could use structural checks of the kind sketched above to confirm that trial judgments make every finding the order requires. The check would not replace appellate review but would remove one class of error.
+
+None of these proposals asks a machine to find facts or to make value judgments. Each asks a machine to do what it does reliably, to check that conclusions follow from premises, and leaves the premises to people.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Write a Lean definition of the civil and criminal standards of proof as predicates on a posterior probability and a threshold. State and prove that the criminal standard implies the civil one when the criminal threshold is higher.
+\item Encode a simple statutory rule with one exception and one exception to the exception, in Catala style pseudocode. Give a case in which the exception applies and one in which it is defeated.
+\item Show that the island conviction proposition is false even with a laboratory error rate of zero. What prior odds would be needed to make it true with an error rate of one in a hundred thousand?
+\item Hart's vehicles in the park example shows the limits of formalisation. Choose a statute you know and identify a term with open texture. How should a formal encoding handle it?
+\item The Horizon cases relied on a presumption that computer evidence is reliable. Express the presumption as a prior on the error rate of a system. What evidence should be required to rebut it?
+\item Could a judgment be fully verified? Identify, for a reported case of your choice, which steps are logical, which arithmetical, which factual and which evaluative.
+\end{enumerate}
+
+\section*{Further reading}
+On Lean, de Moura and Ullrich \citep{demoura2021} and the mathlib paper \citep{mathlib2020}; on Catala, Merigoux, Chataing and Protzenko \citep{merigoux2021}; on statutes and logic, Sergot and colleagues \citep{sergot1986} and Lawsky \citep{lawsky2017}; Hart's \emph{The Concept of Law} \citep{hart1961}.

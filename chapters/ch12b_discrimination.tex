@@ -1,0 +1,88 @@
+\chapter{Discrimination, Regression and the Burden of Proof}
+\label{ch:discrimination}
+
+\section{Statistics as proof of intent}
+
+Discrimination law asks about the reasons for decisions: whether an employer refused to hire, a lender refused to lend, or a university refused to admit a person because of race, sex or another protected characteristic. Reasons are states of mind, and states of mind are rarely documented. Decision makers do not usually write down that they rejected an applicant because of race. Courts therefore infer intent from patterns. If an employer's hiring of women is far below what the qualified pool would predict, and the employer offers no adequate explanation, the pattern is evidence of discrimination. Statistics have been central to discrimination litigation since the 1970s, and the cases have produced some of the most extended judicial engagements with statistical method in any field of law.\index{discrimination}
+
+This chapter examines that engagement through three questions: how disparities should be measured, how regression analysis should be used to control for legitimate factors, and how the burden of proof structures the inference. It then turns to the litigation over admissions at Harvard, decided by the Supreme Court in 2023, in which the competing regression analyses of two leading economists were at the centre of the trial.
+
+\section{Disparate treatment and disparate impact}
+
+American law distinguishes two theories. Disparate treatment is intentional discrimination: treating a person differently because of a protected characteristic. Disparate impact, recognised in \emph{Griggs v Duke Power} in 1971, is liability for practices that are neutral on their face but fall more harshly on a protected group and cannot be justified by business necessity \citep{griggs1971}. In \emph{Griggs} the employer required a high school diploma and passing scores on aptitude tests for jobs that did not need them, and the requirements excluded black applicants at much higher rates.\index{disparate impact}\index{Griggs v Duke Power}
+
+English law has parallel concepts. Direct discrimination under section 13 of the Equality Act 2010 is treating a person less favourably because of a protected characteristic. Indirect discrimination under section 19 is applying a provision, criterion or practice that puts persons sharing a protected characteristic at a particular disadvantage and cannot be shown to be a proportionate means of achieving a legitimate aim. In \emph{Essop v Home Office} the Supreme Court held that a claimant need not show why the practice disadvantaged the group, only that it did, and that the disadvantage could be established by statistics \citep{essop2017}.
+
+The two theories correspond to two statistical questions. Disparate treatment asks whether the protected characteristic causally affected decisions, holding qualifications fixed: a question about a conditional effect. Disparate impact asks whether a practice produces different outcomes for groups: a question about a marginal difference, followed by a question about justification.
+
+\section{Measuring disparity}
+
+\subsection{The four fifths rule}
+
+The Uniform Guidelines on Employee Selection Procedures, adopted by American federal agencies in 1978, state that a selection rate for any group that is less than four fifths of the rate for the group with the highest rate will generally be regarded as evidence of adverse impact. If seventy per cent of white applicants and fifty per cent of black applicants pass a test, the ratio is $0.71$, below four fifths, and adverse impact is indicated.\index{four fifths rule}
+
+The rule is easy to apply and ignores sampling variation. With small numbers of applicants, a ratio below four fifths can easily occur by chance; with large numbers, a ratio of $0.9$ may be highly significant but not substantively important. Courts have therefore combined the four fifths rule with significance tests, following the standard deviation analysis of \emph{Castaneda} and \emph{Hazelwood} discussed in Chapter~\ref{ch:fienberg}.
+
+\subsection{A Bayesian measure}
+
+A Bayesian approach models the selection rates of the two groups, $\theta_1$ and $\theta_2$, with prior distributions, updates them with the observed counts, and reports the posterior distribution of the ratio $\theta_2/\theta_1$. The posterior probability that the ratio is below four fifths answers the question the rule is trying to ask, while accounting for sampling uncertainty. With beta priors and binomial data the posterior is easily computed. For small samples the posterior is wide, and the probability that the ratio is below four fifths may be modest even when the observed ratio is well below it. For large samples it concentrates near the observed ratio. This measure has the same interpretation at every sample size, although at small samples the posterior depends materially on the prior.
+
+\section{Regression and its discontents}
+
+\subsection{Controlling for qualifications}
+
+Raw disparities do not establish discrimination if groups differ in relevant qualifications. Regression analysis estimates the effect of the protected characteristic on outcomes while controlling for qualifications. In \emph{Bazemore v Friday} the Supreme Court held that a regression analysis need not include every measurable variable to be admissible; the omission of some variables goes to its weight, not its admissibility \citep{bazemore1986}. Since then, regression has been the standard tool in pattern and practice cases.\index{regression evidence}\index{Bazemore v Friday}
+
+\subsection{Omitted variables}
+
+A regression coefficient on a protected characteristic estimates discrimination only if the controls capture all legitimate factors correlated with the characteristic. If a relevant qualification is omitted and is correlated with group membership, the coefficient is biased. Defendants routinely argue that the plaintiff's regression omits important variables; plaintiffs reply that the omitted variables would not change the result. A sensitivity analysis can quantify the dispute: how strongly would an omitted variable have to be related to both the outcome and group membership to explain away the estimated effect? Methods developed by Rosenbaum and, more recently, by Cinelli and Hazlett report the strength of confounding needed to change a conclusion \citep{cinelli2020}. A court can then ask whether a confounder of that strength is plausible, a question about priors.
+
+\subsection{Included variables}
+
+The opposite problem is equally important and less recognised. Including a variable that is itself affected by discrimination removes from the coefficient the part of the effect that runs through that variable, which usually biases it toward zero, and can bias it in either direction if that variable also depends on unmeasured qualifications. If an employer discriminates in assigning initial job grades, and a regression of pay on sex controls for grade, the regression will find little pay discrimination, because the discrimination has been absorbed into the grade. Statisticians call such a variable a mediator, and controlling for it a bad control. Whether to include a variable depends on whether it is a legitimate qualification determined independently of the decision under review, or a product of the same process. This is a causal question, best represented with a graph of the kind discussed in Chapter~\ref{ch:graphs}. The variable lies on a path from the protected characteristic to the outcome; controlling for it blocks part of the effect.
+
+\section{SFFA v Harvard}
+
+\begin{casebox}{Students for Fair Admissions v President and Fellows of Harvard College}
+Students for Fair Admissions sued Harvard in 2014, alleging that its undergraduate admissions process discriminated against Asian American applicants. The case was tried in 2018 in the District of Massachusetts. The central evidence consisted of Harvard's admissions data for several cohorts, analysed by two economists: Peter Arcidiacono for SFFA and David Card for Harvard. Both estimated logistic regression models of admission on applicant characteristics. Arcidiacono's models found a statistically significant penalty for Asian American applicants relative to white applicants with similar characteristics. Card's models found no significant penalty. The district court, after a three week trial, found that Harvard had not intentionally discriminated against Asian American applicants \citep{sffa2019}, and the First Circuit affirmed. In 2023 the Supreme Court, deciding this case together with a challenge to the University of North Carolina's admissions, held that race conscious admissions programmes at both universities violated the Equal Protection Clause (and, for Harvard, Title VI, which the Court read to impose the same standard), on grounds that did not depend on resolving the dispute between the experts \citep{sffa2023}.
+\end{casebox}
+
+\subsection{Where the experts disagreed}
+
+The disagreement between the experts turned on a few modelling choices, each of which is a judgment about which variables are legitimate controls and how to pool the data.\index{SFFA v Harvard}
+
+The personal rating was the most important. Harvard's admissions officers rated applicants on several dimensions, including a personal rating reflecting qualities such as likeability, courage and kindness. Asian American applicants received lower personal ratings on average than white applicants with similar academic and extracurricular ratings. If the personal rating is a legitimate measure of qualities Harvard may value, it should be controlled for, and controlling for it reduces the estimated Asian American penalty. If it is itself influenced by bias, it is a bad control in the sense above, and including it masks discrimination. Arcidiacono excluded it from his preferred models; Card included it.
+
+A second choice concerned special categories of applicants: recruited athletes, children of alumni, applicants on the dean's interest list and children of faculty and staff. These applicants were admitted at much higher rates and were disproportionately white. Arcidiacono excluded them from his baseline sample, arguing that they were admitted through a different process; Card included them with controls. A third choice concerned pooling across years and the inclusion of parental occupation and other background variables.
+
+\subsection{A Bayesian reading}
+
+From a Bayesian standpoint, the experts were reporting posteriors under different models, and the court's task was model comparison and averaging. Each modelling choice corresponds to a prior over causal structures: whether the personal rating lies on a path from race to admission or is a parallel measure of qualities correlated with race; whether special categories are part of the same decision process. The data alone could not settle these questions, because the personal rating's relation to race is consistent with both bias and real differences. The district court weighed testimony about how ratings were assigned, admissions officers' training, and the absence of direct evidence of animus, and concluded that, on the record, the rating was not shown to be infected by bias, while acknowledging that implicit bias could have affected Asian American applicants' personal ratings. That was a judgment about the prior on causal structure, informed by non statistical evidence.
+
+A fully Bayesian presentation would have shown the posterior for the Asian American penalty under each model, the posterior probability of each model given all the evidence, and the model averaged posterior. Such a presentation would not have resolved the disagreement, which was about the prior, but it would have made clear exactly where the disagreement lay and how much it mattered. The Supreme Court's decision, which turned on the constitutional permissibility of considering race at all, made the statistical dispute moot for the law, but the case remains a detailed example of competing regression evidence in American litigation.
+
+\section{The burden of proof as a prior allocation}
+
+American disparate treatment law allocates burdens in stages. Under \emph{McDonnell Douglas v Green}, a plaintiff establishes a prima facie case by showing membership of a protected group, application for and qualification for a job the employer was seeking to fill, rejection and that the position remained open \citep{mcdonnell1973}. The employer must then articulate a legitimate, non discriminatory reason. The plaintiff must then show that the reason is a pretext. In pattern and practice cases, under \emph{Teamsters v United States}, statistical evidence of a gross disparity can establish a prima facie case that shifts to the employer the burden of rebutting the inference \citep{teamsters1977}. The Court noted that the inexorable zero, a complete absence of minority employees, was especially telling.\index{McDonnell Douglas}
+
+These frameworks can be read as procedures for structuring Bayesian updating under adversarial conditions. The prima facie case is evidence sufficient to move the posterior above a threshold in the absence of explanation. The employer's articulated reason is an alternative hypothesis that, if credible, explains the observed pattern. The plaintiff's evidence of pretext lowers the credibility of the alternative. The employer, who has better access to the relevant evidence, bears the burden of producing it: it knows its reasons and must state them. That burden is one of production only. The burden of persuasion stays with the plaintiff throughout, so the plaintiff, who suspects the stated reasons, must show why they should be disbelieved. The employer's burden of production follows the principle discussed in Chapter~\ref{ch:misrep}: burdens of production should fall where evidence is cheapest to produce.
+
+\section{Algorithms and disparate impact}
+
+Discrimination law now confronts decisions made or assisted by algorithms: hiring screens, credit scores, tenant screening and risk assessments. An algorithm trained on historical decisions may reproduce historical discrimination; one trained on outcomes such as arrests may reproduce the biases of the processes that generated them, as Chapter~\ref{ch:lindleyai} discusses. Disparate impact doctrine applies naturally: a practice, the algorithm, produces a disparity, and the question is whether it is justified by business necessity and whether a less discriminatory alternative exists.
+
+The Bayesian framework adds two points. First, an algorithm's disparity should be measured with uncertainty, as above, and its justification assessed by its calibration and accuracy within each group. Second, the search for less discriminatory alternatives is now feasible in a way it was not for human decision makers: one can train many models and compare their accuracy and disparities, mapping the frontier of achievable trade offs. A court could ask whether the defendant's model lies on that frontier. This can make the less discriminatory alternative requirement an empirical question, within the model class searched and what the defendant could reasonably have built.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Of fifty white applicants, thirty five pass a test; of twenty black applicants, ten pass. Compute the four fifths ratio. With uniform beta priors, compute the posterior probability that the ratio of pass rates is below four fifths.
+\item Draw a causal graph for the Harvard admissions case including race, academic qualifications, personal rating and admission. Under what graph is the personal rating a legitimate control? Under what graph is it a bad control?
+\item Using the Cinelli and Hazlett framework, explain how a court could decide whether an omitted variable plausibly explains away an estimated disparity.
+\item Explain the \emph{McDonnell Douglas} framework as a sequence of Bayesian updates. Where is the burden of production allocated and why?
+\item An employer has no women among its fifty engineers in a labour market where twenty per cent of qualified engineers are women. Compute the probability of zero women under random hiring. Is this an inexorable zero?
+\item A lender uses a credit model that produces approval rates of sixty per cent for one group and forty per cent for another. Describe how you would test whether a less discriminatory alternative exists.
+\end{enumerate}
+
+\section*{Further reading}
+Finkelstein and Levin's \emph{Statistics for Lawyers} \citep{finkelstein2015}; Kadane and Woodworth on hierarchical models \citep{kadane2004}; the district court's opinion in \emph{SFFA v Harvard} \citep{sffa2019}; Cinelli and Hazlett on sensitivity analysis \citep{cinelli2020}.

@@ -1,0 +1,407 @@
+{
+ "edition": "1",
+ "pdf": {
+  "bytes": 2110342,
+  "file": "pdf/bayes_law.pdf",
+  "pages": 463,
+  "parts": [
+   {
+    "first_page": "i",
+    "key": "",
+    "last_page": "xxvii",
+    "pages": 27,
+    "title": "Front matter"
+   },
+   {
+    "first_page": "2",
+    "key": "1",
+    "last_page": "13",
+    "pages": 12,
+    "title": "Chapter 1. Why the Law Needs Bayes"
+   },
+   {
+    "first_page": "14",
+    "key": "2",
+    "last_page": "21",
+    "pages": 8,
+    "title": "Chapter 2. Bayesian Decisions for Lawyers"
+   },
+   {
+    "first_page": "22",
+    "key": "3",
+    "last_page": "32",
+    "pages": 11,
+    "title": "Chapter 3. Odds, Likelihood and the Weight of Evidence"
+   },
+   {
+    "first_page": "33",
+    "key": "4",
+    "last_page": "45",
+    "pages": 13,
+    "title": "Chapter 4. Classic Problems: Simpson, the Island and the Search"
+   },
+   {
+    "first_page": "46",
+    "key": "5",
+    "last_page": "54",
+    "pages": 9,
+    "title": "Chapter 5. Bayes Factors in the Courtroom"
+   },
+   {
+    "first_page": "55",
+    "key": "6",
+    "last_page": "63",
+    "pages": 9,
+    "title": "Chapter 6. Fallacies of Classical Inference"
+   },
+   {
+    "first_page": "64",
+    "key": "7",
+    "last_page": "71",
+    "pages": 8,
+    "title": "Chapter 7. Standards of Proof as Decision Rules"
+   },
+   {
+    "first_page": "72",
+    "key": "8",
+    "last_page": "80",
+    "pages": 9,
+    "title": "Chapter 8. The Law of Evidence Through Bayes"
+   },
+   {
+    "first_page": "82",
+    "key": "9",
+    "last_page": "94",
+    "pages": 13,
+    "title": "Chapter 9. Bayesian Interpretations of English Tort Law"
+   },
+   {
+    "first_page": "95",
+    "key": "10",
+    "last_page": "101",
+    "pages": 7,
+    "title": "Chapter 10. Mass Torts and Scientific Causation"
+   },
+   {
+    "first_page": "102",
+    "key": "11",
+    "last_page": "109",
+    "pages": 8,
+    "title": "Chapter 11. Assessing Damages Under Uncertainty"
+   },
+   {
+    "first_page": "110",
+    "key": "12",
+    "last_page": "119",
+    "pages": 10,
+    "title": "Chapter 12. Misrepresentation as a Bayesian Constraint"
+   },
+   {
+    "first_page": "120",
+    "key": "13",
+    "last_page": "126",
+    "pages": 7,
+    "title": "Chapter 13. Contracts Under Uncertainty"
+   },
+   {
+    "first_page": "127",
+    "key": "14",
+    "last_page": "131",
+    "pages": 5,
+    "title": "Chapter 14. Children, Families and Decisions About Risk"
+   },
+   {
+    "first_page": "132",
+    "key": "15",
+    "last_page": "142",
+    "pages": 11,
+    "title": "Chapter 15. The Greensill Case"
+   },
+   {
+    "first_page": "143",
+    "key": "16",
+    "last_page": "153",
+    "pages": 11,
+    "title": "Chapter 16. Bankruptcy, Solvency and Hindsight"
+   },
+   {
+    "first_page": "155",
+    "key": "17",
+    "last_page": "164",
+    "pages": 10,
+    "title": "Chapter 17. Bayesian Stories"
+   },
+   {
+    "first_page": "165",
+    "key": "18",
+    "last_page": "172",
+    "pages": 8,
+    "title": "Chapter 18. Graphical Models of Evidence"
+   },
+   {
+    "first_page": "173",
+    "key": "19",
+    "last_page": "181",
+    "pages": 9,
+    "title": "Chapter 19. The Pleadings Game and Generative Bayesian Computation"
+   },
+   {
+    "first_page": "182",
+    "key": "20",
+    "last_page": "188",
+    "pages": 7,
+    "title": "Chapter 20. Pleadings in Practice: Worked Cases"
+   },
+   {
+    "first_page": "190",
+    "key": "21",
+    "last_page": "198",
+    "pages": 9,
+    "title": "Chapter 21. Fienberg and the Evolving Role of Statistics in the Courts"
+   },
+   {
+    "first_page": "199",
+    "key": "22",
+    "last_page": "206",
+    "pages": 8,
+    "title": "Chapter 22. Kadane on Skill, Chance and the Expert Witness"
+   },
+   {
+    "first_page": "207",
+    "key": "23",
+    "last_page": "213",
+    "pages": 7,
+    "title": "Chapter 23. Discrimination, Regression and the Burden of Proof"
+   },
+   {
+    "first_page": "214",
+    "key": "24",
+    "last_page": "222",
+    "pages": 9,
+    "title": "Chapter 24. Securities Fraud, Event Studies and Prices as Evidence"
+   },
+   {
+    "first_page": "223",
+    "key": "25",
+    "last_page": "229",
+    "pages": 7,
+    "title": "Chapter 25. Clusters, Coincidence and Medical Murder Cases"
+   },
+   {
+    "first_page": "230",
+    "key": "26",
+    "last_page": "234",
+    "pages": 5,
+    "title": "Chapter 26. Intellectual Property: Surveys, Obviousness and Machines"
+   },
+   {
+    "first_page": "235",
+    "key": "27",
+    "last_page": "239",
+    "pages": 5,
+    "title": "Chapter 27. Digital Evidence, Surveillance and Privacy"
+   },
+   {
+    "first_page": "241",
+    "key": "28",
+    "last_page": "249",
+    "pages": 9,
+    "title": "Chapter 28. Common Law and Civil Law: England and France"
+   },
+   {
+    "first_page": "250",
+    "key": "29",
+    "last_page": "257",
+    "pages": 8,
+    "title": "Chapter 29. Legal Origins and Finance"
+   },
+   {
+    "first_page": "258",
+    "key": "30",
+    "last_page": "265",
+    "pages": 8,
+    "title": "Chapter 30. Africa as a Natural Experiment"
+   },
+   {
+    "first_page": "266",
+    "key": "31",
+    "last_page": "274",
+    "pages": 9,
+    "title": "Chapter 31. The Indian Court System"
+   },
+   {
+    "first_page": "275",
+    "key": "32",
+    "last_page": "278",
+    "pages": 4,
+    "title": "Chapter 32. Arbitration, Mediation and Private Adjudication"
+   },
+   {
+    "first_page": "280",
+    "key": "33",
+    "last_page": "288",
+    "pages": 9,
+    "title": "Chapter 33. Vendetta, Honour and the Mafia"
+   },
+   {
+    "first_page": "290",
+    "key": "34",
+    "last_page": "299",
+    "pages": 10,
+    "title": "Chapter 34. Costs, Expected Utility and Deterrence"
+   },
+   {
+    "first_page": "300",
+    "key": "35",
+    "last_page": "306",
+    "pages": 7,
+    "title": "Chapter 35. Antitrust Under Uncertainty"
+   },
+   {
+    "first_page": "307",
+    "key": "36",
+    "last_page": "313",
+    "pages": 7,
+    "title": "Chapter 36. Judges, Costs and the Justice System"
+   },
+   {
+    "first_page": "314",
+    "key": "37",
+    "last_page": "320",
+    "pages": 7,
+    "title": "Chapter 37. Litigation Funding, Class Actions and Claims as Assets"
+   },
+   {
+    "first_page": "321",
+    "key": "38",
+    "last_page": "325",
+    "pages": 5,
+    "title": "Chapter 38. Sentencing, Bail and Parole as Decisions"
+   },
+   {
+    "first_page": "326",
+    "key": "39",
+    "last_page": "331",
+    "pages": 6,
+    "title": "Chapter 39. Regulators, Deference and Cost Benefit Analysis"
+   },
+   {
+    "first_page": "332",
+    "key": "40",
+    "last_page": "339",
+    "pages": 8,
+    "title": "Chapter 40. Verification: Lean, Catala and Machine Checked Law"
+   },
+   {
+    "first_page": "340",
+    "key": "41",
+    "last_page": "349",
+    "pages": 10,
+    "title": "Chapter 41. Should Machines Decide? Lindley's Challenge"
+   },
+   {
+    "first_page": "350",
+    "key": "42",
+    "last_page": "358",
+    "pages": 9,
+    "title": "Chapter 42. Verifying AI, Explaining AI and the Ethics of Legal Machines"
+   },
+   {
+    "first_page": "359",
+    "key": "43",
+    "last_page": "365",
+    "pages": 7,
+    "title": "Chapter 43. Intuition, Miracles and the Limits of Human Judgment"
+   },
+   {
+    "first_page": "366",
+    "key": "44",
+    "last_page": "369",
+    "pages": 4,
+    "title": "Chapter 44. A Bayesian Program for the Law"
+   },
+   {
+    "first_page": "370",
+    "key": "45",
+    "last_page": "374",
+    "pages": 5,
+    "title": "Chapter 45. The Future and Promise of AI in Law"
+   },
+   {
+    "first_page": "375",
+    "key": "A",
+    "last_page": "379",
+    "pages": 5,
+    "title": "Appendix A. A Probability Toolkit for Lawyers"
+   },
+   {
+    "first_page": "380",
+    "key": "B",
+    "last_page": "383",
+    "pages": 4,
+    "title": "Appendix B. Code for the Main Calculations"
+   },
+   {
+    "first_page": "384",
+    "key": "C",
+    "last_page": "391",
+    "pages": 8,
+    "title": "Appendix C. Table of Principal Cases"
+   },
+   {
+    "first_page": "392",
+    "key": "D",
+    "last_page": "400",
+    "pages": 9,
+    "title": "Appendix D. Solutions to Selected Questions"
+   },
+   {
+    "first_page": "401",
+    "key": "E",
+    "last_page": "407",
+    "pages": 7,
+    "title": "Appendix E. Glossary"
+   },
+   {
+    "first_page": "408",
+    "key": "F",
+    "last_page": "410",
+    "pages": 3,
+    "title": "Appendix F. Using This Book in a Course"
+   },
+   {
+    "first_page": "411",
+    "key": "G",
+    "last_page": "413",
+    "pages": 3,
+    "title": "Appendix G. A Sample Examination"
+   },
+   {
+    "first_page": "414",
+    "key": "",
+    "last_page": "430",
+    "pages": 17,
+    "title": "References"
+   },
+   {
+    "first_page": "431",
+    "key": "",
+    "last_page": "436",
+    "pages": 6,
+    "title": "Index"
+   }
+  ],
+  "sha256": "d063632c0af15991df09190e5261203bade403d872ad376c9499224ceca6363e"
+ },
+ "results": {},
+ "updated": "2026-11-11",
+ "zenodo": {
+  "draft": {
+   "doi": "10.5281/zenodo.24138404",
+   "html": "https://zenodo.org/deposit/24138404",
+   "id": 24138404,
+   "reserved_on": "2026-11-11",
+   "version": "1.0.0"
+  }
+ }
+}

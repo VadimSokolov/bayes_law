@@ -1,0 +1,127 @@
+\chapter{Misrepresentation as a Bayesian Constraint}
+\label{ch:misrep}
+
+\section{Statements as signals}
+
+Much of commercial life consists of people telling other people what they believe. A seller describes a property, an auditor certifies accounts, a broker presents a risk to an insurer, a fund manager reports the assets in a fund. Each statement is a signal, and the recipient uses it to update beliefs and then to act: to buy, to lend, to insure, to invest. The law of misrepresentation governs these signals. It asks when a false statement gives the recipient a remedy, and what remedy.\index{misrepresentation}
+
+In our tort paper we argued that the doctrines of misrepresentation are best understood as constraints on the relationship between what a speaker says and what the speaker's evidence warrants \citep{polson_sokolov_tort}. A statement of fact implicitly asserts that the speaker's posterior probability for the fact is high. Fraud is the assertion of a high probability when the speaker's actual posterior is low, or when the speaker has no posterior at all because he has not looked. Negligent misstatement is the assertion of a probability that the speaker's evidence does not warrant, because the speaker has failed to reason as a competent person in his position would. Innocent misrepresentation is the assertion of a probability that was warranted by the speaker's evidence, although the fact asserted turned out to be false. The remedies differ accordingly. This chapter develops the framework and applies it to the main English authorities and to insurance law, and closes with Bayesian persuasion and proper scoring rules as limits on what a statement may convey.
+
+\section{A model of assertion}
+
+Let $\theta$ be a fact about which the speaker makes a statement, and let $D_S$ be the speaker's information. A competent speaker in the speaker's position, reasoning correctly from $D_S$, would hold posterior $p_S = \Prob(\theta \given D_S)$. The speaker's actual belief, which may differ from $p_S$ because the speaker has reasoned badly or not at all, is $b_S$. The speaker makes a statement $s$, and a reasonable recipient interprets $s$ as conveying a probability $q(s)$ for $\theta$. For a flat assertion that $\theta$ is true, $q(s)$ is close to one; for an expression of opinion, such as the speaker believes $\theta$, it may be lower; for a statement hedged with qualifications, lower still.\index{assertion, model of}
+
+The recipient's information is $D_R$, and after hearing $s$ the recipient's posterior becomes
+\begin{equation}
+\Prob(\theta\given D_R, s) \propto \Prob(s \given \theta, D_R)\,\Prob(\theta\given D_R).
+\end{equation}
+If the recipient trusts the speaker completely, $\Prob(\theta\given D_R,s) = q(s)$. More generally, the recipient's update depends on the likelihood ratio $\Prob(s\given\theta,D_R)/\Prob(s\given\bar\theta,D_R)$, which depends on the recipient's model of the speaker: how competent, how honest, how well informed.
+
+In this model, the elements of an actionable misrepresentation become conditions on $b_S$, $p_S$, $q(s)$ and the recipient's update.
+\begin{description}
+\item[Falsity] $\theta$ is false.
+\item[Fraud] The speaker knew $b_S$ was low, or did not care what it was, and yet made a statement with $q(s)$ high.
+\item[Negligence] The speaker's actual belief was high, but a competent speaker with information $D_S$, or with information the speaker should have obtained, would have had $p_S$ low; the gap between $q(s)$ and the warranted $p_S$ is the measure of fault.
+\item[Inducement] The statement moved the recipient's posterior, and the change in posterior changed the recipient's action.
+\item[Materiality] A reasonable recipient's action would have been different under the posterior without the statement.
+\end{description}
+The rest of this chapter maps these conditions onto the authorities.
+
+\section{Fraud: Derry v Peek}
+
+In \emph{Derry v Peek} the directors of a tramway company issued a prospectus stating that the company had the right to use steam power \citep{derry1889}. In fact the right was subject to the consent of the Board of Trade, which was later refused. The directors believed consent would be a formality. The House of Lords held that they were not liable in deceit. Lord Herschell's speech defined fraud: a false representation made knowingly, or without belief in its truth, or recklessly, careless whether it be true or false. An honest belief, however unreasonable, is not fraud.\index{Derry v Peek}\index{fraud}
+
+Lord Herschell's three limbs map onto the model. Knowingly means the speaker's actual posterior was low and the statement asserted a high one. Without belief means the speaker had not formed a belief from any evidence; the statement was made without any epistemic basis. Recklessly means the speaker was indifferent to the relationship between $q(s)$ and $b_S$: he would have made the statement whatever his evidence showed. All three are failures of sincerity, of the link between assertion and belief, rather than failures of reasoning. The directors in \emph{Derry v Peek} believed what they said; their belief was optimistic, but sincere. The law of deceit does not police optimism.
+
+\section{Negligent misstatement: Hedley Byrne}
+
+\emph{Derry v Peek} was understood for over seventy years to mean that there was no liability for careless but honest statements, absent a contract or fiduciary relationship \citep{nocton1914}. In \emph{Hedley Byrne v Heller} the House of Lords held in 1963 that a duty of care in making statements could arise where there was a special relationship, in which the speaker assumed responsibility for the accuracy of the statement and the recipient reasonably relied on it \citep{hedleybyrne1964}. On the facts the bank escaped liability because its reference was given without responsibility, but the principle was established.\index{Hedley Byrne v Heller}\index{negligent misstatement}
+
+Negligent misstatement concerns the gap between the speaker's actual belief and the belief a competent speaker would have held. In our model, the speaker reports $q(s)$ equal to his actual belief $b_S$, but $b_S$ differs from $p_S$, the posterior warranted by $D_S$ under competent reasoning. The duty is a duty of epistemic competence: to reason correctly from one's information, and to obtain information that a competent person in one's position would obtain. This is the same epistemic responsibility we found in the law of negligence in Chapter~\ref{ch:tort}.
+
+The special relationship requirement limits the class of recipients to whom the duty is owed. In \emph{Caparo Industries v Dickman} auditors were held to owe no duty to investors who relied on audited accounts in deciding to make a takeover bid \citep{caparo1990}. The statement was made for a statutory purpose, to inform the shareholders as a body in exercising their governance rights, not to inform investment decisions. Decision theory explains why the purpose matters. The value of a statement to a recipient depends on the decision the recipient uses it for. An auditor who tailors work to the statutory purpose cannot be expected to bear liability for every other decision someone might make using the accounts, because the loss function for those decisions is unknown to the auditor and potentially unbounded.
+
+\section{The Misrepresentation Act 1967}
+
+Section 2(1) of the Misrepresentation Act 1967 gives a claimant who has entered a contract after a misrepresentation by the other party a right to damages, unless the representor proves that he had reasonable grounds to believe and did believe up to the time the contract was made that the facts represented were true. The burden of proof is reversed: the representor must show reasonable belief, rather than the claimant having to show its absence. In \emph{Royscot Trust v Rogerson} the Court of Appeal held that damages under section 2(1) are assessed as if the representor had been fraudulent, the so called fiction of fraud (a fiction doubted in the House of Lords), so that all losses directly flowing from the misrepresentation are recoverable whether or not foreseeable \citep{royscot1991}.\index{Misrepresentation Act 1967}
+
+The reversed burden has a Bayesian rationale. The representor knows $D_S$; the representee does not. The party with better access to the evidence about whether the belief was reasonable should bear the burden of producing it. This is an application of a general principle about the allocation of burdens (Chapter~\ref{ch:standards}): they should be placed where the cost of producing evidence is lowest, so that the fact finder's posterior is most informative per unit of cost.
+
+Section 2(2) allows the court to award damages in lieu of rescission for non fraudulent misrepresentation, where it would be equitable. Rescission undoes the contract, returning both parties to their prior positions; damages compensate for the difference the misrepresentation made. The choice between them is a choice between remedies with different expected costs, and the court is directed to consider the nature of the misrepresentation, the loss that would be caused if the contract were upheld, and the loss rescission would cause the other party.
+
+\section{Opinions, intentions and half truths}
+
+\subsection{Opinions}
+
+A statement of opinion is not a statement of fact, and a false opinion honestly held is not a misrepresentation. In \emph{Bisset v Wilkinson} a vendor of land in New Zealand said that it could carry two thousand sheep; neither party knew, since the land had never been used for sheep farming; the Privy Council held this was an honest opinion, not a statement of fact \citep{bisset1927}. But in \emph{Smith v Land and House Property Corporation} the Court of Appeal held that where the facts are not equally known to both sides, a statement of opinion by one who knows the facts best often involves a statement of a material fact, for he impliedly states that he knows facts which justify his opinion \citep{smithland1884}. A vendor who described a tenant as most desirable, when the tenant was in arrears, made a misrepresentation.\index{opinion, statements of}
+
+In the model, a statement of opinion conveys a lower $q(s)$ than a flat assertion, and it conveys information about $D_S$. When the speaker and recipient share the same information, as in \emph{Bisset}, the opinion adds little to the recipient's posterior beyond the speaker's reasoning, which the recipient can evaluate. When the speaker knows more, as in \emph{Smith}, the opinion carries an implied statement that $D_S$ supports it, and the recipient updates on that implied statement. A false implied statement about $D_S$ is a misrepresentation of fact.
+
+\subsection{Intentions}
+
+In \emph{Edgington v Fitzmaurice} the directors of a company issued a prospectus inviting subscriptions for debentures and stating that the money would be used to improve the company's buildings and extend its business \citep{edgington1885}. In fact they intended to use it to pay off pressing debts. Bowen LJ said that the state of a man's mind is as much a fact as the state of his digestion. A misstatement of one's intention is a misstatement of fact. In the model, the speaker's intention is itself the fact $\theta$ the statement is about, known to the speaker with near certainty, and a statement about it carries a correspondingly high $q(s)$.
+
+\subsection{Half truths and changes of circumstance}
+
+A statement that is literally true but misleading by omission can be a misrepresentation. In \emph{Dimmock v Hallett} a vendor said that farms were fully let but did not say that the tenants had given notice to quit \citep{dimmock1866}. In \emph{With v O'Flanagan} a doctor selling his practice stated its income accurately at the start of negotiations, but by the time of the sale the practice had dwindled through his illness \citep{with1936}. The Court of Appeal held that a representation which was true when made but which becomes false before the contract is concluded must be corrected.
+
+These cases establish that the content of a statement is what a reasonable recipient would infer from it, not its literal truth. In the model, $q(s)$ is the recipient's reasonable interpretation, which includes inferences about what has not been said. A statement that farms are fully let invites the inference that they will remain let; the recipient's posterior that they will remain let rises; and the statement is false in the relevant sense if the speaker knew of facts that should have kept that posterior low. A continuing representation is one whose $q(s)$ remains in force until corrected, so that a change in $D_S$ that reduces $p_S$ creates a duty to correct.
+
+\section{Inducement and reliance}
+
+The claimant must show that the misrepresentation induced the contract. In \emph{Redgrave v Hurd} a solicitor selling his practice misrepresented its income, and the buyer was given the opportunity to inspect the books but did not \citep{redgrave1881}. The Court of Appeal held that the buyer could still rescind: if a man is induced to enter into a contract by a false representation, it is not a sufficient answer to say that if he had used due diligence he would have found out its falsity. In \emph{Attwood v Small}, by contrast, buyers of a mine who relied on their own agents' investigation rather than on the vendor's statements could not rescind, because they had not relied on the statements \citep{attwood1838}.\index{inducement}\index{reliance}
+
+The Bayesian reading of inducement is that the statement must have moved the recipient's posterior, and the move must have mattered to the decision. A recipient who commissions his own investigation and relies on it has, in effect, set the likelihood ratio of the speaker's statement to one: his posterior depends on his agents' findings, not on the statement. A recipient who could have checked but did not has relied on the statement; his failure to buy information that would have revealed the truth does not change the fact that the statement moved his posterior. \emph{Redgrave} rightly refuses to allow a misrepresentor to say that his victim should have been less trusting.
+
+\section{Insurance and the duty of fair presentation}
+
+Insurance contracts are the purest case of a decision made on another party's statements. The insurer must price a risk it cannot observe directly, using information the insured supplies. Lord Mansfield set out the principle in \emph{Carter v Boehm} in 1766: insurance is a contract upon speculation, the special facts upon which the contingent chance is to be computed lie most commonly in the knowledge of the insured only, and the underwriter trusts to his representation \citep{carter1766}. The insured's concealment of a material fact, even by mistake, voids the policy, because the risk run is really different from the risk understood and intended to be run.\index{insurance}\index{Carter v Boehm}\index{uberrima fides}
+
+Lord Mansfield's words could serve as a summary of Bayesian decision theory applied to underwriting. The contingent chance is a probability; the special facts are the data; the insured's representation is a signal; and nondisclosure changes the risk run from the risk understood.
+
+\subsection{The old law}
+
+Section 18 of the Marine Insurance Act 1906 codified the duty of disclosure: the assured must disclose every material circumstance known to him, and a circumstance is material if it would influence the judgment of a prudent insurer in fixing the premium or determining whether he will take the risk. The remedy for breach was avoidance of the whole policy. In \emph{Pan Atlantic Insurance v Pine Top Insurance} the House of Lords held that, in addition to materiality, the insurer must show that the nondisclosure actually induced it to write the risk on the terms it did \citep{panatlantic1995}.
+
+The old law had two defects from a decision theoretic standpoint. Materiality was judged by what would influence a prudent insurer, a low bar: almost anything might influence judgment without changing the decision. And the remedy was all or nothing: avoidance of the policy even if the insurer would have written the risk at a slightly higher premium. A small nondisclosure could deprive the insured of all cover.
+
+\subsection{The Insurance Act 2015}
+
+The Insurance Act 2015 replaced the duty of disclosure in non consumer insurance with a duty of fair presentation. The insured must disclose every material circumstance which it knows or ought to know, or give the insurer sufficient information to put a prudent insurer on notice that it needs to make further enquiries. Crucially, Schedule 1 of the Act introduced proportionate remedies. If the breach was deliberate or reckless, the insurer may avoid the contract. Otherwise the remedy depends on what the insurer would have done had the presentation been fair. If it would not have written the contract at all, it may avoid it and return the premium. If it would have written it on different terms, the contract is treated as if those terms applied. If it would have charged a higher premium, the claim is reduced proportionately: the insurer pays the fraction of the claim equal to the premium actually charged divided by the premium that would have been charged.\index{Insurance Act 2015}\index{proportionate remedies}
+
+This is a Bayesian remedy. The insurer's decision is a function of its posterior on the risk, and the remedy asks what decision it would have made with the posterior that a fair presentation would have produced. If premiums are proportional to expected loss, the proportional reduction is the ratio of expected costs: if the true risk warranted a premium of $\pi^\ast$ and the insurer charged $\pi$, the insurer has in effect insured a fraction $\pi/\pi^\ast$ of the true risk. The 2015 Act aligns the remedy with the counterfactual decision, as the analysis of proportional remedies in Chapter~\ref{ch:standards} recommends.
+
+\begin{casebox}{Proportionate reduction under the Insurance Act 2015}
+An insured fails, through carelessness, to disclose that a key customer has missed payments. The insurer charges a premium of $\pi = 1.0$ per cent of the insured amount. With fair presentation, its underwriting model would have raised its estimate of the annual default probability from $0.8$ to $2.0$ per cent and charged $\pi^\ast = 2.5$ per cent. A claim of ten million pounds is made. Under Schedule 1 the insurer pays $10 \times 1.0/2.5 = 4$ million pounds. Under the pre 2015 law the insurer could have avoided the policy entirely and paid nothing. If the nondisclosure was deliberate or reckless, the insurer may still avoid the policy.
+\end{casebox}
+
+\section{Bayesian persuasion and the limits of liability}
+
+Economists have recently studied Bayesian persuasion, in which a sender chooses an information structure, a rule mapping states to signals, to influence a receiver's action \citep{kamenica2011}. The sender cannot lie about the signal but can choose what to reveal. Kamenica and Gentzkow showed that a sender can often benefit by revealing partial information, pooling some bad states with good ones so that the receiver's posterior stays above an action threshold. The theory captures the choices of a company preparing a prospectus or a broker presenting a risk: neither may state falsehoods, but both choose what to emphasise and what to leave in general terms.\index{Bayesian persuasion}
+
+The law of misrepresentation constrains Bayesian persuasion in two ways. First, half truths are actionable, so a sender cannot design a signal whose literal content is true but whose reasonable interpretation is false. Second, in insurance and in some other relationships there is a positive duty of disclosure, so the sender cannot choose to reveal nothing about a material circumstance. In other settings, such as ordinary sales, there is no general duty to disclose, and the law tolerates strategic silence. The boundary between permitted persuasion and actionable misrepresentation is a boundary on the information structures the sender may choose. Making the boundary precise is a project for the law and economics of information, and our model suggests a criterion: an information structure is impermissible if a reasonable recipient, applying Bayes' rule with a correct model of the sender's incentives, would be led to a posterior that the sender knew to be materially higher than the true probability.
+
+\section{Scoring statements}
+
+A proper scoring rule rewards a forecaster who reports a probability $q$ for an event with a score that is maximised in expectation by reporting his true belief. The logarithmic score $\log q$ if the event occurs and $\log(1-q)$ otherwise, and the Brier score $-(q - \mathbf{1}_{\theta})^2$, are examples. A forecaster whose reported $q$ differs from his true posterior $p$ suffers an expected loss relative to honest reporting, and for the logarithmic score that loss is the Kullback Leibler divergence between $p$ and $q$:
+\begin{equation}
+\mathrm{KL}(p \,\Vert\, q) = p\log\frac{p}{q} + (1-p)\log\frac{1-p}{1-q}.
+\end{equation}
+This suggests a measure of the gravity of a misrepresentation that is independent of outcomes: the divergence between the probability conveyed and the probability warranted. A statement that conveys $q = 0.99$ when the warranted probability is $p = 0.95$ is a mild overstatement; one that conveys $q = 0.99$ when $p = 0.5$ is a gross one. Courts do not use such measures, but they implicitly distinguish between puffery, overstatement and falsehood along similar lines, and the measure could help structure the assessment of culpability in regulatory proceedings.\index{proper scoring rule}\index{Kullback Leibler divergence}
+
+\section{Summary}
+
+The law of misrepresentation polices the relationship between assertion and evidence. Fraud is a failure of sincerity, negligence a failure of competence, and innocent misrepresentation a failure of luck. Opinions carry implied statements about the speaker's evidence; intentions are facts; half truths are judged by the inferences a reasonable recipient would draw. Inducement requires that the statement moved the recipient's posterior and that the move mattered. Insurance law, after the 2015 Act, adopts a counterfactual and proportionate remedy that approximates the counterfactual decision. Chapter~\ref{ch:greensill} applies this framework to the collapse of Greensill Capital, a case in which the representations made by a lender and its insurers, and to its investors, were tested by events.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item In the model of assertion, write down conditions on $b_S$, $p_S$ and $q(s)$ for each of Lord Herschell's three limbs of fraud.
+\item A vendor states that a business has turnover of one and a quarter million a year. The buyer's prior for turnover is uniform between half a million and one and a half million. The buyer trusts the vendor's statements with probability $0.8$ and otherwise ignores them. Compute the buyer's posterior mean turnover after the statement.
+\item Using the proportionate reduction formula, compute the payment on a five million claim where the premium charged was $0.6$ per cent and the fair premium would have been $0.9$ per cent.
+\item Construct a Bayesian persuasion example in which a sender reveals partial information to induce a buyer to purchase with probability one half, although with full information the buyer would purchase with probability one quarter. Would the sender's strategy be actionable as a half truth?
+\item Compute, using natural logarithms (so the answer is in nats), the Kullback Leibler divergence for $(p, q) = (0.95, 0.99)$, $(0.5, 0.99)$ and $(0.1, 0.99)$. Propose a scale of culpability based on these values.
+\end{enumerate}
+
+\section*{Further reading}
+On the law, any modern text on contract or tort, and the Law Commission's work leading to the Insurance Act 2015. On Bayesian persuasion, Kamenica and Gentzkow \citep{kamenica2011}. On proper scoring rules, Gneiting and Raftery \citep{gneiting2007}.

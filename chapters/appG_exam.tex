@@ -1,0 +1,46 @@
+\chapter{A Sample Examination}
+\label{app:exam}
+
+This appendix gives a sample three hour examination for a law school course built on this book, with notes on what a strong answer contains. The questions are original and the facts are invented.
+
+\section*{Instructions}
+Answer all three questions. Where a question asks for probabilities, state your assumptions and show your arithmetic. Credit is given for clear reasoning and for identifying the questions on which the answer depends, not only for the final number.
+
+\section*{Question 1: The courier}
+A courier is charged with importing drugs. Customs officers found a package of cocaine hidden in the lining of a suitcase he carried off a flight. He says a stranger asked him to carry the suitcase and paid him for doing so, and that he did not know what it contained. The prosecution relies on four items: (a) he had travelled on the same route three times in six months; (b) he was paid in cash; (c) he appeared nervous when questioned; (d) his phone contained messages from an unregistered number arranging the trip.
+
+\begin{enumerate}[label=(\alph*)]
+\item State the propositions in issue and the alternative the defence advances.
+\item For each item, explain whether it is relevant and estimate a likelihood ratio, stating your reasoning.
+\item Which items are not conditionally independent? How does this affect their combined weight?
+\item With a prior probability of knowledge of your choosing, justified by reference to the population of couriers stopped at the border, compute the posterior. Would you convict?
+\item Draft a direction to the jury on the nervousness evidence.
+\end{enumerate}
+
+\paragraph{Notes on a strong answer} The proposition is knowledge, not carriage, which is admitted. Repeat travel and cash payment are more probable for knowing couriers but common among unwitting ones recruited by the same networks; likelihood ratios of perhaps two each. Nervousness has a likelihood ratio near one, since innocent travellers questioned by customs are nervous too, and the direction should say so. The messages are the strongest item, depending on their content; arranging a trip with an unregistered number is consistent with both accounts unless the messages refer to the contents. Repeat travel, cash payment and the messages share a source, the recruiter, so their likelihood ratios should not simply be multiplied. A careful answer computes a range of posteriors and identifies that the conviction turns on the content of the messages.
+
+\section*{Question 2: The delayed diagnosis}
+A patient attends a hospital with chest pain and is sent home without an electrocardiogram. She returns two days later with a heart attack and suffers permanent damage to her heart. Expert evidence is that prompt investigation would have led to treatment that, in patients like her, reduces the risk of permanent damage from sixty per cent to thirty five per cent.
+
+\begin{enumerate}[label=(\alph*)]
+\item Advise the patient on her prospects of recovering damages under English law (Chapter~\ref{ch:tort}), with reference to \emph{Barnett}, \emph{Hotson} and \emph{Gregg v Scott}.
+\item Compute the probability that the delay caused the permanent damage, stating your assumptions.
+\item How would the claim be assessed in French law (Chapter~\ref{ch:commoncivil})?
+\item Argue for or against proportional recovery in English clinical negligence.
+\item If her claim for loss of earnings is assessed at four hundred thousand pounds on full liability, what would she recover under each approach?
+\end{enumerate}
+
+\paragraph{Notes on a strong answer} Under the but for test the claimant must show that the delay more probably than not caused the damage. With the stated risks, the probability that she would have avoided damage with prompt treatment, given that she suffered it, is $(0.60 - 0.35)/0.60 \approx 0.42$, under the assumption that treatment only prevents damage. This is below one half, so the but for claim fails, and \emph{Gregg v Scott} rules out recovery for the lost chance. French law would award damages for \emph{perte de chance}, about a quarter of the loss on one natural reading, since her chance of avoiding damage fell by twenty five percentage points, or about forty two per cent of the loss on a proportional rule based on the probability of causation. A strong answer distinguishes these, explains the incentive effects of the all or nothing rule, and computes that she recovers nothing in England and about one hundred thousand or one hundred and sixty seven thousand pounds under proportional approaches.
+
+\section*{Question 3: The algorithm}
+A county court introduces a machine learning tool that predicts the probability that a defendant will fail to appear for trial, and recommends release if the probability is below twenty per cent. After a year, data show that among released defendants the tool's predictions were well calibrated overall, but that defendants from one neighbourhood were detained at twice the rate of others with similar charges.
+
+\begin{enumerate}[label=(\alph*)]
+\item Explain what calibration means and why it matters for the decision.
+\item Explain why the tool might detain one group more often even if it were calibrated within each group.
+\item What is the selective labels problem in this setting, and how could it be addressed?
+\item Using the decision theory of Chapter~\ref{ch:decisions}, explain what the twenty per cent threshold implies about the ratio of the losses from failure to appear and from unnecessary detention. Is the threshold defensible?
+\item Advise the court on whether its use of the tool meets the requirements set out in Chapter~\ref{ch:lindleyai}.
+\end{enumerate}
+
+\paragraph{Notes on a strong answer} Calibration means that among defendants predicted at $p$, a fraction $p$ fail; it matters because the decision rule compares $p$ with a threshold. A calibrated tool detains more people from a group whose base rate of failure is higher, or whose predicted risks are more spread out when the threshold lies above most predictions; whether that is fair depends on whether the higher predicted risk reflects genuine differences or biased inputs, such as arrest records shaped by policing. Outcomes are observed only for released defendants; quasi random assignment of judges or careful modelling can help. A twenty per cent threshold implies that unnecessary detention is one quarter as costly as a failure to appear, which seems to undervalue liberty, particularly when trials are delayed. A strong answer works through each requirement: probabilities rather than verdicts, explicit utilities, separation, calibration checks by group, a model of the data, verifiable computation, contestability and human responsibility.

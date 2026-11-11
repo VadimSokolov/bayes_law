@@ -1,0 +1,67 @@
+\chapter{Intellectual Property: Surveys, Obviousness and Machines}
+\label{ch:ip}
+
+\section{Property in information}
+
+Intellectual property law grants exclusive rights in inventions, creative works, brands and designs. Its central questions are probabilistic. Would a person skilled in the art have found an invention obvious? Are consumers likely to be confused between two marks? How much of a defendant's profit is attributable to the infringing feature? Would the patentee have made the infringer's sales but for the infringement? Each question asks a court to estimate a probability or a counterfactual from imperfect evidence, and each has generated its own statistical methods. And intellectual property is where artificial intelligence presents the law with its most direct questions: can a machine be an inventor, and can a machine learn from protected works without permission? This chapter treats these questions with the tools of the book.\index{intellectual property}
+
+\section{Consumer confusion and surveys}
+
+\subsection{The legal question}
+
+Trade mark infringement in many cases turns on whether there is a likelihood of confusion on the part of the public: whether an average consumer, reasonably well informed and reasonably observant and circumspect, would be likely to believe that goods bearing the defendant's sign come from the claimant or a connected undertaking. In the United States, the Lanham Act asks whether a use is likely to cause confusion. Likelihood is a probability, and courts in both systems have used consumer surveys as evidence of it.\index{trade marks}\index{consumer confusion}
+
+\subsection{Surveys as evidence}
+
+A confusion survey\index{survey evidence} shows respondents the defendant's product and asks questions designed to reveal whether they associate it with the claimant. The proportion who do is compared with the proportion in a control group shown a product that differs in the allegedly infringing feature. The difference estimates the confusion caused by the feature. Survey design matters greatly: leading questions, unrepresentative samples and inappropriate controls can produce any result the sponsor wants. English courts have been sceptical of surveys, and in \emph{Interflora v Marks and Spencer} the Court of Appeal emphasised that permission to adduce survey evidence should be given only where the evidence is likely to be of real value and its cost justified \citep{interflora2012,interflora2013}. American courts admit surveys more readily and weigh their methodological quality.
+
+In Bayesian terms, a survey is an estimate of a population proportion with sampling error and possible bias. The legal question is not whether the proportion exceeds zero but whether it exceeds a threshold that would make confusion likely in the relevant sense, a threshold courts have rarely stated. A Bayesian analysis reports the posterior distribution of the net confusion rate, after subtracting the control, with priors on bias informed by the survey's design, and asks the court what level of confusion matters. Stating the threshold, even approximately, would make survey evidence more useful and decisions more consistent.
+
+\section{Obviousness}
+
+\subsection{The test}
+
+A patent is invalid if the invention was obvious to a person skilled in the art at the priority date, having regard to the state of the art. UK courts apply a structured approach, following \emph{Pozzoli v BDMO}, asking what the skilled person would have known, what the inventive concept is, what the differences are between the prior art and the invention, and whether those differences would have been obvious steps \citep{pozzoli2007}. American courts apply \emph{Graham v John Deere} and, since \emph{KSR v Teleflex}, a flexible test that asks whether a person of ordinary skill would have had reason to combine prior art elements with a reasonable expectation of success \citep{ksr2007}.\index{obviousness}
+
+\subsection{A probabilistic reading}
+
+Obviousness has a natural probabilistic reading: an invention is obvious if a skilled person, starting from the prior art, would have arrived at it with high probability without inventive effort. The phrase reasonable expectation of success, which the Federal Circuit applies alongside \emph{KSR}, is explicitly probabilistic. Courts sometimes speak of an invention being obvious to try, where there were a finite number of identified, predictable solutions; that corresponds to a high probability that routine experimentation would find the answer.
+
+The difficulty is hindsight, the same difficulty as in Chapter~\ref{ch:bankruptcy}. Once an invention is known, the path to it looks obvious. Courts warn against hindsight, but the warning is hard to follow. Secondary considerations, such as long felt need, the failure of others and commercial success, are evidence about the ex ante probability that a skilled person would have found the invention: if many skilled people tried and failed, the probability was low. A Bayesian court treats them as likelihood ratios for the hypothesis that the invention was obvious, weighing them against the expert's reconstruction of the path from prior art, which is vulnerable to hindsight bias.
+
+\section{Damages in patent cases}
+
+\subsection{Lost profits}
+
+A patentee can recover the profits it would have made but for the infringement. In the United States the \emph{Panduit} factors ask about demand for the product, the absence of acceptable non infringing substitutes, the patentee's capacity, and the amount of profit. Each is an input to a counterfactual: what sales the patentee would have made had the infringer been absent. The counterfactual requires a model of demand and substitution, of the kind Chapter~\ref{ch:antitrust} discusses later for merger simulation, and its answer is uncertain. A Bayesian assessment produces a posterior distribution for lost profits, and the award should, by default, be its mean, for the reasons given in Chapter~\ref{ch:damages}.
+
+\subsection{Reasonable royalties}
+
+Where lost profits cannot be shown, the patentee recovers a reasonable royalty\index{reasonable royalty}, often assessed by a hypothetical negotiation between a willing licensor and a willing licensee at the time infringement began, considering factors listed in \emph{Georgia Pacific}. The hypothetical negotiation is the counterfactual bargaining problem of negotiating damages in Chapter~\ref{ch:damages}. Comparable licences provide evidence, as do the infringer's expected profits from using the invention. The apportionment problem, how much of a product's value is due to the patented feature among many, has been a central issue in cases involving complex products with thousands of patents. Apportionment is a causal question: what is the marginal contribution of the feature to demand? Conjoint surveys, which estimate consumers' valuation of features from their choices among hypothetical products, are increasingly used to answer it, with the strengths and weaknesses of all survey evidence.
+
+\section{Machines as inventors}
+
+\subsection{DABUS}
+
+Stephen Thaler filed patent applications in several countries naming as inventor an AI system he had built, called DABUS, and claiming the right to the patents as its owner. The applications were refused in the United Kingdom, the United States, the European Patent Office and elsewhere. South Africa granted a patent in 2021 without substantive examination, and an Australian judge at first instance allowed the application in 2021, but the Full Federal Court reversed that decision in 2022. In \emph{Thaler v Comptroller General of Patents} the UK Supreme Court held in 2023 that an inventor under the Patents Act 1977 must be a natural person, so that DABUS could not be an inventor, and that Thaler was not entitled to the patents merely by owning the machine \citep{thaler2023}. The American Federal Circuit had reached a similar conclusion in \emph{Thaler v Vidal}.\index{DABUS}\index{AI inventorship}
+
+The decisions leave open the more practical question: what happens when a human uses an AI system to help make an invention? The United States Patent and Trademark Office's revised guidance of November 2025 treats an AI system as a tool: only natural persons can be inventors, and a human who conceives the invention under the ordinary conception standard is the inventor even if AI assisted \citep{uspto2025}. Whether the human conceived the invention can be read as a question about the counterfactual: would the invention have been made without the human? In a world where AI systems can generate candidate inventions in large numbers, the obviousness standard itself may shift: if a skilled person equipped with standard AI tools would have found the invention with high probability, it is obvious. The person skilled in the art, a legal fiction, may soon be a person with a machine.
+
+\section{Machines learning from works}
+
+Generative AI systems are trained on large collections of text, images and other works, many protected by copyright. Whether such training infringes copyright, and whether the outputs infringe, are being litigated in several jurisdictions. The issues include whether training involves copying, whether any copying is excused by fair use in the United States or by text and data mining exceptions in the European Union and the United Kingdom, whether outputs reproduce protected expression, and how damages should be measured. Several cases have settled, some for large sums: the class claim against Anthropic over pirated copies of books it downloaded to build a training library settled for \$1.5 billion, with final approval granted in July 2026, after the court had held that training on the books was itself fair use \citep{bartz2026}. Others continue.
+
+The Bayesian contribution to these disputes is evidential and remedial. Whether a model's output reproduces a protected work is a question with a likelihood ratio: how probable is the similarity if the model memorised the work, against the probability of similarity arising independently from the general distribution of works? The second probability is the analogue of the random match probability in Chapter~\ref{ch:odds}, and it can be estimated by comparing outputs with many works. Damages, if liability is found, raise the apportionment problem again: how much of a model's value derives from any particular work in a training set of billions? The answer is small for most works and the method of estimation, perhaps by the marginal contribution of a work or a class of works to model performance, is an open research problem with legal consequences.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item A confusion survey finds that twenty two per cent of the test group and eight per cent of the control group associate the defendant's product with the claimant, with samples of two hundred each. Compute the posterior distribution of the net confusion rate. What threshold would you propose for likely confusion?
+\item Explain why secondary considerations such as the failure of others are evidence about obviousness. Express each as a likelihood ratio.
+\item In a hypothetical negotiation, the patentee's minimum royalty is two per cent of sales and the infringer's maximum is six per cent. What royalty would a court award? How should uncertainty about these bounds affect the award?
+\item Should a person skilled in the art be assumed to use AI tools? How would that change the obviousness of inventions in a field where AI design tools are standard?
+\item Propose a method for estimating the contribution of a single work to the value of a generative model trained on billions of works.
+\end{enumerate}
+
+\section*{Further reading}
+\emph{KSR v Teleflex} \citep{ksr2007}; \emph{Thaler v Comptroller} \citep{thaler2023}; \emph{Interflora v Marks and Spencer} on survey evidence \citep{interflora2012,interflora2013}.

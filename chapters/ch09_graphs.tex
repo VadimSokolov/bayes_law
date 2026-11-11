@@ -1,0 +1,183 @@
+\chapter{Graphical Models of Evidence}
+\label{ch:graphs}
+
+\begin{quote}\itshape
+Wheresoever there is a cause, there an effect must be produced; this necessity cannot be resisted.
+\par\hfill\normalfont Swami Vivekananda, \emph{Karma Yoga}
+\end{quote}
+
+\section{From Wigmore to Pearl}
+
+In 1913 John Henry Wigmore published \emph{The Principles of Judicial Proof}, in which he proposed a method for analysing a mass of evidence by drawing a chart \citep{wigmore1913}. Each proposition, whether an item of evidence or an inference from it, was a numbered node; arrows showed which propositions supported which; special symbols marked the force of belief and whether a proposition was offered by the prosecution or defence. Wigmore's charts were neglected for decades, but were revived by Terence Anderson, David Schum and William Twining, whose \emph{Analysis of Evidence} made chart construction a core skill in evidence teaching \citep{anderson2005}.\index{Wigmore chart}
+
+Wigmore's charts are graphs, and since the 1980s graphs have become the organising structure of probabilistic reasoning. Judea Pearl's Bayesian networks represent a joint probability distribution over many variables by a directed acyclic graph together with a conditional probability table for each node given its parents \citep{pearl1988}. The graph encodes conditional independence: each variable is independent of its non-descendants given its parents. This makes inference tractable in large problems and, as important for law, makes the assumptions of an analysis visible. Pearl later extended the framework to causal reasoning, so that a graph can represent not just associations but the effects of interventions and the answers to counterfactual questions \citep{pearl2009}.\index{Bayesian network}\index{Pearl, Judea}
+
+This chapter introduces Bayesian networks for legal evidence, describes Kadane and Schum's analysis of the Sacco and Vanzetti case, catalogues the common patterns or idioms that recur in legal networks, and shows how causal graphs clarify the law of causation in tort.
+
+\section{Bayesian networks in brief}
+
+A Bayesian network on variables $X_1, \ldots, X_n$ is a directed acyclic graph $\mathcal{G}$ and a factorisation
+\begin{equation}
+\Prob(X_1,\ldots,X_n) = \prod_{i=1}^n \Prob(X_i \given \mathrm{pa}(X_i)),
+\label{eq:bnfactor}
+\end{equation}
+where $\mathrm{pa}(X_i)$ are the parents of $X_i$ in $\mathcal{G}$. Three elementary structures (Figure~\ref{fig:structures}) determine how information flows.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=0.6cm and 0.9cm, every node/.style={font=\small},
+ v/.style={circle, draw=nightblue, fill=softgray, minimum size=7mm, inner sep=1pt},
+ ar/.style={-{Stealth[length=1.6mm]}, nightblue}]
+\node[v] (a1) {$A$}; \node[v, right=of a1] (b1) {$B$}; \node[v, right=of b1] (c1) {$C$};
+\draw[ar] (a1) -- (b1); \draw[ar] (b1) -- (c1);
+\node[below=0.15cm of b1, font=\scriptsize] {chain};
+\node[v, right=1.1cm of c1] (b2) {$B$}; \node[v, below left=0.7cm and 0.3cm of b2] (a2) {$A$}; \node[v, below right=0.7cm and 0.3cm of b2] (c2) {$C$};
+\draw[ar] (b2) -- (a2); \draw[ar] (b2) -- (c2);
+\node[below=1.15cm of b2, font=\scriptsize] {fork};
+\node[v, right=1.9cm of b2] (b3) {$B$}; \node[v, above left=0.7cm and 0.3cm of b3] (a3) {$A$}; \node[v, above right=0.7cm and 0.3cm of b3] (c3) {$C$};
+\draw[ar] (a3) -- (b3); \draw[ar] (c3) -- (b3);
+\node[below=0.15cm of b3, font=\scriptsize] {collider};
+\end{tikzpicture}
+\caption{The three elementary structures. In a chain and a fork, $A$ and $C$ may be dependent unless $B$ is observed. In a collider, $A$ and $C$ are independent unless $B$, or a descendant of $B$, is observed.}
+\label{fig:structures}
+\end{figure}
+
+In a chain $A\to B\to C$, $A$ influences $C$ through $B$; observing $B$ blocks the influence. A motive leads to an act, which leads to a trace; once the act is established, the motive tells us nothing more about the trace. In a fork $A \leftarrow B \to C$, a common cause makes $A$ and $C$ dependent; observing $B$ makes them independent. Two witnesses' reports both depend on what happened; given what happened, they are independent, unless they spoke to each other. In a collider $A \to B \leftarrow C$, two independent causes become dependent when their common effect is observed. If a stain could have come from the defendant or from a contaminated sample, learning that the sample was contaminated lowers the probability that the defendant left the stain. This is explaining away, and it is the structure behind every alternative explanation offered by the defence.\index{explaining away}\index{d-separation}
+
+The general rule, d-separation, says when two sets of variables are independent given a third. A path between them is blocked if it contains a chain or fork node that is observed, or a collider node that is not observed and has no observed descendant. If every path is blocked, the sets are conditionally independent. Lawyers who learn this rule acquire a precise test for whether two items of evidence are independent given the hypothesis, which is the usual condition for adding their weights.
+
+\section{Sacco and Vanzetti}
+
+\begin{casebox}{Commonwealth v Sacco and Vanzetti}
+On 15 April 1920 a paymaster and a guard carrying a shoe factory's payroll in South Braintree, Massachusetts, were shot dead by two men who escaped by car with accomplices. Nicola Sacco, a shoe worker, and Bartolomeo Vanzetti, a fish peddler, both Italian immigrants and anarchists, were arrested in May 1920. They were armed when arrested and lied to the police about their associations. They were tried and convicted in 1921 and, after years of motions, appeals and an advisory committee's review, executed in August 1927. The case became an international cause, and debate about their guilt has never ended. In 1977 the Governor of Massachusetts issued a proclamation that the trial had been permeated by prejudice.
+\end{casebox}
+
+Joseph Kadane and David Schum's \emph{A Probabilistic Analysis of the Sacco and Vanzetti Evidence} is one of the most thorough Bayesian analyses of a historical trial \citep{kadane_schum1996}. They constructed Wigmore-style charts of the entire body of trial and post-trial evidence, nearly four hundred items, organised around the ultimate propositions that Sacco fired the fatal shot into the guard and that Vanzetti was present. They then converted the charts into inference networks and assessed the required conditional probabilities. Crucially, they did not produce a single answer. Each author assessed the probabilities separately, and they reported both sets, along with sensitivity analyses showing which judgments drove the conclusions.\index{Sacco and Vanzetti}\index{Kadane, Joseph}\index{Schum, David}
+
+The central item against Sacco was the fatal bullet, known as Bullet III, which the prosecution's experts linked to Sacco's pistol: Van Amburgh testified that he was inclined to believe it had been fired from that pistol, while Proctor's testimony was only that it was consistent with having been fired from it; tests by Calvin Goddard in 1927, after the trial, matched it to the pistol. The defence suggested that the bullet in evidence had been substituted. Kadane and Schum's analysis shows how the conclusion depends on the probability of substitution and on the reliability of the ballistic comparison. If one accepts the integrity of Bullet III and the ballistic identification, the evidence against Sacco is strong; if one has serious doubts about either, it is much weaker. The evidence against Vanzetti was much thinner throughout, resting heavily on eyewitness identification and on his possession, when arrested, of a revolver that may or may not have belonged to the dead guard.
+
+Figure~\ref{fig:sacco} is a highly simplified network for the bullet evidence. The ultimate proposition $G_S$, that Sacco fired the fatal bullet, influences whether the bullet recovered from the victim came from Sacco's pistol. The bullet in evidence equals the recovered bullet unless there was a substitution, which may itself depend on whether Sacco was guilty. The expert's report depends on the bullet in evidence and on the reliability of the comparison. Consciousness of guilt evidence, the lies at arrest, depends on guilt but also on Sacco's fear, as an anarchist, of deportation, which provides an alternative explanation.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=0.9cm and 0.7cm, every node/.style={font=\scriptsize},
+ v/.style={ellipse, draw=nightblue, fill=softgray, minimum height=6mm, inner sep=2pt, align=center},
+ o/.style={rectangle, draw=nightblue, fill=starlight!35, minimum height=6mm, inner sep=3pt, align=center},
+ ar/.style={-{Stealth[length=1.6mm]}, nightblue}]
+\node[v] (G) {$G_S$: Sacco\\fired};
+\node[v, below left=of G] (rec) {recovered bullet\\from Sacco gun};
+\node[v, below right=of G] (sub) {substitution};
+\node[v, below=1.4cm of G] (evb) {bullet in\\evidence from gun};
+\node[v, right=0.6cm of sub] (rel) {comparison\\reliable};
+\node[o, below=of evb] (rep) {expert report:\\match};
+\node[v, left=1.0cm of G] (fear) {fear of\\deportation};
+\node[o, below=of fear] (lies) {lies at\\arrest};
+\draw[ar] (G) -- (rec); \draw[ar] (G) -- (sub);
+\draw[ar] (rec) -- (evb); \draw[ar] (sub) -- (evb);
+\draw[ar] (evb) -- (rep); \draw[ar] (rel) |- (rep);
+\draw[ar] (G) -- (lies); \draw[ar] (fear) -- (lies);
+\end{tikzpicture}
+\caption{A simplified network for the bullet and consciousness of guilt evidence against Sacco. The lies at arrest are a collider: once fear of deportation is established, they say less about guilt.}
+\label{fig:sacco}
+\end{figure}
+
+\section{Idioms for legal networks}
+
+Building a network for a real case from scratch is laborious. Fenton, Neil and Lagnado proposed a small set of idioms, reusable fragments that capture recurring patterns of legal reasoning \citep{fenton2013}. We describe the most useful.
+
+\subsection{Evidence and accuracy}
+
+An item of evidence $E$ is a report about a hypothesis $H$, and its accuracy $A$ is a separate variable. $E$ depends on both $H$ and $A$. This idiom makes explicit that a witness's testimony is not the fact itself, and that challenges to accuracy are challenges to a parent of $E$, not to $H$. A cross-examination that shows the witness was drunk changes $\Prob(A)$, which changes the likelihood ratio of $E$ for $H$.
+
+\subsection{Cause and consequence}
+
+A hypothesis $H$ causes several observable consequences $E_1, \ldots, E_k$. If the consequences are independent given $H$, their weights add. If they share another common cause, such as a single investigation that produced all of them, they are dependent, and adding their weights double counts.
+
+\subsection{Alternative explanation}
+
+Evidence $E$ has two possible causes, $H$ and an alternative $A$. This is the collider, and it supports explaining away. Every defence of the form that evidence was planted, contaminated or produced by coercion instantiates this idiom.
+
+\subsection{Opportunity and motive}
+
+Opportunity and motive are parents of the act. They raise its prior probability but are not consequences of it. Motive is sometimes treated as evidence of the act in the same way as forensic traces; in the network, motive enters the prior, while traces enter the likelihood.
+
+\subsection{Witness dependence}
+
+Two witnesses who discussed events before testifying are not independent given what happened. In the network there is an edge between them, or a latent variable representing their conversation (Figure~\ref{fig:witness}), and their combined weight is usually less than the sum of their weights. The law's concern with collusion, and the practice of separating witnesses, are attempts to preserve conditional independence.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=0.9cm and 1.2cm, every node/.style={font=\scriptsize},
+ v/.style={circle, draw=nightblue, fill=softgray, minimum size=8mm, inner sep=1pt, align=center},
+ o/.style={rectangle, draw=nightblue, fill=starlight!35, minimum size=7mm, inner sep=2pt},
+ ar/.style={-{Stealth[length=1.6mm]}, nightblue}]
+\node[v] (H) {$H$};
+\node[o, below left=of H] (W1) {$W_1$};
+\node[o, below right=of H] (W2) {$W_2$};
+\node[v, below=1.6cm of H] (T) {talk};
+\draw[ar] (H) -- (W1); \draw[ar] (H) -- (W2);
+\draw[ar] (T) -- (W1); \draw[ar] (T) -- (W2);
+\node[v, right=3.4cm of H] (H2) {$H$};
+\node[o, below left=of H2] (W3) {$W_1$};
+\node[o, below right=of H2] (W4) {$W_2$};
+\draw[ar] (H2) -- (W3); \draw[ar] (H2) -- (W4);
+\end{tikzpicture}
+\caption{Witness idioms. On the right, two witnesses are independent given the event $H$ and their weights add. On the left, a conversation creates dependence, and the combined weight is less than the sum.}
+\label{fig:witness}
+\end{figure}
+
+\section{Object-oriented networks}
+
+Real cases contain repeated structures: many witnesses, many traces, many suspects. Object-oriented Bayesian networks let the analyst define a class once, such as a witness with its accuracy and testimony, and instantiate it many times. Dawid, Mortera and Vicard used this approach to handle complex DNA problems with many individuals and markers \citep{dawid2007oobn}. The same approach suits legal arguments generally. A class for a document might include its authenticity, its author's knowledge, and its content; a class for an expert might include her qualifications, her methods, and her report.
+
+\section{Graphs for causation in tort}
+
+The law of causation, discussed in Chapter~\ref{ch:tort}, is a natural application of causal graphs. A structural causal model represents each variable as a function of its parents and an independent error term. The intervention $\mathrm{do}(X = x)$ replaces the equation for $X$ with the constant $x$ and propagates the change through the model. The but for question, whether the harm would have occurred without the breach, is a counterfactual (Figure~\ref{fig:twin}): given that the breach and the harm occurred, what would the harm have been under $\mathrm{do}(\text{no breach})$?
+
+Pearl's method for counterfactuals has three steps \citep{pearl2009}. Abduction: update the distribution of the error terms using the evidence of what actually happened. Action: modify the model by the intervention. Prediction: compute the probability of the outcome in the modified model with the updated errors. This makes the but for test computable whenever the model is specified, and it shows why the probability of causation discussed in Chapter~\ref{ch:tort} depends on more than the relative risk: it depends on the joint distribution of the error terms, which data on populations do not fully identify.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=0.8cm and 1.4cm, every node/.style={font=\scriptsize},
+ v/.style={circle, draw=nightblue, fill=softgray, minimum size=8mm, inner sep=1pt, align=center},
+ u/.style={circle, draw=starlight, fill=white, minimum size=6mm, inner sep=1pt},
+ ar/.style={-{Stealth[length=1.6mm]}, nightblue}]
+\node[u] (U) {$U$};
+\node[v, below left=of U] (X) {breach};
+\node[v, below right=of U] (Y) {harm};
+\node[v, right=2.6cm of X] (Xc) {no\\breach};
+\node[v, right=of Xc] (Yc) {harm\\(cf.)};
+\draw[ar] (U) -- (X); \draw[ar] (U) -- (Y); \draw[ar] (X) -- (Y);
+\draw[ar] (U) to[bend left=20] (Yc); \draw[ar] (Xc) -- (Yc);
+\end{tikzpicture}
+\caption{A twin network for the but for test. The left side is the actual world; the right is the counterfactual world in which the breach is removed. Both share the background factors $U$, which are updated by what actually happened.}
+\label{fig:twin}
+\end{figure}
+
+\subsection{Overdetermination and the NESS test}
+
+Some cases have more than one sufficient cause. Two fires, each sufficient to destroy a house, merge and destroy it. Neither is a but for cause, since the house would have burned without either one. Richard Wright's NESS test treats a condition as a cause if it was a necessary element of a set of conditions sufficient for the outcome \citep{wright1985}. Halpern and Pearl's definition of actual causation formalises a similar idea in structural models, allowing contingencies in which other causes are held fixed \citep{halpern2005}. These definitions address the classic puzzles of overdetermination and pre-emption, and they suggest that the law's departures from the but for test in such cases are principled, although both remain contested.
+
+\subsection{Material contribution as a collider problem}
+
+The mesothelioma cases have a simple graph: the disease has a single trigger, and a latent node records which exposure triggered it, with probability proportional to each employer's dose. Given the disease, the exposures are the parents of that collider, and evidence that one exposure was the trigger explains away the others, consistent with the model of Chapter~\ref{ch:tort}. The posterior probability that a given employer's fibres were responsible is proportional to its share, as in Figure~\ref{fig:fairchild} of Chapter~\ref{ch:tort}. The \emph{Fairchild} exception can be described as a rule for decision when the posterior over causes is spread across several defendants none of whom individually crosses one half.
+
+\section{Graphs as tools of advocacy and judgment}
+
+Graphs are not neutral. Which nodes to include, which edges to draw and which to omit, are choices that reflect a theory of the case. A prosecution graph that omits the possibility of contamination has already decided the most important question. The value of graphical analysis is that these choices are visible, so they can be contested. A court that receives competing graphs from the parties can see where they disagree, and can focus the trial on those points.
+
+The comparison by Dawid and colleagues of Wigmore charts, Bayesian networks and chain event graphs on the Kercher evidence found that each method suits a different user \citep{dawid2024kercher}. Wigmore charts are best for lawyers organising argument; Bayesian networks for forensic scientists computing likelihood ratios; chain event graphs, introduced in Chapter~\ref{ch:classic}, for investigators thinking about how events unfolded.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item In the collider $A \to B \leftarrow C$ with $A$ and $C$ independent binary variables each with probability $0.1$, and $B = A \lor C$, compute $\Prob(A \given B = 1)$ and $\Prob(A\given B = 1, C = 1)$. Interpret as explaining away.
+\item Two witnesses each identify the defendant with likelihood ratio ten: each identifies him with probability 0.9 if he is guilty and 0.09 if he is not. If they spoke to each other, so that the second witness repeats the first with probability one half regardless of what she saw, what is the combined likelihood ratio?
+\item Draw a network for the Simpson evidence of Chapter~\ref{ch:classic}, including the battering, the murder, the DNA and the possibility of contamination. Which nodes are colliders?
+\item Using the network of Figure~\ref{fig:sacco}, explain why establishing that Sacco feared deportation reduces the weight of his lies at arrest. What would increase it?
+\item Construct a structural causal model for \emph{Barnett v Chelsea and Kensington Hospital Management Committee} (Chapter~\ref{ch:tort}). Show how the counterfactual probability of death without the negligence is computed.
+\item Explain the difference between the but for test and the NESS test using the two fires example. Which test does English law apply?
+\end{enumerate}
+
+\section*{Further reading}
+Pearl's \emph{Causality} \citep{pearl2009}; Taroni, Biedermann and colleagues on Bayesian networks in forensic science \citep{taroni2014}; Fenton, Neil and Lagnado on idioms \citep{fenton2013}; Kadane and Schum on Sacco and Vanzetti \citep{kadane_schum1996}; Anderson, Schum and Twining on Wigmore charts \citep{anderson2005}.

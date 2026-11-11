@@ -1,0 +1,134 @@
+\chapter{The Pleadings Game and Generative Bayesian Computation}
+\label{ch:pleadings}
+
+\section{Pleading as a game}
+
+Before a civil case reaches trial, the parties exchange written statements of their positions. The claimant states the facts on which the claim rests and the relief sought; the defendant admits, denies or puts the claimant to proof on each allegation, and may raise affirmative defences; the claimant may reply. The purpose of this exchange, in the common law tradition, is to identify the issues: the questions of fact and law on which the parties genuinely disagree and which the court must decide. Everything admitted drops out. Everything denied becomes an issue. A well run pleading process narrows a sprawling dispute to a handful of questions.\index{pleading}
+
+Thomas Gordon's \emph{The Pleadings Game} formalised this process as a dialogue game between two players \citep{gordon1995}. Each player can make moves: assert a claim, concede an opponent's claim, deny it, or offer an argument consisting of premises and a defeasible rule that supports a conclusion. Rules can have exceptions, and a player can challenge a rule by asserting an exception or by arguing that a more specific rule applies. The game ends when no player can make a further relevant move. Its outcome is the set of issues: claims that have been asserted and denied, and that are relevant to the ultimate question, together with the arguments for and against each. Gordon grounded the logic in conditional entailment, a nonmonotonic logic due to Geffner and Pearl, and the procedure in Rescher's formal theory of disputation. His aim was a model of procedural justice: a fair procedure for identifying what is in dispute.\index{Gordon, Thomas F.}\index{Pleadings Game}
+
+In our paper on the Pleadings Game we asked what happens if one adds probabilities to Gordon's structure, and how a modern deep learning system could be built on it \citep{polson_sokolov_pleadings}. The answer leads to generative Bayesian computation, a method for approximating posterior distributions by training neural networks on simulated data. This chapter explains the idea and illustrates it with the pleading standards of English and American law.
+
+\section{From issues to probabilities}
+
+Gordon's game identifies issues but does not say how they will be decided. For a party deciding whether to bring or defend a claim, and for a court managing a case, the next question is how probable each outcome is. Each issue $I_j$ will be resolved for the claimant or the defendant, and the claim succeeds if the issues are resolved in a combination that satisfies the elements of the cause of action. Let $Z_j \in\{0,1\}$ indicate resolution for the claimant. The probability that the claim succeeds is
+\begin{equation}
+\Prob(\text{success}) = \sum_{z \in \mathcal{S}} \Prob(Z = z),
+\end{equation}
+where $\mathcal{S}$ is the set of combinations that make out the claim. The structure of $\mathcal{S}$ comes from the substantive law; the joint distribution of $Z$ comes from the evidence the parties expect to adduce and from the way courts decide such questions. A Bayesian network whose structure mirrors Gordon's argument graph, with issues as nodes and rules as edges, gives a natural model for the joint distribution.
+
+\section{Pleading standards as posterior thresholds}
+
+\subsection{Twombly and Iqbal}
+
+In the United States, Rule 8 of the Federal Rules of Civil Procedure requires a short and plain statement of the claim showing that the pleader is entitled to relief. For half a century after \emph{Conley v Gibson} in 1957, this was read as permitting dismissal only if it appeared beyond doubt that the plaintiff could prove no set of facts entitling him to relief. In \emph{Bell Atlantic Corp v Twombly} the Supreme Court in 2007 retired that formula in an antitrust case alleging a conspiracy among telephone companies, holding that a complaint must contain enough facts to state a claim to relief that is plausible on its face \citep{twombly2007}. Allegations of parallel conduct, consistent with conspiracy but equally consistent with independent responses to common market conditions, were not enough. In \emph{Ashcroft v Iqbal} in 2009 the Court extended the plausibility standard to all civil actions and instructed judges to draw on judicial experience and common sense in assessing it \citep{iqbal2009}.\index{Twombly}\index{Iqbal}\index{plausibility pleading}
+
+\begin{casebox}{Bell Atlantic Corp v Twombly, 550 U.S. 544 (2007)}
+Subscribers sued the regional telephone companies formed after the breakup of AT\&T, alleging that they had conspired not to compete in each other's territories and to exclude new entrants. The complaint alleged parallel conduct and a statement by one executive, quoted in both the majority opinion and Justice Stevens's dissent, that competing in another company's territory might be a good way to turn a quick dollar but that doesn't make it right. The Supreme Court held the complaint insufficient: parallel conduct is consistent with conspiracy but just as much in line with a wide swath of rational and competitive business strategy unilaterally prompted by common perceptions of the market. The plaintiffs had not nudged their claims across the line from conceivable to plausible.
+\end{casebox}
+
+\emph{Twombly}'s reasoning is a likelihood ratio argument. Parallel conduct has roughly equal probability under conspiracy and under independent action in a concentrated market, so its likelihood ratio is near one. Allegations that would move the posterior, such as evidence of meetings or communications, were absent. The Court said that plausibility is not a probability requirement: asking for plausible grounds ``does not impose a probability requirement at the pleading stage'' (\emph{Twombly}), and the standard ``is not akin to a `probability requirement,' but it asks for more than a sheer possibility'' (\emph{Iqbal}). We read the standard nonetheless as an implicit threshold on the posterior probability of the claim given the pleaded facts, taken as true, with the judge's experience and common sense supplying the prior and the likelihoods. The Court's disclaimer denies that a numerical probability must be computed or that the claim must be more likely than not; it does not deny that a complaint whose allegations have a likelihood ratio near one, and so leave the posterior near a low prior, is implausible, and that is all the threshold reading needs. The threshold is lower than the trial standard, since discovery may yet uncover evidence, but higher than the bare possibility contemplated by \emph{Conley}.
+
+The decision theoretic justification for such a threshold is the cost of discovery. In \emph{Twombly} the Court noted that antitrust discovery can be expensive, and that the threat of it can push defendants to settle weak claims. If the cost of discovery is $c$, the value of a successful claim is $V$, and $p$ is the probability of success given the pleaded facts, then on a simple expected value rule the case should proceed when $pV > c$, that is, when $p > p^\ast = c/V$. This threshold rises with $c$ and falls with $V$. A full value of information criterion would also credit discovery with sorting meritorious from unmeritorious claims. The plausibility standard is a rough implementation of the simpler rule, applied without numbers.
+
+\subsection{English strike out and summary judgment}
+
+English procedure reaches similar questions through different routes. Under the Civil Procedure Rules a court may strike out a statement of case that discloses no reasonable grounds for bringing or defending the claim, and may give summary judgment where a party has no real prospect of succeeding and there is no other compelling reason for a trial. In \emph{Swain v Hillman} Lord Woolf said that real prospect means a realistic as opposed to a fanciful prospect \citep{swain2001}. In \emph{Three Rivers District Council v Bank of England (No 3)}, a claim by depositors of the collapsed bank BCCI against the Bank of England for misfeasance in public office, the House of Lords by a majority refused to strike out the claim, holding that the question was whether the claim had no real prospect of succeeding at trial, and that a claim involving disputed facts and serious allegations should generally go to trial \citep{threerivers2001}. The claimants discontinued the action in November 2005, after years of hearings and enormous costs, and were ordered to pay costs on an indemnity basis \citep{threerivers2006}.\index{summary judgment}\index{Three Rivers}
+
+\emph{Three Rivers} is a cautionary example for the decision theorist. The majority's reasoning was that a claim of bad faith against a regulator could not be assessed without hearing the evidence, which is a statement that the value of information from trial was high. The outcome is at least consistent with a low posterior on success and a large cost of the information, though one outcome cannot establish either. A Bayesian assessment at the strike out stage would have had to estimate both. It is not obvious that it would have done better than the House of Lords, but it would at least have made the trade off explicit.
+
+\section{Generative Bayesian computation}
+
+\subsection{The problem}
+
+Suppose we want to compute the posterior probability of success for a pleaded claim, using a model of how disputes of that kind unfold. The model has parameters $\theta$, such as the strength of each issue, the reliability of the evidence each party is likely to have, and the tendencies of courts, and it generates observable data $y$, such as the pleaded facts, the admissions and denials, and the eventual outcome. Bayesian inference requires the posterior $\Prob(\theta \given y)$ and the predictive probability of outcomes. For realistic models these are intractable: the likelihood $\Prob(y\given\theta)$ cannot be written down, because the process that generates pleadings and outcomes is too complex.\index{generative Bayesian computation}
+
+Approximate Bayesian computation and likelihood free inference address this problem by simulation. If we can simulate $y$ from the model for any $\theta$, we can learn the posterior without evaluating the likelihood. Generative Bayesian computation, which we have developed \citep{polson_sokolov_gbc}, does this with neural networks.
+
+\subsection{The method}
+
+The idea is to learn the inverse map from data to parameters directly. Draw $\theta^{(i)}$ from the prior and simulate $y^{(i)}$ from the model, for $i = 1,\ldots, N$, with $N$ large. Then train a neural network $f_w(y, \tau)$, indexed by a quantile level $\tau \in (0,1)$, to minimise the quantile loss for a scalar target $\phi(\theta)$, such as one component of $\theta$ or the probability of success $\Prob(\text{success}\given\theta)$ (the network is trained on one such target at a time)
+\begin{equation}
+\begin{gathered}
+\mathcal{L}(w) = \frac{1}{N}\sum_{i=1}^N \rho_\tau\left(\phi^{(i)} - f_w(y^{(i)},\tau)\right),\\
+\rho_\tau(u) = u(\tau - \mathbb{1}\{u < 0\}), \qquad \phi^{(i)} = \phi(\theta^{(i)}),
+\end{gathered}
+\label{eq:quantileloss}
+\end{equation}
+with $\tau$ drawn at random for each training example. The minimiser of the expected quantile loss is the conditional quantile function, so after training $f_w(y,\tau)$ approximates the $\tau$ quantile of the posterior of $\phi(\theta)$ given $y$ \citep{polson_sokolov_gbc}. Given a new case with data $y^\ast$, we obtain its posterior by evaluating $f_w(y^\ast, \tau)$ over a grid of $\tau$, or generate posterior draws by evaluating it at uniform random $\tau$. The network approximates Bayesian inference for any data the model could generate, so the cost of training is spread over all future cases, a property called amortisation.
+
+\begin{keybox}
+Generative Bayesian computation in four steps.
+\begin{enumerate}[label=\arabic*.]
+\item Specify a generative model of the dispute: priors on parameters and a simulator for pleadings, evidence and outcomes.
+\item Simulate a large training set of parameter and data pairs.
+\item Train a quantile network to map data and a quantile level to the corresponding posterior quantile.
+\item Apply the trained network to the data of a real case to obtain its posterior.
+\end{enumerate}
+\end{keybox}
+
+\subsection{A simulator for pleadings}
+
+For the Pleadings Game the simulator generates a dispute in stages. First, latent facts are drawn: what actually happened, encoded as truth values of propositions. Second, each party's knowledge is drawn as a noisy view of the facts. Third, the parties play Gordon's game: the claimant asserts propositions it believes and that support its claim; the defendant concedes those it believes true and whose denial would be costly, denies others, and raises exceptions; the result is a set of issues. Fourth, evidence on each issue is drawn as a noisy signal of the latent facts, with noise depending on the type of issue. Fifth, the court resolves each issue by Bayesian updating on the evidence with a threshold, and the outcome follows from the substantive rules. Parameters $\theta$ include the base rates of the latent facts, the noise levels, and the cost structure that governs concessions.
+
+Training the network on millions of such simulated disputes teaches it to map the observable pleadings, the pattern of assertions, admissions, denials and exceptions, to the posterior distribution of the probability of success, taking $\phi(\theta)=\Prob(\text{success}\given\theta)$ as the target. Admissions are informative because a rational defendant admits what it expects to lose; denials are less informative, because they are cheap; exceptions are informative about which issues the defendant expects to be pivotal. The network learns these regularities from the simulation, and the quality of its inferences depends on the realism of the simulator.
+
+\begin{lstlisting}[language=Python, caption={A sketch of the quantile network for pleadings (the simulator and training loop are omitted).}]
+import torch, torch.nn as nn
+
+class QuantileNet(nn.Module):
+    def __init__(self, d_in, d_hidden=128):
+        super().__init__()
+        self.body = nn.Sequential(
+            nn.Linear(d_in + 1, d_hidden), nn.ReLU(),
+            nn.Linear(d_hidden, d_hidden), nn.ReLU(),
+            nn.Linear(d_hidden, 1))
+    def forward(self, y, tau):
+        return self.body(torch.cat([y, tau], dim=1))
+
+def quantile_loss(theta, pred, tau):
+    u = theta - pred
+    return torch.mean(u * (tau - (u < 0).float()))
+
+# theta (here the scalar target phi), y simulated from the pleadings model
+# for each batch: tau = torch.rand(batch, 1)
+# loss = quantile_loss(theta, net(y, tau), tau)
+\end{lstlisting}
+
+\section{Case law as training data}
+
+Simulation is only as good as the simulator. The obvious complement is data from real cases: pleadings, motions and outcomes. Large collections of judgments and filings are now available in electronic form in many jurisdictions. Such data can be used in two ways. They can calibrate the simulator, by choosing parameters so that simulated outcomes match observed outcome frequencies for cases with similar pleadings. And they can train a network directly, mapping features of real pleadings to outcomes. The second approach is what commercial litigation analytics products do, typically with discriminative models rather than generative ones.
+
+The Bayesian approach has an advantage over pure prediction from case data: it separates the components of the problem. A discriminative model trained on outcomes learns that certain kinds of claims usually fail, but cannot say why, or how the answer would change if the law changed. A generative model specifies the mechanism, so that one can ask how a change in the pleading standard, or in the cost of discovery, would change outcomes. Since the cases that reach a reported judgment are a selected sample, as the Priest and Klein theory, to which Chapter~\ref{ch:becker} returns, explains, a model that represents the selection process explicitly is needed to learn from them without bias.
+
+\section{Worked example: a negligent misstatement claim}
+
+Consider a claim for negligent misstatement under \emph{Hedley Byrne}, of the kind discussed in Chapter~\ref{ch:misrep}. The elements are a statement, its falsity, an assumption of responsibility, reasonable reliance, breach of the duty of care in making the statement, and loss within the scope of the duty. A simplified pleading exchange might run as follows.
+\begin{enumerate}[label=(\alph*)]
+\item The claimant pleads that the defendant, its financial adviser, stated that a fund invested only in short dated receivables of investment grade obligors; that the defendant knew the claimant would rely on the statement in deciding to invest; that the statement was false; that a competent adviser would have known it was false; and that the claimant lost money when the fund collapsed.
+\item The defendant admits making the statement and knowing the claimant's purpose, does not contest assumption of responsibility or reasonable reliance, denies that it was false when made, denies that a competent adviser would have known otherwise, and pleads that the loss was caused by an unforeseeable event outside the scope of its duty.
+\item The claimant replies that the fund held concentrated and prospective receivables at the time of the statement.
+\end{enumerate}
+The Pleadings Game identifies three issues: falsity at the time of the statement, breach of the standard of care, and scope of duty. A generative model assigns each a prior based on the type of statement and adviser, and a likelihood for the evidence each side is likely to produce. The admission of the statement and of knowledge of reliance, and the decision not to contest assumption of responsibility and reliance, remove three of the six elements from dispute; the specific reply on concentration raises the probability of falsity. A trained network would output a posterior distribution for the probability of success, perhaps centred around one half with substantial spread, reflecting uncertainty about breach and scope. Such an output would help a court decide whether to give summary judgment, and help the parties decide whether to settle.
+
+\section{What the machine adds and what it cannot}
+
+A system of this kind could change civil litigation in three ways. It could make early case assessment cheaper and more consistent, reducing the cost of deciding whether to sue or settle. It could help courts manage dockets by identifying cases likely to settle and issues likely to be pivotal. And it could make the reasoning behind pleading standards more transparent, by showing what posterior a given standard implies.
+
+It cannot replace the judgment of what the law is. The substantive rules that determine $\mathcal{S}$, the combinations of issues that make out a claim, are inputs, not outputs. When the law is uncertain, as it often is at the frontier, the model must represent that uncertainty, and the prior on legal questions is a matter for lawyers. Nor can it guarantee that its simulator captures the world. A network trained on a simulator that omits an important mechanism will be confidently wrong about cases where that mechanism matters. Chapters~\ref{ch:lindleyai} and~\ref{ch:xai} discuss how such systems should be validated and governed.
+
+Gordon called his book a model of procedural justice. Procedural justice requires that parties be heard, that their arguments be considered, and that the decision follow from the arguments in a way they can understand. A Bayesian network built on Gordon's game, and a generative model trained on it, can meet these requirements better than an opaque predictive model, because every probability in the Bayesian network and the simulator can be traced to issues, rules and evidence that the parties themselves put forward.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Express the \emph{Conley} standard and the \emph{Twombly} standard as thresholds on a posterior probability, bearing in mind the Court's statement that plausibility is not a probability requirement. What would the threshold have to be for the \emph{Twombly} complaint to survive?
+\item Show that the minimiser over $q$ of $\E[\rho_\tau(\theta - q)]$ is the $\tau$ quantile of $\theta$.
+\item In the pleading exchange of the worked example, which admissions are most informative about the defendant's own assessment of the case? Model the defendant's decision to admit or deny as an expected cost minimisation.
+\item Read \emph{Three Rivers (No 3)}. Write a short opinion applying a value of information test to the strike out application.
+\item Design a simulator for a simple contract dispute with two issues, formation and breach. Specify priors and noise levels. What features of the simulated pleadings would a network need to learn the posterior?
+\item What biases would a model trained on reported judgments inherit? How could a generative model correct for selection?
+\end{enumerate}
+
+\section*{Further reading}
+Gordon's \emph{The Pleadings Game} \citep{gordon1995}; our papers on the Pleadings Game and on generative Bayesian computation \citep{polson_sokolov_pleadings,polson_sokolov_gbc}; and the opinions in \emph{Twombly} and \emph{Iqbal} \citep{twombly2007,iqbal2009}.

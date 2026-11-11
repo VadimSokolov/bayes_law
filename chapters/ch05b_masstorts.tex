@@ -1,0 +1,85 @@
+\chapter{Mass Torts and Scientific Causation}
+\label{ch:masstorts}
+
+\section{Many claimants, one question}
+
+A mass tort is a set of claims arising from a common cause: a drug, a medical device, a chemical, a consumer product. Thousands or hundreds of thousands of claimants allege that exposure caused their illness. The defendants deny that the product causes the illness at all, or that it caused it in particular claimants. The litigation turns on science: epidemiology, toxicology, pharmacology, and the interpretation of studies that often disagree. Courts must decide scientific questions under uncertainty, with enormous sums at stake and with experts on each side who read the same studies differently.\index{mass torts}
+
+Mass torts raise two causal questions. General causation asks whether the product can cause the illness: does exposure raise the risk in the population? Specific causation asks whether it caused this claimant's illness. The first is a question about a population parameter, the relative risk, and is answered by epidemiology. The second is a question about an individual, answered, if at all, by combining the population evidence with facts about the claimant. Chapter~\ref{ch:tort} discussed the probability of causation and the doubling of risk. This chapter treats general causation as a problem of Bayesian evidence synthesis, examines how courts have managed scientific evidence in mass torts, and draws lessons from several major episodes.
+
+\section{General causation as evidence synthesis}
+
+\subsection{The evidence}
+
+The evidence for general causation is a body of studies: randomised trials where they exist, cohort and case control studies, animal experiments and mechanistic research. Each study estimates a relative risk with uncertainty, and the estimates differ because of sampling error, differences in populations and exposures, and biases in design. The question for a court is what the body of evidence, taken together, says about the true relative risk.\index{general causation}
+
+\subsection{Hierarchical meta analysis}
+
+A Bayesian random effects meta analysis models each study's estimate $y_j$, on the log relative risk scale, as
+\begin{equation}
+y_j \sim N(\theta_j, s_j^2), \qquad \theta_j \sim N(\mu, \tau^2),
+\label{eq:meta}
+\end{equation}
+where $s_j$ is the study's standard error (the uncertainty from sampling alone), $\theta_j$ its true effect, $\mu$ the average effect across studies, and $\tau^2$ the between study variance (how much true effects differ from one study to the next). The random effects in the name are the $\theta_j$, which vary across studies around $\mu$. Priors on $\mu$ and $\tau$ complete the model. The posterior for $\mu$ answers the general causation question: what is the probability that the typical relative risk, $e^{\mu}$, exceeds one (general causation) or two (the doubling threshold relevant to specific causation)? The posterior for $\tau$ says how much the effect varies across settings. Bias can be modelled explicitly, for instance by allowing observational studies a bias term with a prior reflecting how much confounding is plausible.\index{meta analysis}
+
+This approach has two advantages over the way experts often present evidence in court. First, it combines all the studies coherently and makes any selection explicit, rather than leaving it hidden in favourable choices, which is the adversarial expert problem that Chapter~\ref{ch:fienberg} examines. Second, it reports a probability that the effect is real and of a given size, which is what a court needs, rather than a collection of p values.
+
+\subsection{The Bradford Hill considerations}
+
+Epidemiologists and courts often refer to the considerations set out by Austin Bradford Hill in 1965 for judging whether an association is causal: strength, consistency, specificity, temporality, biological gradient, plausibility, coherence, experiment and analogy \citep{hill1965}. Hill did not intend them as a checklist, and courts that apply them mechanically miss their point. Each consideration is a reason to update beliefs about causation. A strong association is harder to explain by confounding; a consistent association across settings makes chance and setting specific bias less likely; a dose response gradient is predicted by causation and less so by most biases; biological plausibility raises the prior. A Bayesian treatment turns the considerations into components of the likelihood and the prior, which can be combined rather than counted.\index{Bradford Hill}
+
+\section{Daubert and the gatekeeper}
+
+The Supreme Court's decision in \emph{Daubert} \citep{daubert1993}, discussed in Chapter~\ref{ch:evidence}, arose from mass tort litigation over Bendectin, a drug for morning sickness alleged to cause birth defects. By the early 1990s, many epidemiological studies had found no association, and the plaintiffs' experts relied on animal studies, chemical structure analysis and reanalyses of the published studies. The Court held that trial judges must assess the reliability of expert evidence, and on remand the Ninth Circuit excluded the plaintiffs' experts. In \emph{General Electric v Joiner} the Court held that a trial judge may exclude an expert whose conclusions do not follow from the studies on which he relies, because there is too great an analytical gap between the data and the opinion \citep{joiner1997}.\index{Daubert}\index{General Electric v Joiner}
+
+The gatekeeping role asks judges to evaluate scientific reasoning, which most are not trained to do. The analytical gap of \emph{Joiner} is, in Bayesian terms, a gap between the likelihood the studies supply and the posterior the expert claims. An expert who infers a large relative risk from studies that, combined, are consistent with no effect has made an inference the evidence does not support. A judge equipped with a meta analytic posterior can see the gap directly.
+
+\section{Court appointed experts}
+
+In the breast implant litigation of the 1990s, hundreds of thousands of women claimed that silicone implants caused connective tissue and autoimmune diseases. Juries returned large verdicts, and the leading manufacturer filed for bankruptcy. Several courts appointed independent experts. In \emph{Hall v Baxter Healthcare}, Judge Robert Jones in Oregon appointed four technical advisors, in epidemiology, rheumatology, immunology and toxicology, and polymer chemistry, and after hearing them excluded the plaintiffs' expert evidence of causation \citep{hall1996}. A national panel appointed in the federal multidistrict litigation reported in 1998 that the evidence did not show an association between implants and the diseases alleged \citep{nationalsciencepanel1998}, and the Institute of Medicine concluded in 1999 that the evidence did not show that implants cause these diseases \citep{iom1999}.\index{breast implants}\index{court appointed experts}
+
+The breast implant experience supports the recommendation of Fienberg's panel, which Chapter~\ref{ch:fienberg} discusses, that courts make more use of neutral experts. A neutral panel provides a draw from the unselected distribution of expert opinion, and in a mass tort, where the same scientific question arises in thousands of cases, its findings can be applied across them. One Bayesian view is that a neutral panel's synthesis is the court's best estimate of the posterior on general causation, to be updated by any new studies, rather than relitigated in every trial, although binding non-parties to a finding raises due process limits.
+
+\section{Specific causation}
+
+\subsection{From population to individual}
+
+Once general causation is established, each claimant must show that the product caused her illness. If the relative risk is $R$ and nothing distinguishes the claimant from the exposed population in the studies, the probability of causation is $1 - 1/R$ under the assumptions of equation~\eqref{eq:pc} in Chapter~\ref{ch:tort}, and at least that if exposure can also accelerate onset. Individual facts can move this probability: a higher dose than average, a latency consistent with the known induction period, the absence of other risk factors, or a biomarker associated with the exposure raises it; a family history or another known cause lowers it. A Bayesian treatment updates the population probability of causation with the claimant's individual evidence, using likelihood ratios for each factor.\index{specific causation}
+
+\subsection{Differential etiology}
+
+Experts often address specific causation by differential etiology: listing possible causes of the claimant's illness and ruling them out until one remains. The method is legitimate only if the list is complete and the ruling out is evidence based. Many illnesses have no identifiable cause in most patients; ruling out known alternatives does not establish that the product was the cause if most cases are idiopathic. The Bayesian version makes this explicit: the posterior probability that the product was the cause is its prior weight times its likelihood, divided by the sum over all causes including unknown ones. If the unknown cause has a large prior weight, eliminating the other known causes leaves the product's probability well below one. This is the island formula, equation~\eqref{eq:islandsimple} of Chapter~\ref{ch:classic}, applied to causes rather than suspects.
+
+\section{Episodes}
+
+\subsection{Agent Orange}
+
+Veterans of the Vietnam War sued the manufacturers of Agent Orange, a herbicide contaminated with dioxin, alleging that exposure caused cancers in themselves and birth defects in their children. Judge Jack Weinstein, whom we met in Chapter~\ref{ch:standards} and will meet again in Chapter~\ref{ch:kadane}, presided over the class action. In 1984 the parties settled for one hundred and eighty million dollars, reportedly the largest product liability class settlement up to that time. Weinstein later dismissed the claims of veterans who opted out, finding that the epidemiological evidence did not establish causation for the diseases claimed. Weinstein was explicit that he was making a probabilistic judgment about a population, and he favoured approaches that would compensate claimants in proportion to the probability of causation rather than all or nothing, the expected utility approach of Chapter~\ref{ch:standards}.
+
+\subsection{Vioxx}
+
+Vioxx, an anti inflammatory drug, was withdrawn from the market in 2004 after a randomised trial showed an increased risk of heart attacks and strokes. Unlike many mass torts, the evidence for general causation came from randomised trials, and the debate concerned the size of the risk, its dependence on duration of use, and when the manufacturer knew. The litigation settled in 2007 for about four point eight five billion dollars, under a programme that paid claimants according to criteria related to the strength of their individual evidence: duration of use, timing of the event and other risk factors. The settlement grid was, to a first approximation, a schedule of probabilities of causation applied to individuals, although the points also reflected injury severity and litigation risk.
+
+\subsection{Glyphosate}
+
+In 2015 the International Agency for Research on Cancer classified glyphosate, the active ingredient in the herbicide Roundup, as probably carcinogenic to humans, based on limited human evidence of an association with non Hodgkin lymphoma, sufficient evidence in experimental animals, and strong mechanistic evidence. The United States Environmental Protection Agency and the European Food Safety Authority concluded that glyphosate was not likely to be carcinogenic at realistic exposures. Juries in several trials returned large verdicts for plaintiffs, and in 2020 Bayer, which had acquired Monsanto, agreed to a settlement programme of up to about eleven billion dollars, with litigation continuing. The glyphosate episode shows how different bodies, applying different standards to the same evidence, can reach different conclusions. The IARC classification is a hazard assessment, asking whether a substance can cause cancer under some conditions; regulatory risk assessment asks whether it does at actual exposure levels; a jury asks whether it more probably than not caused a particular plaintiff's cancer. Each is a different question, with a different threshold, and conflating them is a source of confusion.
+
+\section{Aggregation and its limits}
+
+Mass torts strain the individual adjudication model of the common law. Trying hundreds of thousands of claims individually is impossible; class actions and multidistrict litigation aggregate them, and bellwether trials of selected cases inform global settlements. Statistically, bellwether trials are a sample used to estimate the value of the remaining claims, and their usefulness depends on how they are selected. If each side picks its strongest cases, the outcomes are biased in both directions, as with selected experts. Random selection of bellwether cases, which some judges have ordered, yields an unbiased sample, although randomly selected cases are often dismissed or settled before trial, so the tried cases may no longer be random, and allows the results to be extrapolated with stated uncertainty.
+
+Aggregate approaches raise fairness questions. A claimant whose individual case is strong may receive less in a global settlement than she would at trial; one whose case is weak may receive more. A settlement grid that pays according to probability of causation is the Bayesian compromise: each claimant receives the expected harm the product caused her, given the evidence, without the cost of individual trial. This is the logic of proportional liability extended to an entire litigation.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Five studies report log relative risks of $0.4, 0.1, 0.6, -0.1, 0.3$ with standard errors of $0.2, 0.15, 0.3, 0.25, 0.2$. Fit the model \eqref{eq:meta} with a flat (uniform, uninformative) prior on $\mu$ and $\tau$ fixed at $0.1$. What is the posterior probability that the typical relative risk, $e^{\mu}$, exceeds one (general causation), and that it exceeds two (the doubling threshold)? Contrast the two answers.
+\item Explain how each Bradford Hill consideration would enter a Bayesian analysis as a likelihood or a prior.
+\item A claimant was exposed to the product. Among exposed people with her illness, the product accounts for twenty per cent of cases, two other known causes for twenty per cent between them, and an unknown cause for the remaining sixty per cent. Experts rule out the two other known causes. What is the posterior probability that the product caused her illness?
+\item Design a protocol for selecting bellwether cases in a mass tort. What statistical properties should it have?
+\item Compare the questions answered by a hazard classification, a regulatory risk assessment and a jury verdict in the glyphosate litigation. Which threshold applies to each?
+\item Should courts compensate mass tort claimants in proportion to the probability of causation? Consider incentives for manufacturers, fairness to claimants, and administrative cost.
+\end{enumerate}
+
+\section*{Further reading}
+Hill's 1965 address \citep{hill1965}; the Federal Judicial Center's \emph{Reference Manual on Scientific Evidence}, especially its chapters on epidemiology and statistics \citep{fjc2011}; Greenland and Robins on the probability of causation \citep{greenland1999}.

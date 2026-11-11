@@ -1,0 +1,109 @@
+\chapter{Common Law and Civil Law: England and France}
+\label{ch:commoncivil}
+
+\begin{quote}\itshape
+By law is meant the tendency of a series to repeat itself.
+\par\hfill\normalfont Swami Vivekananda, \emph{Karma Yoga}
+\end{quote}
+
+\section{Two traditions}
+
+The legal systems of the modern world descend mainly from two traditions. The common law grew in England from the decisions of royal judges after the Norman conquest, developed through precedent and the jury, and spread with the British Empire to the United States, India, much of Africa, Australia and elsewhere. The civil law descends from Roman law as revived in the medieval universities, was codified in France under Napoleon and in Germany at the end of the nineteenth century, and spread through conquest, colonisation and imitation to continental Europe, Latin America, much of Africa and the Middle East, and parts of Asia. The two traditions differ in their sources of law, the role of judges, the procedure of trials and the treatment of evidence. Comparative lawyers have long debated how deep these differences go. Economists, as Chapter~\ref{ch:llsv} discusses, have argued that they matter for financial development and growth.\index{common law}\index{civil law}
+
+This chapter compares English and French law through a Bayesian lens. We ask how each system acquires information about facts, how it aggregates information about law across cases, and how it decides under uncertainty. The comparison is not meant to rank the systems, each of which has strengths, but to show that their differences can be understood as different solutions to the same inference and decision problems.
+
+\section{Sources of law: precedent and code}
+
+\subsection{Stare decisis}
+
+In the common law, the decisions of higher courts bind lower courts, and courts generally follow their own earlier decisions. The binding part of a decision is its ratio decidendi, the principle necessary to the result; other statements are obiter dicta. A court faced with a precedent can follow it, or distinguish it by finding a material difference in the facts. The House of Lords in its 1966 Practice Statement announced that it would depart from its own previous decisions when it appeared right to do so, a power the Supreme Court inherited.\index{stare decisis}
+
+\subsection{The code}
+
+In the French tradition, the primary source of law is legislation, above all the codes. Article 5 of the Code civil forbids judges to pronounce by way of general and regulatory disposition on the cases submitted to them; a judgment decides the dispute between the parties and does not make law for others. The Revolution's distrust of the old \emph{parlements}, which had used their judicial power to resist royal reform, shaped this rule. In practice, the decisions of the Cour de cassation are followed by lower courts, and a consistent line of decisions, \emph{jurisprudence constante}, carries great authority. But the theory is that the code is the law, and judges apply it.\index{Code civil}\index{Cour de cassation}
+
+\subsection{A Bayesian reading}
+
+Think of the law on a given question as an unknown function $f$ mapping facts to legal consequences. A legal system is a procedure for estimating $f$ and applying the estimate to new cases. In the civil law, the legislature supplies an explicit specification of $f$ in the code, a strong prior, and courts apply it, refining its interpretation as cases arise. In the common law, $f$ is learned from cases: each decision is a data point, and the body of precedent is the posterior. Distinguishing a precedent is adding a covariate: the court finds that the earlier decision applies to a region of fact space different from the present case.
+
+A hierarchical model captures both systems. Let $\beta_c$ denote the rule applied in case $c$, and suppose
+\begin{equation}
+\beta_c = \beta_0 + \eta_{g(c)} + \epsilon_c,
+\end{equation}
+where $\beta_0$ is a general principle, $\eta_g$ is a refinement for a category $g$ of cases, and $\epsilon_c$ is case specific variation. In a code system, $\beta_0$ and many $\eta_g$ are fixed by legislation with small prior variance; courts estimate the residual variation. In a precedent system, $\beta_0$ is weakly specified, and the $\eta_g$ are learned from the decisions in each category, with shrinkage toward $\beta_0$ that depends on how many cases have been decided. New categories, where few cases exist, are close to the general principle; mature categories have their own well estimated rules.
+
+This reading explains familiar features of both systems. Codes are clear and predictable in their core but can be slow to adapt to new circumstances, since changing the prior requires legislation. Precedent adapts to new facts case by case but can be unpredictable in new areas and can accumulate inconsistent decisions that must be reconciled. Gennaioli and Shleifer modelled the evolution of the common law as a process in which judges distinguish precedents to reach preferred outcomes, and showed that this can make the law more refined over time even when judges are biased \citep{gennaioli2007}. Earlier, Priest and Rubin had argued that the common law tends toward efficiency because inefficient rules are litigated more often and so are more often overturned \citep{priest1977,rubin1977}. Each of these is a theory of how a learning process converges, or fails to.
+
+\section{Procedure: adversarial and inquisitorial}
+
+\subsection{The English trial}
+
+In the English trial the parties control the case. They decide which issues to raise, which witnesses to call and which documents to disclose, subject to rules of disclosure. The judge is an umpire who rules on admissibility and directs the jury on the law. Witnesses are examined orally and cross examined by the opposing party. In Crown Court trials the jury decides the facts and gives a general verdict without reasons. In civil trials the judge almost always decides alone and gives reasons.\index{adversarial procedure}
+
+\subsection{The French trial}
+
+In French criminal procedure a serious case is investigated by a \emph{juge d'instruction}, an examining magistrate, who gathers evidence for and against the accused and compiles a written dossier. The trial court, for the most serious crimes the \emph{cour d'assises} composed of professional judges and lay jurors, has the dossier before it. The presiding judge questions the accused and witnesses; the prosecutor and counsel may put questions directly with the president's leave, and the accused and the civil party may put questions through the president. Written evidence plays a larger role than in England. In civil procedure, the judge has wider powers to order measures of investigation, and oral testimony is less central.\index{inquisitorial procedure}\index{juge d'instruction}
+
+\subsection{Information acquisition}
+
+A Bayesian model of procedure asks how each system acquires and aggregates information. In the adversarial system there are two information gatherers, each with an incentive to find evidence favourable to its side and to present it persuasively. The fact finder hears two selected samples. Dewatripont and Tirole showed that advocacy can produce more information than a single neutral investigator, because each advocate has strong incentives to search for evidence on its side, and the competition between them ensures that both sides are explored \citep{dewatripont1999}. The cost is that each side presents only favourable evidence, so the fact finder must discount for selection, and unfavourable evidence may never be found if neither side has an incentive to seek it.
+
+In the inquisitorial system there is one information gatherer, who is supposed to be neutral. If the investigator is genuinely neutral and well resourced, the sample is unbiased. If the investigator forms a hypothesis early and seeks confirming evidence, a pattern documented in the psychology of investigation, the sample is biased toward that hypothesis and there is no opposing advocate to correct it. The Kercher case of Chapter~\ref{ch:stories}, tried under Italy's mixed system, shows how a theory adopted early in an investigation can shape the evidence collected.
+
+Suppose each item of evidence is a signal with likelihood ratio $\lambda_k$. An unbiased investigator collects items at random; their expected log likelihood ratio is the Kullback Leibler divergence between the distributions under the true and false hypotheses, positive under the true one. An advocate collects items selectively: from a pool of $n$ available items it presents those with $\lambda_k$ favourable to its side. If both advocates search the same pool, the fact finder sees both tails, and the sum of log likelihood ratios across both presentations has, when the log likelihood ratios are symmetrically distributed, an expected value proportional to the total log likelihood ratio of the pool (with $m$ items presented by each side from a pool of $n$, it is $2m/n$ times the expected total), though it is noisy and the proportionality fails for skewed pools. If one side has more resources, it searches more of the pool, and the sum is biased toward it. The adversarial system thus works best when the parties are evenly matched, which is a Bayesian argument for legal aid and for equality of arms.
+
+\section{Evidence and the standard of proof}
+
+\subsection{Free proof and inner conviction}
+
+French criminal law follows the principle of free proof: offences may be proved by any mode of proof, and the judge decides according to his inner conviction. Article 353 of the Code de proc\'edure p\'enale states that the law does not ask judges to account for the means by which they were convinced, and does not prescribe rules by which they must assess the fullness and sufficiency of a proof; it asks them only whether they have an inner conviction, the \emph{intime conviction}. The formula, read aloud to the \emph{cour d'assises} before deliberation, is a statement in the spirit of subjective Bayesianism: the court's posterior is what matters, and no rule fixes how it must be formed.\index{intime conviction}
+
+Until 2012, the \emph{cour d'assises} gave no reasons for its verdicts, like an English jury. After the European Court of Human Rights held in \emph{Taxquet v Belgium} that, although jurors need not give reasons, the accused must be able to understand why he was convicted, which requires procedural safeguards such as precise questions put to the jury \citep{taxquet2010}, France required the \emph{cour d'assises} to state the main elements that convinced it, in a reasoned statement annexed to the verdict. England has not followed: the jury's verdict remains unreasoned, and the Court of Appeal reviews the safety of convictions on the evidence and the judge's directions.
+
+\subsection{Written evidence in civil cases}
+
+French civil law requires written proof for juridical acts above a modest threshold, now set by decree at fifteen hundred euros: a contract above that value must in principle be proved by a written instrument, and oral testimony cannot contradict a written instrument. English law has no general rule of this kind, although some contracts, such as those for the sale of land, must be in writing. The French rule is a prior on the reliability of evidence types: written evidence is presumed more reliable than oral testimony, and the law fixes the weight in advance rather than leaving it to the judge. In Bayesian terms it imposes a likelihood ratio of one on oral evidence contradicting a writing, so that such evidence cannot move the posterior, a strong form of regularisation.
+
+\subsection{Standards of proof}
+
+The English civil standard, the balance of probabilities, has no exact French counterpart. French civil judges are said to decide on their conviction, and French scholars debate whether a standard more demanding than preponderance applies. Empirical comparisons are difficult because French judgments are short and do not usually state the degree of belief reached. Kevin Clermont and Emily Sherwin argued that civil law systems apply a higher civil standard, close to the criminal one, and that the high standard conveys an impression of accuracy and certainty that boosts the legitimacy of decisions \citep{clermont2002}. If they are right, the French system implies a ratio of losses in civil cases that favours defendants, and the English one treats the parties symmetrically.
+
+\section{Loss of a chance in France}
+
+Chapter~\ref{ch:tort} discussed the English refusal, in \emph{Gregg v Scott}, to award damages for loss of a chance of recovery in clinical negligence. French law takes the opposite view. Since the 1960s the Cour de cassation has accepted that a patient whose chance of recovery or survival was reduced by a doctor's fault may recover for the lost chance, with damages equal to a fraction of the loss corresponding to the probability lost. The doctrine of \emph{perte de chance} is applied across many fields: a candidate deprived of the chance to sit an examination, a litigant whose lawyer missed a deadline, a patient whose diagnosis was delayed.\index{perte de chance}
+
+The French approach is the proportional rule that expected utility recommends and that our tort paper defends \citep{polson_sokolov_tort}. Its adoption in France and rejection in England is instructive. It suggests that the English majority in \emph{Gregg} was not compelled by the logic of tort law, since another developed legal system reached the opposite result, but made a policy choice, one that we argued in Chapter~\ref{ch:tort} produces worse incentives and less accurate compensation.
+
+\section{Tort: general clause and strict liability}
+
+The French law of delict rests on general clauses. Article 1240 of the Code civil, formerly Article 1382, provides that any act whatever of man which causes damage to another obliges the one by whose fault it occurred to compensate it. Article 1242, formerly Article 1384, makes a person liable for damage caused by things in his custody. In the \emph{Jand'heur} decision of 1930 the Cour de cassation interpreted this provision as establishing a presumption of liability for damage caused by things, rebuttable only by proof of an external cause, which became a general regime of strict liability for things. The Badinter law of 1985 created a special regime of near strict liability for road traffic accidents, under which victims other than drivers recover except in narrow cases of their own inexcusable fault.\index{Jand'heur}\index{Loi Badinter}
+
+English law has no general clause. It recognises specific torts, of which negligence is the most general, and strict liability is exceptional, as in \emph{Rylands v Fletcher}. In decision terms, the French regime places more of the expected cost of accidents on those who control dangerous things, and so gives them incentives both to take due care and to moderate their activity levels, as Shavell's analysis predicts \citep{shavell1987}. The English regime requires the claimant to prove fault, which reduces liability costs for defendants and raises the cost of proving claims.
+
+\section{Machines and judges in France}
+
+France has taken a distinctive position on the use of data about judges. Article 33 of the 2019 law reforming the justice system (Loi no 2019-222 of 23 March 2019, \emph{Journal officiel} no 0071 of 24 March 2019), the open data provision on court decisions, prohibits the reuse of the identity data of magistrates and court clerks for the purpose of evaluating, analysing, comparing or predicting their actual or alleged professional practices, on pain of criminal penalties. The provision was a response to commercial products that analysed judges' decisions to predict outcomes, and to concern that such analysis would encourage forum shopping and pressure on individual judges.\index{judicial analytics}
+
+The French ban reflects a view that judges should be seen as applying the law, not as individuals with predictable tendencies, a view rooted in Article 5 of the Code civil. The common law tradition, in which individual judges write signed opinions and are known by their reasoning, takes a different view, and judge level analytics are lawful and widely sold in the United States. A Bayesian perspective would note that the information exists whether or not it is analysed: parties and their lawyers form beliefs about judges in any case. The question is whether formal analysis makes those beliefs more accurate, and whether accuracy about judges is desirable. If outcomes depend heavily on which judge hears a case, that is a defect in the system, and analysis that reveals it is valuable for reform. If outcomes depend little on the judge, analysis will reveal that too.
+
+At the same time, France has been a leader in the formal representation of law. The Catala programming language, developed by researchers at Inria, has been used to encode US tax rules on the sale of a principal residence and French family benefits rules, so that the computation of entitlements can be checked against the text \citep{merigoux2021}. Chapter~\ref{ch:lean} discusses this work. It fits naturally with a code based system, in which the law is a text that can be translated into another formal language.
+
+\section{Convergence}
+
+The two traditions have moved toward each other. English civil procedure, after the Woolf reforms (the Civil Procedure Rules 1998, in force from 1999), gives judges active case management powers that resemble the inquisitorial model. The Civil Procedure Rules encourage single joint experts. Statutes now govern large areas of English law once left to the common law. French courts have become more open about their reasoning, the Cour de cassation has reformed the drafting of its judgments to give fuller reasons, and the European courts have imposed common standards on both systems. Mixed jurisdictions such as Scotland, Quebec, Louisiana and South Africa combine features of both. Cameroon, as Chapter~\ref{ch:africa} discusses, contains both within one state.
+
+The Bayesian reading suggests why convergence is natural. Both systems face the same inference problems, and each has learned from the other's solutions. Precedent systems have adopted codes where predictability matters, and code systems have accepted the authority of consistent case law where codes are silent. Adversarial systems have added neutral experts to reduce selection bias, and inquisitorial systems have strengthened the rights of the defence to reduce confirmation bias. The optimal procedure, in a given context, depends on the costs of information, the incentives of the participants and the losses from error, not on tradition.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item In the hierarchical model of this chapter, suppose $\beta_0$, $\sigma^2$ and $\tau^2$ are known, $\beta_c \sim N(\beta_0 + \eta_g, \sigma^2)$ for a case in category $g$, and $\eta_g \sim N(0,\tau^2)$. After $n_g$ decided cases in category $g$, what is the posterior mean of $\eta_g$? Interpret the shrinkage factor as the weight of precedent.
+\item In the adversarial information model, suppose a pool of twenty items has log likelihood ratios drawn from $N(0.5, 1)$ under the true hypothesis. Each advocate presents the five items most favourable to its side. Compute by simulation the expected sum of presented log likelihood ratios and compare it with the expected total for the pool. What happens if one advocate can search only half the pool?
+\item Compare the reasons given by a French \emph{cour d'assises} since 2012 with the directions given to an English jury. Which provides more information about the court's posterior?
+\item Read the speeches in \emph{Gregg v Scott} and a French decision on \emph{perte de chance}. Is the difference in outcome principled?
+\item Should England follow France in prohibiting analytics about individual judges? Frame your answer in terms of the value of information to litigants and to reformers.
+\item Explain the French rule requiring written proof of contracts above a threshold as a choice of prior. What are its costs?
+\end{enumerate}
+
+\section*{Further reading}
+Zweigert and K\"otz's \emph{Introduction to Comparative Law} is the standard text \citep{zweigert1998}. Dewatripont and Tirole on advocates \citep{dewatripont1999}; Gennaioli and Shleifer on the evolution of the common law \citep{gennaioli2007}; Clermont and Sherwin on standards of proof \citep{clermont2002}.

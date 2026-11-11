@@ -1,0 +1,119 @@
+\chapter{Solutions to Selected Questions}
+\label{app:solutions}
+
+This appendix gives worked answers to the computational questions at the ends of chapters, and brief guidance on some discussion questions. Numbers are rounded, and for some questions only part of the question is answered. Readers should check them with the code of Appendix~\ref{app:code}.
+
+\section*{Chapter~\ref{ch:why}}
+\paragraph{Question 1} A threshold $p^\ast = L(c,\bar G)/(L(c,\bar G)+L(a,G))$ of $0.95$ implies $L(c,\bar G)/L(a,G) = p^\ast/(1-p^\ast) = 19$. A threshold of one half implies equal losses: the civil law treats a wrong judgment for the claimant and a wrong judgment for the defendant as equally bad.
+\paragraph{Question 2} With twelve jurors each correct with probability $0.6$, a strict majority requires at least seven correct votes, with probability $\sum_{k=7}^{12}\binom{12}{k}0.6^k0.4^{12-k}\approx 0.67$; ties are possible with an even number. Unanimity in the correct direction has probability $0.6^{12}\approx 0.002$, and a hung jury is the usual outcome. The theorem assumes independent votes; deliberation makes them dependent, so the binomial calculation does not apply.
+\paragraph{Question 3} With a uniform prior over one million and a feature shared by one in a thousand, about one thousand people match. The posterior that the matching suspect is the offender is $1/(1 + 999{,}999/1{,}000)\approx 0.001$. To reach $0.95$ requires additional evidence with a combined likelihood ratio of about $0.95/0.05 \times 1{,}000 = 19{,}000$.
+\paragraph{Question 4} With prior odds of $10^{-7}$ and a likelihood ratio of $10^6$, the posterior odds are $0.1$ and the posterior probability about $0.09$; then $\Prob(E\given\bar G) = 10^{-6}$ while $\Prob(\bar G\given E)\approx 0.91$.
+\paragraph{Question 6} Take losses: acquit $(0, 10)$, intermediate order $(3, 4)$, convict $(20, 0)$, listed as (loss if innocent, loss if guilty). Expected losses are $10p$, $3 + p$ and $20(1-p)$. The intermediate order is optimal when $3 + p < 10p$ and $3 + p < 20 - 20p$, that is for $1/3 < p < 17/21\approx 0.81$.
+
+\section*{Chapter~\ref{ch:odds}}
+\paragraph{Question 1} If $\LR = 1$ the odds are unchanged. Conversely, posterior odds equal $\LR$ times prior odds; if they equal the prior odds for some prior strictly between zero and one, then $\LR = 1$ (one prior suffices).
+\paragraph{Question 2} $1/(1 + (10^6-1)\times 10^{-6})\approx 0.5$. A second independent trait with frequency $1/50$ makes the effective match probability $2\times 10^{-8}$, so the posterior is $1/(1 + 0.02)\approx 0.98$.
+\paragraph{Question 4} With a conditional probability of one in a hundred for a second death given a first, the probability of two deaths is $1/8{,}543\times 1/100 \approx 1/854{,}300$, about eighty five times larger than the squared figure. Independence understated it by nearly two orders of magnitude.
+\paragraph{Question 5} Prior odds $1/499{,}999$; times $10^7$, times $1/5$, times $1/3$, gives posterior odds of about $1.33$ and a posterior probability of about $0.57$, well short of any criminal threshold.
+
+\section*{Chapter~\ref{ch:classic}}
+\paragraph{Question 1} With a non partner rate of one in ten thousand, $\Prob(K\given B, M) = (1/2{,}500)/(1/2{,}500 + 1/10{,}000) = 0.8$. With one in fifty thousand, it is about $0.95$. The conclusion that the battering evidence is strongly incriminating is robust.
+\paragraph{Question 3} For a beta distribution with mean $\mu = 10^{-5}$ and standard deviation $2\times 10^{-5}$, the effective match probability is $\mu + \sigma^2/\mu = 10^{-5} + 4\times 10^{-5} = 5\times 10^{-5}$. With $N = 10^5$, the posterior probability of guilt is $1/(1 + 5) \approx 0.17$, compared with $0.5$ if uncertainty were ignored.
+\paragraph{Question 4} The sum over alternatives is $10^4\times 10^{-6} + 0.01 = 0.02$, so the posterior is $1/1.02\approx 0.98$. The brother contributes as much doubt as all ten thousand strangers together.
+\paragraph{Question 7} Posteriors between the civil threshold of $0.5$ and the criminal threshold of $0.9$ are consistent with both verdicts, provided the evidence did not change; if the civil trial heard different evidence, the two posteriors are conditional on different information and need not be compared.
+
+\section*{Chapter on Bayes factors}
+\paragraph{Question 2} The bounds are $2.46$, $7.99$ and $53.3$ for $p = 0.05, 0.01, 0.001$. Even at $p = 0.001$ the Bayes factor is at most about fifty, so a prior probability of one in a hundred for the alternative yields a posterior of at most about $0.35$.
+\paragraph{Question 3} With $\tau = 1$ and $z = 2.5$, the Bayes factor for the null is $\sqrt{1+n}\,e^{-3.125 n/(1+n)}$, which exceeds one when $n$ is greater than about $500$.
+\paragraph{Question 4} Counting the suspect's own item as a further observation, the conditional match probability is $(k+a+1)/(n+a+b+1)$ with $k=0$ and $n=250$. With $a = b = 1$ it is $2/253$, so the Bayes factor is $253/2\approx 127$. With $a = b = 0.5$ it is $1.5/252$, giving a Bayes factor of $252/1.5 = 168$. The choice of prior matters for unseen features.
+\paragraph{Question 5} If the second wear feature has double the probability given the first, its frequency range becomes ten to forty per cent, and the bounds become $2{,}500$ and $200{,}000$.
+
+\section*{Chapter on standards of proof}
+\paragraph{Question 1} Thresholds of $0.75$, $0.9$ and $0.95$ imply loss ratios of three, nine and nineteen, a more than sixfold range.
+\paragraph{Question 2} This question departs from the facts of Cohen's rodeo case by supposing that tickets were issued and that ticket holders keep their stubs. If ticket holders keep stubs with probability $0.8$ and gatecrashers have none, the probability that a randomly chosen attendee is a gatecrasher with no stub is $0.501\times 1 = 0.501$, and that he is a ticket holder with no stub $0.499\times 0.2 = 0.0998$, so the posterior that the defendant gatecrashed is $0.501/(0.501 + 0.0998) \approx 0.83$.
+\paragraph{Question 3} At $p = 0.8$, the expected losses are $8$, $7.2$ and $20$; the light sanction is best. Adding fifty to the loss of any sanction on an innocent person raises the light sanction's expected loss to $70(1-p) + 4p = 17.2$, and the heavy sanction's to $150(1-p) = 30$; acquittal, with loss $8$, becomes optimal.
+
+\section*{Chapter on the law of evidence}
+\paragraph{Question 4} The hit rate is $0.5$; an innocent defendant in a fair line up of six is picked with probability $0.3/6 = 0.05$. The likelihood ratio is ten. If the defendant alone matches the description, an innocent defendant may be picked with probability near $0.3$, and the likelihood ratio falls to about $1.7$.
+
+\section*{Chapter on tort}
+\paragraph{Question 1} With a gamma prior of shape one and rate one on the annual rate of balls leaving the ground, after six events in thirty years the posterior is gamma with shape seven and rate thirty one, with mean $0.23$ a year. The annual probability of injury is about $0.23\times 0.02\approx 0.0045$, and the expected annual harm about four hundred and fifty pounds. Over twenty years the expected harm is about nine thousand pounds, less than the fence's cost of fifty thousand. The club was not negligent on the Hand formula, consistent with \emph{Bolton v Stone}.
+\paragraph{Question 4} Under the all or nothing rule, an uncured patient recovers the full loss $L$ if $p_0 > 1/2$, the rule stated in Chapter~\ref{ch:tort}, and nothing otherwise, so the doctor's expected liability per patient is $(1 - p_1)L$ or zero. Under the proportional rule each uncured patient recovers $(p_0 - p_1)/(1 - p_1)$ of the loss, an expected liability of $(p_0 - p_1)L$ per patient, proportional to the harm done in every case.
+
+\section*{Chapter on mass torts}
+\paragraph{Question 3} The two other known causes are ruled out, so the remaining shares are twenty and sixty per cent, and the posterior probability that the product caused her illness is $0.2/(0.2+0.6) = 0.25$.
+
+\section*{Chapter on misrepresentation}
+\paragraph{Question 2} If the buyer trusts the statement with probability $0.8$, the posterior for turnover is a mixture: with probability $0.8$ it is one and a quarter million, and with probability $0.2$ it is uniform between half a million and one and a half million, with mean one million. The posterior mean is $0.8\times 1.25 + 0.2\times 1 = 1.2$ million: the statement raises the mean by two hundred thousand and reduces uncertainty.
+\paragraph{Question 3} The payment is $5\times 0.6/0.9 \approx 3.33$ million.
+\paragraph{Question 5} The divergences are about $0.04$, $1.61$ and $3.82$ nats, suggesting a scale in which values below about $0.1$ are a mild overstatement and values above one are gross misstatement.
+
+\section*{Chapter on Greensill}
+\paragraph{Question 3} After six late of twenty four, the posterior is $\text{Beta}(7, 48)$. To bring the mean below five per cent requires $7/(55 + m) < 0.05$, so $m > 85$ further on time settlements.
+\paragraph{Question 4} A careless breach yields $50\times 0.4/1.2 \approx 16.7$ million. A reckless breach allows the insurer to avoid the policy and pay nothing.
+
+\section*{Chapter on bankruptcy}
+\paragraph{Question 1} With assets of one hundred, debt of eighty five and $\mu = 0.05$, the one year default probabilities are about $0.17$ at twenty per cent volatility and $0.37$ at forty per cent. Neither firm fails the balance sheet test.
+\paragraph{Question 2} The risk neutral intensity is $0.04/0.7\approx 5.7$ per cent a year. Halving gives a real world probability of about $2.8$ per cent.
+\paragraph{Question 3} The expert estimate corrected for hindsight is twelve per cent. The precision weighted combination with the market's four per cent is about $5.1$ per cent, with standard deviation about $1.9$ per cent. If the market signal's standard deviation doubles to four per cent, the combination rises to about $7.1$ per cent.
+
+\section*{Chapter on graphical models}
+\paragraph{Question 2} The second witness repeats the first with probability one half and otherwise reports independently. Both identify him with probability $0.9\times(0.5 + 0.5\times 0.9) = 0.855$ if he is guilty and $0.09\times(0.5 + 0.5\times 0.09) = 0.04905$ if he is not, so the combined likelihood ratio is $\approx 17.4$, against $100$ for independent witnesses.
+
+\section*{Chapter on Fienberg}
+\paragraph{Question 1} The mean is $688.2$, the standard deviation $12.0$, and the observed count is $29.1$ standard deviations below the mean.
+\paragraph{Question 4} With detection rate $0.9$ and false positive rate $0.1$, half of those who fail are spies when $0.9\pi = 0.1(1-\pi)$, so $\pi = 0.1$: one employee in ten would have to be a spy.
+
+\section*{Chapter on Kadane}
+\paragraph{Question 1} Skill accounts for half the variance when $\sigma_\alpha^2 = 1/m$, that is $m = 500$ hands.
+
+\section*{Chapter on discrimination}
+\paragraph{Question 1} Pass rates are $0.7$ and $0.5$, a ratio of $0.71$. With uniform priors the posteriors are $\text{Beta}(36,16)$ and $\text{Beta}(11,11)$; simulation gives a posterior probability of about $0.68$ that the ratio is below four fifths.
+\paragraph{Question 5} The probability of no women among fifty hires from a pool that is twenty per cent women is $0.8^{50}\approx 1.4\times 10^{-5}$.
+
+\section*{Chapter on securities}
+\paragraph{Question 1} The $t$ statistic is $-1.6$. Under the prior, the prior probability times the density of the observation is $0.9\,\phi(4/2.5)/2.5$ under no impact and $0.1\,\phi(4/\sqrt{2.5^2+8^2})/\sqrt{2.5^2+8^2}$ under impact. Computing, the posterior probability of a genuine impact is about $0.096$: the observation is slightly less probable under impact than under noise (likelihood ratio about $0.96$), so the posterior is a little below the prior of $0.1$.
+
+\section*{Chapter on medical clusters}
+\paragraph{Question 1} For a nurse chosen in advance, the number of incidents on her shifts is binomial with parameters twenty and $0.05$; the probability of eight or more is about $3\times 10^{-6}$. Across twenty nurses, the probability that some nurse has eight or more is about twenty times larger, still small, but the selection of incidents can raise it by orders of magnitude.
+\paragraph{Question 4} Effective likelihood ratio of the toxicology finding, assuming the finding is certain under deliberate harm and that an error always produces it: $1/(0.1 + 0.9/1000)\approx 9.9$. Posterior odds $= 200\times 9.9/50{,}000\approx 0.04$, a posterior probability of about four per cent.
+
+\section*{Chapter on India}
+\paragraph{Question 2} The average time to disposal is $200{,}000/80{,}000 = 2.5$ years. Halving it at the same backlog requires disposals of one hundred and sixty thousand a year.
+\paragraph{Question 3} For bail applications $c\mu = 1/(10/1440)$ per day, about $144$; for civil suits $2/(180/1440) = 16$. Bail applications have priority.
+\paragraph{Question 6} Release is optimal when $10r < 24(1-r)$, that is for $r < 0.71$: with two years of expected delay, only defendants whose risk of absconding exceeds about seventy per cent should be detained on these numbers.
+
+\section*{Chapter on Becker}
+\paragraph{Question 1} With $D(O) = O$ and $C(p) = 4p^2$, an offender with gain $g$ offends when $g > 20p$, so for $p\le 1/2$ the offending fraction is $O = 1 - 2p$ and the social loss is $1 - 2p + 4p^2$. It is minimised at $p = 1/4$, where $O = 1/2$ and the loss is $3/4$.
+\paragraph{Question 4} Settlement is possible when $(p_P - p_D)\times 100\le 20$, so the optimism gap must be at most $0.2$. Under the English rule each party's expected payment of costs depends on its own estimate, which raises the stakes and narrows the zone for optimistic parties. With $J = 100$ and costs of ten each, settlement then requires $(p_P - p_D)\times 120\le 20$, a gap of at most about $0.17$.
+\paragraph{Question 5} A risk neutral defendant accepts any plea below $0.3\times 8 = 2.4$ years.
+
+\section*{Chapter on Hume}
+\paragraph{Question 2} Ten independent witnesses each with likelihood ratio five supply $5^{10}\approx 9.8\times 10^6$; with prior odds of about $10^{-6}$, the posterior odds are about ten, a posterior probability of about $0.91$. If all heard the story from one person, the combined likelihood ratio is closer to five, and the posterior is about $5\times 10^{-6}$.
+
+\section*{Chapter on Lean}
+\paragraph{Question 3} With zero error the posterior odds are $10^{-5}\times 10^6 = 10 < 19$, so the conviction proposition is false. With an error rate of $10^{-5}$ the likelihood ratio is about $90{,}900$, and prior odds above $19/90{,}900\approx 2.1\times 10^{-4}$ are needed.
+
+\section*{Chapter on Bayesian decisions}
+\paragraph{Question 3} Half of positives are innocent when $0.9\pi = 0.01(1-\pi)$, so $\pi \approx 0.011$: about one defendant in ninety.
+\paragraph{Question 4} With linear losses and under compensation twice as bad as over compensation, set the award at the posterior quantile $2/3$.
+\paragraph{Question 6} With $f = 1/2$ the English rule gives $40{,}000 - 30{,}000 - 9{,}000 + 6{,}000 = 7{,}000$ and one-way costs shifting gives $40{,}000 - 30{,}000 + 6{,}000 = 16{,}000$. The break-even probability of winning is $45/130 \approx 0.35$ under the English rule, $0.30$ under the American rule and $30/115 \approx 0.26$ under one-way shifting, so one-way shifting encourages weak claims most.
+
+\section*{Chapter on damages}
+\paragraph{Question 1} The multipliers are about $42.1$, $36.2$ and $25.1$; the award falls by about forty per cent from the first to the last.
+\paragraph{Question 3} Under a strict reasonable certainty rule a court might award nothing for a start up; the expected value approach awards $0.4\times 5 = 2$ million, before discounting.
+\paragraph{Question 4} Twelve prizes among fifty finalists gives a chance of $0.24$, ignoring differences in merit; damages are about a quarter of the value of a prize.
+
+\section*{Chapter on family law}
+\paragraph{Question 3} The likelihood ratio is thirty. Prior odds of $5/95$ become $1.58$, a posterior probability of about $0.61$.
+
+\section*{Chapter on digital evidence}
+\paragraph{Question 1} With twelve expected false candidates, a search that returns exactly one candidate is far more likely to have returned a false one than the true person alone. Treating false candidates as Poisson with mean twelve, and assuming the true person is always returned when in the database, the posterior probability that the single candidate is the person is $1/13$, about eight per cent.
+\paragraph{Question 4} The probability that at least one of ten undermining messages is missed is $1 - 0.7^{10}\approx 0.97$.
+
+\section*{Chapter on funding}
+\paragraph{Question 3} The Kelly fraction is $(0.55\times 2 - 0.45)/2 = 0.325$. With a uniform posterior on $[0.45, 0.65]$, expected log wealth depends on $p$ only through its posterior mean $0.55$, so the optimal fraction is again $0.325$.
+
+\section*{Chapter on regulation}
+\paragraph{Question 1} The rule saves thirty statistical lives a year, worth three hundred million at ten million each, against costs of one hundred million: benefits exceed costs unless the risk reduction is less than a third of the estimate.
+\paragraph{Question 5} Flagged firms with misconduct: $0.01\times 0.8 = 0.008$ of all firms; flagged in total $0.05$; so sixteen per cent of flagged firms have engaged in misconduct.

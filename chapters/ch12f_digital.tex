@@ -1,0 +1,59 @@
+\chapter{Digital Evidence, Surveillance and Privacy}
+\label{ch:digital}
+
+\section{Evidence at scale}
+
+Much evidence in modern litigation is digital. Emails, messages, location records, financial transactions, social media posts, video from cameras, logs from devices: the record of a person's life is now largely kept by machines. Investigators search it with tools that operate at scale, matching faces against databases of millions, collecting the identities of every phone near a crime scene, scanning communications for keywords. Each tool produces signals with error rates, and because they operate at scale, small error rates produce large numbers of false matches. This chapter applies the base rate reasoning of Chapters~\ref{ch:odds} and~\ref{ch:classic} to digital evidence and surveillance, and examines how the law of privacy constrains the information available to courts.\index{digital evidence}
+
+\section{Facial recognition}
+
+\subsection{Matching at scale}
+
+Automated facial recognition compares a probe image, such as a still from a camera, with a database of known faces and returns candidate matches above a similarity threshold. Its accuracy has improved greatly, but every system has a false match rate: the probability that an image of one person is matched to another. When the probe is compared with a database of $N$ people, the expected number of false matches is approximately $N$ times the false match rate. With a database of ten million and a false match rate of one in a million, ten false candidates are expected for every search, in addition to the true match if the person is in the database.\index{facial recognition}\index{Bridges, R v Chief Constable of South Wales Police}
+
+This is the island problem in its purest form. The posterior probability that a returned candidate is the person in the probe image depends on whether the person is in the database at all, the prior, and on the number of false candidates, which grows with the database. A candidate returned by a search of a large database, with no other evidence, has a modest posterior probability of being the right person, however impressive the similarity score. Several wrongful arrests in the United States have followed facial recognition matches treated as identifications rather than as leads. The Bayesian lesson is that a match from a large database search is a reason to investigate, with a likelihood ratio that must be combined with a prior, not an identification.
+
+\subsection{Live deployment and the law}
+
+In \emph{R (Bridges) v Chief Constable of South Wales Police} the Court of Appeal held in 2020 that the police's use of live automated facial recognition in public places was unlawful, not as a blanket ban but because the interference was not in accordance with the law, since the legal framework left too much discretion to individual officers about who could be placed on watch lists and where the technology could be deployed, because the data protection impact assessment was deficient, and because the force had not taken reasonable steps to satisfy itself that the software did not have an unacceptable bias on grounds of race or sex \citep{bridges2020}. The last point is a requirement to measure error rates by group, the analysis of error rates by group in Chapter~\ref{ch:lindleyai}. A system whose false match rate is higher for some groups produces more false stops of members of those groups, a disproportionate effect that the public sector equality duty requires the authority to investigate. The court did not find the interference disproportionate.
+
+\section{Location data}
+
+\subsection{Cell site records}
+
+Mobile phones register with nearby cell towers, and network operators keep records of which towers a phone used and when. These records place a phone, approximately, at a location at a time. In \emph{Carpenter v United States} the Supreme Court held in 2018 that acquiring historical cell site location information covering a substantial period is a search under the Fourth Amendment, generally requiring a warrant \citep{carpenter2018}. The Court reasoned that such records provide an intimate window into a person's life, revealing not only movements but associations.\index{location data}\index{Carpenter v United States}
+
+\subsection{What location evidence proves}
+
+Location records are evidence of the phone's location, not the person's. The likelihood ratio of a record placing the defendant's phone near a crime scene depends on how precise the location is, how many other phones were in the same area, how probable it is that the defendant's phone would be there for innocent reasons, and how probable it is that someone else had the phone. A tower that serves a dense urban area covers thousands of people; one in a rural area may cover few. A record that places a phone in a large sector of a city at a time when the defendant lived there has a likelihood ratio close to one. One that places it at a remote location where the defendant had no reason to be may have a large likelihood ratio. Experts who present location evidence must explain these factors, and courts should be wary of maps that display coverage areas as points.
+
+\subsection{Geofence warrants}
+
+A geofence\index{geofence warrants} warrant asks a provider to identify all devices present in a defined area during a defined time. It reverses the usual order of investigation: instead of identifying a suspect and then seeking his location, it collects everyone present and then narrows down. Courts in the United States have divided on whether such warrants are constitutional. The Bayesian analysis is the database search of Chapter~\ref{ch:classic}: everyone in the geofence is a candidate, the prior for each is roughly one over the number of people who could have committed the crime, before the geofence results are seen, and further evidence must do the work of identifying the offender. The constitutional concern is about the privacy of the many innocent people swept up; the evidential concern is that a person identified only by presence in a geofence has a low posterior probability of guilt.
+
+\section{Communications and keyword searches}
+
+Investigators and litigants search large collections of communications for relevant material, using keywords, technology assisted review and, increasingly, language models. Chapter~\ref{ch:lindleyai} discusses the acceptance of technology assisted review in disclosure. In criminal investigations, the failure to disclose relevant material found in digital records has led to prosecutions collapsing. In England, the rape trial of Liam Allan collapsed at Croydon Crown Court in December 2017, when messages on the complainant's phone that undermined the prosecution case came to light after not being disclosed; a joint review by the Metropolitan Police and the Crown Prosecution Service attributed the failure to a combination of error, lack of challenge, and lack of knowledge \citep{metcps2018}. The problem is partly one of volume, since a single phone may hold hundreds of thousands of messages, and partly one of incentives. A disclosure process is a search with recall and precision, and its error rates should be measured: what fraction of relevant material does the process find, and what fraction of what it finds is relevant? A process with low recall fails defendants.
+
+\section{Authentication}
+
+Digital evidence can be altered, and generative AI now makes fabrication easy, as Chapter~\ref{ch:lindleyai} discusses. Courts have long required evidence to be authenticated, that is shown to be what it purports to be. For digital evidence, authentication\index{authentication} involves metadata, chains of custody, hash values that detect alteration, and expert examination. The likelihood ratio of a digital record for the fact it records is bounded by the reciprocal of the probability that such a record would exist, fabricated or altered, if the fact it records were false. As fabrication becomes cheaper, that probability rises for evidence whose provenance is not established, and the evidential value of unauthenticated recordings falls. Cryptographic provenance standards, which sign content at the point of capture, offer a way to restore it. Courts may come to distinguish sharply between evidence with verifiable provenance and evidence without.
+
+\section{Privacy as a constraint on evidence}
+
+Privacy law limits the information available to courts and investigators. Data protection law in the United Kingdom and the European Union governs the processing of personal data, including by law enforcement, and requires that processing be necessary and proportionate. Constitutional protections, such as the Fourth Amendment in the United States and Article 8 of the European Convention on Human Rights, limit searches and surveillance. These limits have costs in lost evidence, which a decision theoretic analysis can estimate as the expected increase in decision loss from excluding the information, and benefits in protecting the privacy of the many people whose data would otherwise be collected, most of whom have done nothing wrong.
+
+The scale of digital surveillance changes the balance. A tool that searches the data of millions to find one offender imposes a privacy cost on millions and produces many false candidates. The base rate argument and the privacy argument point the same way: mass searches produce low posterior probabilities for the individuals they flag and large intrusions on everyone. Targeted searches, based on prior evidence that raises the probability for a particular person, produce higher posterior probabilities and smaller intrusions. The requirement of individualised suspicion, which runs through the law of search and seizure, is in Bayesian terms a requirement that the prior be raised by evidence specific to the person before the search, not after.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item A facial recognition system with a false match rate of one in a million searches a database of twelve million. The person in the probe image is in the database with probability one half, and if so the true match is always returned. If the system returns one candidate above threshold, what is the probability that the candidate is the person in the image?
+\item A cell site record places the defendant's phone in a sector covering forty thousand residents at the time of a crime. The defendant lives in the sector. Estimate the likelihood ratio of the record for the hypothesis that the defendant committed the crime.
+\item Explain why a geofence warrant is a database search in the sense of Chapter~\ref{ch:classic}. What is the prior for each device identified?
+\item A disclosure process for a phone with two hundred thousand messages has recall of seventy per cent. If ten messages would undermine the prosecution case, what is the probability that at least one is missed? Assume each message is found independently with probability seven tenths.
+\item Express the requirement of individualised suspicion as a condition on the prior before a search. Why does it protect both privacy and the accuracy of evidence?
+\end{enumerate}
+
+\section*{Further reading}
+\emph{Carpenter v United States} \citep{carpenter2018}; \emph{R (Bridges) v Chief Constable of South Wales Police} \citep{bridges2020}.

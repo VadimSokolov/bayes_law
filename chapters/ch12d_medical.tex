@@ -1,0 +1,85 @@
+\chapter{Clusters, Coincidence and Medical Murder Cases}
+\label{ch:clusters}
+
+\section{When deaths cluster around a carer}
+
+A recurring kind of criminal case begins with a cluster. On a hospital ward, more patients than usual die or suffer sudden collapses, and colleagues notice that a particular nurse was on duty for many of them. Suspicion grows, a review is commissioned, the police are called, and eventually the nurse is charged with murder. Some such cases have revealed real killers: Beverley Allitt in England in the early 1990s and Harold Shipman, a general practitioner who killed many of his patients, were convicted on overwhelming evidence. Others have produced miscarriages of justice. The Dutch nurse Lucia de Berk was convicted in 2003 of several murders and attempted murders of patients, partly on the strength of a statistical argument about her presence at incidents, and was exonerated in 2010 after the statistical argument and the medical evidence were reexamined.\index{medical murder cases}\index{Lucia de Berk}
+
+These cases are among the most difficult in criminal law, and they are statistical at their core. The fact that a nurse was present at many incidents is evidence only if her presence is more probable under the hypothesis that she caused the incidents than under the hypothesis that they arose naturally. Assessing that likelihood ratio requires understanding how incidents are identified, how shifts are allocated, how often natural clusters occur, and how suspicion itself shapes the data. The Royal Statistical Society's Statistics and the Law Section published a report in 2022 on statistical issues in the investigation of suspected medical misconduct, setting out these problems and recommending safeguards \citep{rss2022}. This chapter draws on that report and on the cases.
+
+\section{The Lucia de Berk case}
+
+\begin{casebox}{The Lucia de Berk case (Netherlands)}
+Lucia de Berk was a nurse in The Hague who worked at a children's hospital and, in the period examined, on adult wards of another hospital. After the unexpected death of a child in her care in 2001, hospital staff reviewed earlier incidents and identified a number in which she had been on duty. A statistician, Henk Elffers, whom the court consulted, calculated that the probability of her being present at so many incidents by chance was about one in three hundred and forty two million. She was convicted in 2003 of several murders and attempted murders, and on appeal she was convicted again, on more counts (seven murders and three attempted murders), though the appeal court said it did not rely on the statistics. After campaigning by scientists, including the statistician Richard Gill, and a reexamination of the medical evidence showing that the death that triggered the investigation was likely natural, the case was reopened, and she was acquitted of all charges in 2010.
+\end{casebox}
+
+The one in three hundred and forty two million figure illustrates nearly every error discussed in this book. It was a p value, the probability, under a hypothesis of chance, of data at least as extreme as those observed, presented in a way that invited the prosecutor's fallacy. The incidents were identified after suspicion had fallen on her, so incidents during her shifts were more likely to be recorded as suspicious than similar events during others' shifts. The calculation combined data from several wards by multiplying p values, which is not a valid way to combine evidence. And it ignored the base rate: even if the coincidence was unusual, the prior probability that a nurse is a serial killer is small, and many nurses in many hospitals will by chance be present at clusters of deaths. Gill and colleagues' reanalysis, using more defensible methods, found that the evidence of an unusual association was far weaker than claimed \citep{meester2006,gill2018}.
+
+\section{The statistics of clusters}
+
+\subsection{Clusters happen}
+
+Deaths and collapses on a hospital ward are not evenly spread. They come in clusters because illnesses cluster, because admissions vary, and because chance produces clusters. If a hospital has many wards and each ward has many nurses, then in any year some nurse somewhere will be on duty for an unusually large share of a ward's incidents. The probability that a particular nurse, chosen in advance, is present at a given number of incidents may be small, but the probability that some nurse is present at that many is much larger. This is the multiple comparisons problem, sometimes called the Texas sharpshooter fallacy after the marksman who fires at a barn and then draws a target around the bullet holes (Chapter~\ref{ch:fallacies} treats multiple comparisons and the combining of p values among the fallacies).\index{clusters}\index{Texas sharpshooter fallacy}
+
+Let $n$ nurses work on a ward over a period with $k$ incidents, and suppose nurse $i$ works a fraction $f_i$ of the shifts. Under the hypothesis that incidents occur independently of who is on duty, the number of incidents during nurse $i$'s shifts is binomial with parameters $k$ and $f_i$. The probability that the maximum over nurses exceeds a threshold is the relevant chance probability when the nurse was identified because of her count, and when the nurses work similar shares of the shifts it can be up to about $n$ times larger than the probability for a nurse chosen in advance, and larger by orders of magnitude when the search also ranges over wards, hospitals and periods.
+
+\subsection{Selection of incidents}
+
+The second problem is that the incidents themselves are selected. Whether an event is classified as suspicious, as unexpected, or as an incident at all depends on the judgment of clinicians, and once suspicion has fallen on a nurse, events during her shifts are more likely to be reexamined and reclassified. This creates an association between her presence and the recorded incidents even if she did nothing. In Bayesian terms, the likelihood of the data under innocence must include the probability that an innocent nurse's shifts are subjected to closer scrutiny. If the reviewers knew who was on duty when they classified events, the classifications are contaminated, and their likelihood ratio cannot be estimated reliably without blind review.
+
+\subsection{Shift charts}
+
+A common presentation in such cases is a chart showing, for each suspicious event, which staff were on duty, with the accused nurse's presence at every event highlighted. Such charts are visually powerful and statistically misleading if the events were selected with knowledge of who was on duty, or if events when the accused was absent were excluded as not suspicious. A chart that shows only the events attributed to the defendant will by construction show her present at all of them. The relevant evidence is a comparison of the rate of genuinely unexplained events during her shifts with the rate during others', with events classified by reviewers blind to the rota.\index{shift charts}
+
+\section{The Bayesian analysis}
+
+\subsection{Prior}
+
+The prior probability that a given nurse is deliberately harming patients is small. Healthcare serial killers exist, but they are rare relative to the number of healthcare workers. Any sensible analysis starts from a prior of the order of one in tens or hundreds of thousands, adjusted for anything specific known about the nurse before the investigation.
+
+\subsection{Likelihood of the cluster}
+
+The likelihood ratio of the cluster is the probability of observing the association under the hypothesis of deliberate harm divided by its probability under the hypothesis of natural causes, including the selection and multiple comparison effects. Under deliberate harm, a strong association is expected. Under natural causes, the probability of an association as strong as observed, for some nurse, given how the incidents were identified, may be modest rather than tiny. The likelihood ratio may then be in the tens or hundreds rather than in the millions, which against a prior of one in a hundred thousand leaves a low posterior. The cluster is a reason to investigate, not by itself a reason to convict.
+
+\subsection{Medical evidence}
+
+The decisive evidence in these cases is usually medical: evidence that particular events could only have been caused by deliberate acts, such as the administration of a drug that was not prescribed. Such evidence, if reliable, can have a large likelihood ratio, because natural explanations are excluded. But the reliability of medical evidence of deliberate harm depends on the tests used, their error rates, and whether alternative explanations were considered. In the de Berk case, the reexamination of the medical evidence showed that natural explanations had been wrongly excluded. The Bayesian principle is that each item of medical evidence must be assessed with its own likelihood ratio, including the probability of misinterpretation, and that the items should not be assumed independent when the same experts, aware of the suspicion, interpreted them.
+
+\section{Lucy Letby}
+
+Lucy Letby, a neonatal nurse at the Countess of Chester Hospital, was convicted in 2023 of murdering seven babies and attempting to murder others, and in 2024 of a further attempted murder after a retrial. She received whole life orders. The Court of Appeal refused permission to appeal against the 2023 convictions in 2024, and a separate challenge to the 2024 conviction was also refused. The prosecution case included evidence of her presence at the events, medical evidence that some babies had been harmed by air embolism or by the administration of insulin, notes she had written, and other circumstantial evidence. After the trials, a number of clinicians and statisticians publicly questioned aspects of the evidence, and an international panel of neonatal experts, whose findings were submitted by her legal team, concluded that natural causes and deficiencies in care could explain the events. Her lawyers applied to the Criminal Cases Review Commission in February 2025, and the Commission's review was continuing at the time of writing. In January 2026 the Crown Prosecution Service decided not to bring further charges relating to other babies, and that decision was upheld on review.\index{Lucy Letby}
+
+We express no view on whether the convictions are safe; that is for the Commission and, if the case is referred, the Court of Appeal. What a Bayesian analysis can do is identify the questions on which the safety of such convictions turns, and they are those discussed above. Was the association between the nurse's shifts and the events established with incidents classified blind to the rota? What is the likelihood ratio of the medical findings, including the probability of misdiagnosis of air embolism or of insulin administration, given the tests performed? Were the items of medical evidence interpreted independently, or by experts who knew the hypothesis? How should the circumstantial evidence, including the notes, be weighed, given that its likelihood under innocence depends on the psychological state of a person under suspicion? These are questions about likelihood ratios and their dependence, and they can be framed, and in part bounded, by the methods of this book.
+
+\section{Safeguards}
+
+The Royal Statistical Society's report recommended safeguards for investigations of suspected medical misconduct \citep{rss2022}. In summary, and in our own words:
+\begin{enumerate}[label=(\roman*)]
+\item Investigations should define incidents and classify them before, and independently of, any knowledge of who was on duty.
+\item Statistical analyses should account for multiple comparisons and for how the suspect came to be identified.
+\item Comparisons should use the rates of incidents per shift for the suspect and for comparable colleagues, with uncertainty, rather than counts of incidents attended.
+\item Medical evidence should be reviewed by experts blind to the suspicion where possible, and the possibility of natural causes should be explicitly assessed.
+\item Courts should be presented with likelihood ratios for the evidence, not with p values or probabilities of coincidence.
+\item Expert statistical evidence should come from qualified statisticians, with independent review.
+\end{enumerate}
+Each safeguard addresses a source of bias in the likelihood ratio. Together they would make the evidence in such cases more reliable, whichever way it points.
+
+\section{Wrongful convictions more generally}
+
+Medical murder cases are one class of wrongful conviction. Studies of exonerations in the United States, many documented by the National Registry of Exonerations and the Innocence Project, have identified common contributing factors: mistaken eyewitness identification, false confessions, invalid or misleading forensic evidence, unreliable informants and official misconduct. Each factor corresponds to an error in a likelihood ratio: an identification given more weight than its conditions warranted, a confession whose denominator was raised by coercion, a forensic method without established error rates, an informant with motives to lie, evidence suppressed or fabricated. The Bayesian framework does not prevent wrongful convictions, but it identifies where they come from and what kinds of procedural safeguards address each source.
+
+In England, Wales and Northern Ireland, the Criminal Cases Review Commission, established in 1997, investigates possible miscarriages of justice and may refer cases to the Court of Appeal if there is a real possibility that the conviction would not be upheld. A real possibility is a probability judgment about another court's judgment, a posterior about a posterior. The Commission's caseload and the time it takes have been criticised, and the Post Office Horizon cases taken up in Chapter~\ref{ch:lean} showed how slowly the system can respond to systematic error. A Bayesian triage of applications, of the kind Chapter~\ref{ch:india} proposes for India, could help direct the Commission's resources to the cases with the highest probability of error and the highest cost of delay.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item A ward has twenty nurses who each work five per cent of shifts. Over a year there are twenty incidents. What is the probability that a nurse chosen in advance is on duty for eight or more? What is the probability that some nurse is?
+\item Explain why multiplying p values from several wards, as in the de Berk calculation, does not give a valid measure of evidence. What would?
+\item Design a blind classification protocol for incidents in an investigation of a suspected healthcare killer.
+\item Suppose the prior probability that a nurse is deliberately harming patients is one in fifty thousand, the cluster evidence has likelihood ratio two hundred, and a toxicology finding has likelihood ratio one thousand if reliable (treat the two items as independent, although the chapter warns that they may not be) but a ten per cent chance of being a laboratory or interpretive error. Compute the posterior.
+\item The Criminal Cases Review Commission refers a case when there is a real possibility the conviction would not be upheld. Express this as a threshold on a probability. What threshold would you choose, and why?
+\item Shift charts are visually compelling. Draft a direction to a jury on how to interpret a shift chart.
+\end{enumerate}
+
+\section*{Further reading}
+The Royal Statistical Society report on medical misconduct investigations \citep{rss2022}; Gill's work on the de Berk case \citep{meester2006,gill2018}; and, on wrongful convictions generally, the National Registry of Exonerations.

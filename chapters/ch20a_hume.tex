@@ -1,0 +1,100 @@
+\chapter{Intuition, Miracles and the Limits of Human Judgment}
+\label{ch:hume}
+
+\begin{quote}\itshape
+A wise man, therefore, proportions his belief to the evidence.
+\par\hfill\normalfont David Hume, \emph{Of Miracles}, 1748
+\end{quote}
+
+\section{Odds, not opinions}
+
+Courts are full of opinions. Witnesses believe they saw the defendant; experts are of the opinion that the injury was not accidental; counsel submit that a story is implausible; judges find that a witness was credible. Opinions are the raw material of adjudication, and the law could not function without them. But an opinion is not a probability, and a fact finder who adopts the most confident opinion, or the most eloquent, is not reasoning. The task is to weigh: to ask how probable the evidence would be if each account were true, and to combine that with how probable each account was to begin with. This chapter argues that this weighing is exactly what unaided human intuition does badly, that two and a half centuries of thought from Hume to Lindley explain why, and that the empirical evidence on human and mechanical judgment supports Lindley's view that coherent procedures, including machines, will often do better than people left to themselves.
+
+\section{Hume on miracles}
+
+\subsection{The argument}
+
+In the tenth section of his \emph{Enquiry Concerning Human Understanding}, published in 1748, David Hume considered what testimony could establish the occurrence of a miracle. His answer has become one of the most famous arguments in philosophy. A miracle is a violation of the laws of nature, and those laws are established by uniform experience. Testimony, too, derives its authority from experience: we trust witnesses because we have found that people usually report truly. When testimony asserts a miracle, the two kinds of experience conflict, and we must weigh them. Hume's conclusion was a maxim:
+\begin{quote}
+No testimony is sufficient to establish a miracle, unless the testimony be of such a kind, that its falsehood would be more miraculous, than the fact, which it endeavours to establish.
+\end{quote}
+And he summarised the method in a phrase: a wise man proportions his belief to the evidence.\index{Hume, David}\index{miracles}
+
+\subsection{Hume as a Bayesian}
+
+Hume did not use Bayes' theorem, which was published by Richard Price only in 1763, partly, it has been suggested, as a reply to Hume. But his maxim is a statement about posterior odds. Let $M$ be the proposition that the miracle occurred and $T$ the testimony that it did. Then
+\begin{equation}
+\frac{\Prob(M\given T)}{\Prob(\bar M\given T)} = \frac{\Prob(T\given M)}{\Prob(T\given \bar M)}\cdot\frac{\Prob(M)}{\Prob(\bar M)} .
+\end{equation}
+The prior odds of a miracle are tiny, since it violates laws established by uniform experience. The testimony establishes the miracle, in the sense of making it more probable than not, only if the likelihood ratio exceeds the reciprocal of the prior odds: only if $\Prob(T\given\bar M)$, the probability that such testimony would be given though the miracle did not occur, is smaller than $\Prob(T\given M)\,\Prob(M)/\Prob(\bar M)$, which for a tiny prior is essentially $\Prob(M)$ times $\Prob(T\given M)$. Equivalently, $\Prob(T\text{ and }\bar M)<\Prob(T\text{ and }M)$: the falsehood of the testimony must be less probable, more miraculous, than the miracle itself. Hume's maxim is the condition that the posterior odds exceed one.\index{Hume's maxim}
+
+John Earman criticised Hume's argument as an abject failure, on the central ground that Hume did not see how independent witnesses can combine to overcome a small prior \citep{earman2000}. If each of many independent witnesses has a likelihood ratio of ten, then twenty of them supply a combined likelihood ratio of $10^{20}$, enough to overcome even small priors. Whether Hume missed this is debated. For our purposes the important point is that the Bayesian framework both vindicates Hume's maxim and shows its limits: it is correct as a condition on a single body of testimony, and it correctly implies that sufficiently many independent witnesses could establish an extraordinary event. The key word is independent. Witnesses who share a source, a motive or an enthusiasm are not independent, and their combined weight is far less than the product.
+
+\subsection{Hume in court}
+
+Hume's argument applies to law with little change. Courts are regularly asked to find that extraordinary things happened: that a respectable professional committed a grave fraud, that a parent harmed a child, that a nurse murdered patients, that a company knowingly concealed a lethal defect. Each allegation has a low prior, because such conduct is rare. Each is supported by testimony and other evidence whose falsehood or misleadingness has some probability. Hume's maxim tells the fact finder what to ask: is the evidence of such a kind that its being misleading would be more improbable than the allegation itself?
+
+This is exactly the reasoning of Lord Nicholls in \emph{Re H} \citep{reh1996}, discussed in Chapter~\ref{ch:standards}: the more serious the allegation, the less likely it is that the event occurred, and hence the stronger the evidence needed. Lord Nicholls was applying Hume's maxim to the civil standard of proof. Lady Hale's correction in \emph{Re B} (2008) \citep{reb2008}, that seriousness does not always imply improbability, is also Humean: the prior depends on the circumstances, and, as Lord Hoffmann observed in the same case, where a child was injured by one of only two people, one of them certainly did, so seriousness says nothing about which.
+
+The medical murder cases of Chapter~\ref{ch:clusters} are the most direct application. The prior that a particular nurse is a serial killer is small. The evidence typically includes a statistical association and expert medical opinion. Hume would ask: what is the probability that such an association and such opinions would arise if the nurse were innocent, given how the cases were identified and how the experts were instructed? If that probability is not much smaller than the prior probability of murder, the evidence does not establish guilt, however confident the experts.
+
+\section{Human intuition}
+
+\subsection{Heuristics and biases}
+
+Kahneman and Tversky's research program showed that people reasoning about uncertainty rely on heuristics, mental shortcuts that are often useful and sometimes systematically wrong \citep{tversky1974}. The representativeness heuristic leads people to judge probability by resemblance, neglecting base rates, as in the cab problem of Chapter~\ref{ch:odds}. The availability heuristic leads them to judge frequency by how easily examples come to mind, so that vivid evidence is overweighted. Anchoring leads them to adjust insufficiently from an initial value, even an irrelevant one. The studies below document anchoring, framing, hindsight bias and related effects in legal decision makers.\index{heuristics and biases}
+
+\subsection{Judges are human}
+
+Studies of experienced judges confirm that expertise does not immunise against these effects. Englich, Mussweiler and Strack asked experienced German legal professionals to sentence a hypothetical shoplifting case after rolling dice that had been loaded to produce a high or a low number, presented as the prosecutor's demand; participants who rolled higher numbers gave longer sentences \citep{englich2006}. Guthrie, Rachlinski and Wistrich found that American federal magistrate judges were susceptible to anchoring, hindsight bias and egocentric bias, though they did better than lay people on framing and representativeness \citep{guthrie2001}. Studies of asylum adjudication in the United States found large differences in grant rates between judges in the same court hearing similar cases, a phenomenon its authors called refugee roulette \citep{ramji2007}. A widely cited study of Israeli parole boards reported that favourable decisions fell over the course of each session and recovered after food breaks \citep{danziger2011}; the finding has been disputed, on the ground that the order of cases was not random, and is best treated as illustrating the questions rather than settling them. Kahneman, Sibony and Sunstein collected evidence that unwanted variability, which they call noise, is pervasive in professional judgment, including sentencing \citep{kahneman2021}.\index{anchoring}\index{noise}
+
+\subsection{When intuition works}
+
+Intuition is not always unreliable. Kahneman and Klein, who had long disagreed about expert intuition, agreed in a joint paper on the conditions under which it can be trusted: the environment must be regular enough to be predictable, and the expert must have had extensive practice with rapid and accurate feedback \citep{kahneman2009}. Chess masters, firefighters and anaesthetists meet these conditions. Judges deciding facts usually do not. A judge who finds a witness credible rarely learns whether the witness was in fact telling the truth. Appellate review is built to correct legal errors and defers heavily to findings of fact, and wrongful convictions are discovered years later, if ever. In an environment without feedback, intuition does not calibrate, and confidence becomes unrelated to accuracy. This is the core of the case for structured, explicit reasoning in fact finding.
+
+\section{Clinical versus statistical judgment}
+
+\subsection{Meehl's disturbing little book}
+
+In 1954 the psychologist Paul Meehl published \emph{Clinical versus Statistical Prediction}, comparing the accuracy of predictions made by trained clinicians using their judgment with predictions made by simple statistical formulas using the same information \citep{meehl1954}. In study after study the formulas did at least as well as the clinicians, and often better. Meehl called it his disturbing little book. Half a century later, Grove and colleagues conducted a meta analysis of over a hundred studies comparing clinical and mechanical prediction across medicine, psychology, education and criminal justice; mechanical prediction was about as accurate or more accurate in the great majority, and clinical prediction was substantially better in only a small minority \citep{grove2000}.\index{Meehl, Paul}\index{clinical versus statistical prediction}
+
+Robyn Dawes added a striking result: even improper linear models, with weights chosen arbitrarily, such as equal weights on standardised predictors, outperform clinical judgment in many settings, because the main advantage of the formula is its consistency \citep{dawes1979}. A human expert knows which variables matter but applies them inconsistently, distracted by irrelevant detail, swayed by vivid cases and influenced by mood. The formula applies the same weights to every case.
+
+\subsection{Bail and sentencing}
+
+The Kleinberg study of bail decisions in New York, discussed in Chapter~\ref{ch:lindleyai}, is Meehl's comparison applied to a legal decision with careful attention to the selective labels problem \citep{kleinberg2018}. The machine learning rule, using only information available to the judges, could have reduced crime substantially at the same detention rate. The judges' errors appeared to reflect responding to noise, including unobservable features of the case, as if it were signal.
+
+\section{Lindley's point}
+
+Lindley's point is the ground of the challenge set out in Chapter~\ref{ch:why}. He drew the conclusion that the evidence of Meehl, Kahneman and Tversky invites. People are not coherent; they do not reason according to the rules of probability, nor act to maximise expected utility. In \emph{Understanding Uncertainty} he acknowledged the descriptive evidence that people are not rational in the economist's sense, and responded not by revising the normative theory but by arguing that everyone should be taught probability, utility and the maximisation of expected utility, and should act accordingly \citep{lindley2006}. His view of the law, as we understand it, followed. A court that decided by the rules of coherent reasoning would do better than one that relied on intuition, and since machines can be built to follow those rules exactly, while people cannot, a properly designed machine would in many respects be a better judge of facts than a person.\index{Lindley, Dennis}
+
+We should be precise about what this point claims. It does not claim that machines understand the world better than people, or that they should decide what society values. It claims that, given the same information and the same utilities, a procedure that combines them coherently will on average make better decisions (higher expected utility under the stated probabilities and utilities) than a procedure that combines them incoherently, and that unaided human judgment is demonstrably incoherent in predictable ways. The evidence from Meehl onwards supports this claim for prediction tasks with clear outcomes. Legal fact finding is harder, because outcomes are rarely observed, but the biases that make human prediction inferior are the same ones that operate in fact finding.
+
+The practical upshot is not to replace judges with machines but to change what judges do. Judges should state their probabilities and their reasons in a form that can be checked; they should use structured tools, such as likelihood ratio ledgers and decision thresholds, where the stakes justify the effort; and they should use machines to compute, check and flag, while reserving to themselves the tasks that require understanding and values. A judge who weighs odds rather than opinions, aided by tools that keep the arithmetic straight, combines the strengths of each.
+
+\section{Weighing testimony: a procedure}
+
+Hume's maxim and Lindley's point suggest a procedure that any fact finder can follow, with or without numbers.
+\begin{enumerate}[label=\arabic*.]
+\item State the propositions in issue and their alternatives, including alternatives no party has advanced.
+\item For each, ask how probable it was before the specific evidence, considering base rates for conduct of this kind in circumstances of this kind.
+\item For each item of evidence, ask how probable it would be under each proposition, including the probability that it would be misleading if the proposition were false: that a witness would be mistaken or lying, that a test would err, that an expert would be wrong.
+\item Ask which items share sources, so that their likelihood ratios must not be multiplied as if independent.
+\item Combine, and ask whether the result crosses the threshold the law sets, given the consequences of error.
+\item Ask, with Hume, whether the falsehood of the evidence would be more improbable than the fact it is offered to prove. This is the balance-of-probabilities test; for a criminal standard it is necessary but not sufficient, and step 5 still governs.
+\end{enumerate}
+This procedure is the Bayesian method stated in words. It is what this book has recommended throughout. Its value lies less in any particular number than in the discipline of asking each question explicitly, so that intuition is checked at each step rather than trusted at the end.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Express Hume's maxim as an inequality between $\Prob(M)$, $\Prob(T\given M)$ and $\Prob(T\given \bar M)$, keeping the factor $1/\Prob(\bar M)$. Show that it is exactly equivalent to the posterior odds exceeding one, and say when it reduces to $\Prob(T\given\bar M)<\Prob(M)\Prob(T\given M)$.
+\item Ten independent witnesses each testify to an event with prior probability $10^{-6}$. Each witness has a likelihood ratio of five. What is the posterior probability? What if the witnesses all heard the story from one person?
+\item Apply Hume's maxim to an allegation of fraud against a long serving and well regarded professional. What kind of evidence would satisfy it?
+\item Design an experiment, in the manner of Englich, Mussweiler and Strack, to test whether a likelihood ratio direction reduces anchoring in civil damages awards.
+\item Kahneman and Klein identify conditions under which intuition is reliable. Which legal tasks, if any, meet them?
+\item Is Lindley's point an argument for machine judges? State the strongest version of the argument and the strongest objection.
+\end{enumerate}
+
+\section*{Further reading}
+Hume's \emph{Of Miracles}, section ten of the \emph{Enquiry}; Earman's \emph{Hume's Abject Failure} \citep{earman2000}; Meehl \citep{meehl1954} and Grove and colleagues \citep{grove2000}; Kahneman, Sibony and Sunstein on noise \citep{kahneman2021}; Lindley's \emph{Understanding Uncertainty} \citep{lindley2006}.

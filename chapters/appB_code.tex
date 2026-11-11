@@ -1,0 +1,32 @@
+\chapter{Code for the Main Calculations}
+\label{app:code}
+
+This appendix lists a short Python program that reproduces the principal calculations in the book. It uses only NumPy and SciPy. Readers are encouraged to change the inputs and see how the conclusions move; that sensitivity is the point of most of the examples. The figures in the book were produced by a companion script, distributed with the source files, that uses the same functions together with Matplotlib.
+
+\section{The program}
+
+\lstinputlisting[language=Python, caption={Calculations from the book.}]{code/bayes_law.py}
+
+\section{Output}
+
+Running the program prints the following.
+
+\lstinputlisting[caption={Output of the program.}]{code/output.txt}
+
+\section{Notes on the calculations}
+
+\paragraph{Simpson} The function \texttt{simpson} computes $\Prob(K\given B, M)$ from the annual probabilities that a battered woman is killed by her partner and by someone else, as in equation \eqref{eq:simpson}. The default inputs are those of Chapter~\ref{ch:classic}.
+
+\paragraph{Island} The function \texttt{island} gives the posterior for a uniform prior and common match probability, as in \eqref{eq:islandsimple}. Here $N$ counts the people other than the suspect, as in Chapter~\ref{ch:classic}, so it is one less than the $N$ of Chapter 2. The function \texttt{island\_general} implements the Balding and Donnelly sum \eqref{eq:islandgeneral} \citep{balding1995}, allowing each alternative source its own prior weight and match probability. The example with a brother, an island of $10^4$ unrelated inhabitants with $p = 10^{-6}$ plus one brother with $p = 1/100$, shows how a single close relative reduces the posterior: from about $0.990$ without him to $0.980$ with him, since the brother alone carries as much weight as all the other inhabitants together.
+
+\paragraph{Thresholds and Bayes factors} \texttt{threshold} implements \eqref{eq:threshold}. \texttt{sbb\_bound} gives the Sellke, Bayarri and Berger bound \eqref{eq:sbb} \citep{sellke2001}. \texttt{lindley\_bf01} gives the Bayes factor for the null in Lindley's paradox, \eqref{eq:lindleybf}.
+
+\paragraph{Castaneda} \texttt{castaneda\_log10\_bf} \citep{castaneda1977} computes the base ten logarithm of the Bayes factor for discrimination versus random selection, with a uniform prior on the selection probability below the population share, using the incomplete beta function. The result, about $141.6$, means the Bayes factor is of the order of $10^{141}$.
+
+\paragraph{Solvency} \texttt{merton\_pd} gives the one year default probability in Merton's model. \texttt{combine} gives the precision weighted combination of two normal signals, as in \eqref{eq:solvencycombo}, here used with a market implied probability of four per cent and an expert estimate of twenty per cent corrected for eight points of hindsight bias.
+
+\paragraph{Insurance} \texttt{proportionate\_payment} implements the proportionate reduction of Schedule 1 of the Insurance Act 2015 used in the casebox of Chapter~\ref{ch:misrep}.
+
+\section{Extending the code}
+
+Three extensions make good projects. First, implement the beta binomial predictive probability and use it to compute Bayes factors for forensic features observed in small databases. Second, build the Bayesian network of Figure~\ref{fig:sacco} using a library for discrete networks, assign conditional probabilities, and compute the posterior for Sacco's guilt as the probability of substitution varies. Third, implement the quantile network of Chapter~\ref{ch:pleadings} with a simple simulator for a two issue contract dispute and check that its quantiles match those computed by exact enumeration.

@@ -1,0 +1,146 @@
+\chapter{A Probability Toolkit for Lawyers}
+\label{app:toolkit}
+
+This appendix collects the definitions and results used in the book, with short proofs or derivations where they are instructive. It is meant as a reference, not a course; readers who want a fuller treatment should consult \citet{lindley2006}, \citet{kadane2011} or \citet{aitken_taroni2004}.
+
+\section{Probability}
+
+\subsection{The three rules}
+
+For propositions $A$, $B$ and background information $K$:
+\begin{enumerate}[label=(\roman*)]
+\item Convexity: $0 \le \Prob(A\given K) \le 1$, and $\Prob(A\given K) = 1$ if $K$ implies $A$.
+\item Addition: if $A$ and $B$ are mutually exclusive given $K$, $\Prob(A \text{ or } B\given K) = \Prob(A\given K) + \Prob(B\given K)$.
+\item Multiplication: $\Prob(A\text{ and } B\given K) = \Prob(A\given K)\,\Prob(B\given A, K)$.
+\end{enumerate}
+Everything else follows. The complement rule $\Prob(\bar A\given K) = 1 - \Prob(A\given K)$ follows from (i) and (ii). The law of total probability,
+\[
+\Prob(E\given K) = \sum_i \Prob(E\given H_i, K)\,\Prob(H_i\given K)
+\]
+for mutually exclusive and exhaustive $H_i$, follows from (ii) and (iii).
+
+\subsection{Bayes' rule}
+
+Applying the multiplication rule in both orders to $\Prob(H\text{ and }E\given K)$ gives
+\[
+\Prob(H\given E, K) = \frac{\Prob(E\given H, K)\,\Prob(H\given K)}{\Prob(E\given K)} .
+\]
+In odds form, for two hypotheses $\Hp$ and $\Hd$,
+\[
+\frac{\Prob(\Hp\given E,K)}{\Prob(\Hd\given E,K)} = \frac{\Prob(E\given\Hp,K)}{\Prob(E\given \Hd, K)}\times \frac{\Prob(\Hp\given K)}{\Prob(\Hd\given K)} .
+\]
+Posterior odds equal the likelihood ratio times the prior odds. When $\Hp$ and $\Hd$ are complements, odds $o$ convert to probability $o/(1+o)$.
+
+\subsection{Independence}
+
+$A$ and $B$ are independent given $K$ if $\Prob(A\given B, K) = \Prob(A\given K)$. Independence is always relative to background information: two witnesses' reports are dependent unconditionally, since both depend on what happened, but may be independent given what happened. One error in \emph{Collins} and in \emph{Sally Clark} was to multiply probabilities of features that are dependent.
+
+\section{Evidence}
+
+\subsection{Likelihood ratio and weight}
+
+The likelihood ratio of evidence $E$ for $\Hp$ against $\Hd$ is $\LR = \Prob(E\given\Hp)/\Prob(E\given\Hd)$ (the background information $K$ is suppressed from here on). The weight of evidence in decibans is $10\log_{10}\LR$. Items that are independent given $\Hp$ and given $\Hd$ add their weights. Table~\ref{tab:decibans} gives conversions.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{rrr}
+\toprule
+Likelihood ratio & Decibans & Posterior from prior $1/2$\\
+\midrule
+$1$ & $0$ & $0.500$\\
+$2$ & $3$ & $0.667$\\
+$10$ & $10$ & $0.909$\\
+$100$ & $20$ & $0.990$\\
+$1{,}000$ & $30$ & $0.999$\\
+$10^{6}$ & $60$ & $0.999999$\\
+\bottomrule
+\end{tabular}
+\caption{Likelihood ratios, weights in decibans, and posterior probabilities from even prior odds.}
+\label{tab:decibans}
+\end{table}
+
+\subsection{Composite hypotheses}
+
+When a hypothesis has unknown parameters $\theta$ with prior $\pi(\theta\given H)$, its marginal likelihood is $m(E\given H) = \int \Prob(E\given\theta,H)\pi(\theta\given H)\,d\theta$, and the Bayes factor is the ratio of marginal likelihoods (written $m_p(E)$ and $m_d(E)$ in Chapter~\ref{ch:bf}).
+
+\subsection{The island formula}
+
+If $N$ people, including the suspect $S$, could have left the stain, with prior probabilities $\pi_i$ of being the source and random match probabilities $\gamma_i$, and $S$ matches, then
+\[
+\Prob(S \text{ is the source}\given\text{match}) = \frac{\pi_S}{\pi_S + \sum_{i\ne S}\pi_i \gamma_i}.
+\]
+With uniform priors and a common $\gamma$ this is $1/(1 + (N-1)\gamma)$, as in Chapter~\ref{ch:odds}.
+
+\subsection{Uncertain match probabilities}
+
+If the random match probability $\gamma$ is uncertain with mean $\mu$ and variance $\sigma^2$, the effective match probability given one observed match is $\E(\gamma^2)/\E(\gamma) = \mu + \sigma^2/\mu$.
+
+\subsection{Beta binomial prediction}
+
+If a feature has frequency $\gamma \sim \text{Beta}(a,b)$ and has been seen $k$ times in $n$ items, the predictive probability that the next item has it is $(k+a)/(n+a+b)$.
+
+\section{Decisions}
+
+\subsection{Expected utility}
+
+Given actions $d$, states $\theta$ with posterior $\Prob(\theta\given E)$, and utility $U(d,\theta)$, the optimal action maximises $\E[U(d,\theta)\given E] = \sum_\theta U(d,\theta)\Prob(\theta\given E)$. Equivalently it minimises expected loss.
+
+\subsection{Thresholds}
+
+With two actions and two states, and zero loss for correct decisions, act for $\Hp$ (convict, decision $c$) when $\Prob(\Hp\given E) > p^\ast = L(c,\bar G)/(L(c,\bar G) + L(a,G))$, where $G$ is $\Hp$, $\bar G$ is not $G$, $L(c,\bar G)$ is the loss from acting for $\Hp$ when $\Hd$ is true (in a criminal case, a false conviction) and $L(a,G)$ the loss from acquitting (decision $a$) when $\Hp$ is true. This is \eqref{eq:threshold}; Table~\ref{tab:thresholds} gives values.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{lcc}
+\toprule
+Threshold $p^\ast$ & Loss ratio $L(c,\bar G)/L(a,G)$ & Threshold odds\\
+\midrule
+$0.50$ & $1$ & $1$\\
+$0.75$ & $3$ & $3$\\
+$0.90$ & $9$ & $9$\\
+$0.95$ & $19$ & $19$\\
+$0.99$ & $99$ & $99$\\
+\bottomrule
+\end{tabular}
+\caption{Posterior thresholds and the loss ratios they imply. The loss ratio equals the threshold odds $p^\ast/(1-p^\ast)$, which is why the last two columns coincide.}
+\label{tab:thresholds}
+\end{table}
+
+\subsection{Value of information}
+
+The expected value of information from observing $X$ before deciding is the expected maximum expected utility after observing $X$ minus the maximum expected utility now. It is never negative, and it is largest when the current posterior is near the decision threshold.
+
+\section{Distributions}
+
+\subsection{Binomial}
+
+The number of successes in $n$ independent trials with probability $p$ has $\Prob(X = k) = \binom{n}{k}p^k(1-p)^{n-k}$, mean $np$ and variance $np(1-p)$. It is used in the jury and discrimination cases of later chapters.
+
+\subsection{Poisson}
+
+For rare events, the number in a period has $\Prob(X = k) = e^{-\lambda}\lambda^k/k!$, with mean and variance $\lambda$. Poisson derived it in his study of jury verdicts \citep{poisson1837}; see the box ``Poisson and the French juries'' in Chapter~\ref{ch:why}.
+
+\subsection{Beta and gamma}
+
+The beta distribution $\text{Beta}(a,b)$ on $(0,1)$ has density proportional to $\theta^{a-1}(1-\theta)^{b-1}$ and mean $a/(a+b)$. It is conjugate to the binomial: after $k$ successes in $n$ trials the posterior is $\text{Beta}(a+k, b+n-k)$. The gamma distribution with shape $\alpha$ and rate $\beta$ is conjugate to the Poisson: after $k$ events in time $t$ the posterior for the rate is gamma with shape $\alpha + k$ and rate $\beta + t$.
+
+\subsection{Normal}
+
+The normal distribution with mean $\mu$ and variance $\sigma^2$ is conjugate to a normal likelihood with known variance: if $\theta \sim N(m, v)$ and $y\given\theta \sim N(\theta, s^2)$, then $\theta\given y \sim N(m', v')$ with $1/v' = 1/v + 1/s^2$ and $m' = v'(m/v + y/s^2)$. Precisions add and means are precision weighted. This is the formula behind the combination of market and expert evidence in Chapter~\ref{ch:bankruptcy} and the shrinkage in Chapter~\ref{ch:llsv}.
+
+\section{Fallacies}
+
+\begin{description}
+\item[Prosecutor's fallacy] Reading $\Prob(E\given\Hd)$ as $\Prob(\Hd\given E)$.
+\item[Defence fallacy] Treating evidence as irrelevant because it does not single out the defendant, ignoring its likelihood ratio.
+\item[Dershowitz fallacy] Reporting a probability conditioned on less than what is known, such as $\Prob(K\given B)$, the probability that a battered woman is killed by her batterer, when $\Prob(K\given B, M)$, which also conditions on her having been murdered, is required (here $K$ is an event, not background information).
+\item[Independence fallacy] Multiplying probabilities of dependent events.
+\item[Base rate neglect] Ignoring the prior when interpreting evidence.
+\item[Double counting] Adding the weights of items that share a common source.
+\item[Hindsight bias] Assessing an ex ante probability using knowledge of the outcome.
+\item[Selection neglect] Treating a selected sample, such as tried cases or favourable experts, as representative.
+\end{description}
+
+\section{Graphical models}
+
+A Bayesian network factorises a joint distribution as $\prod_i\Prob(X_i\given\mathrm{pa}(X_i))$. In a chain or fork, observing the middle node blocks dependence; in a collider, observing the middle node or a descendant creates it. Two sets of variables are conditionally independent given a third if every path between them is blocked (d-separation).

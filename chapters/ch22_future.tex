@@ -1,0 +1,80 @@
+\chapter{The Future and Promise of AI in Law}
+\label{ch:future}
+
+\section{A profession built on reasoning}
+
+Law is a profession of reasoning under uncertainty. Lawyers predict what courts will do, judges decide what probably happened, legislators guess how people will respond to rules. For centuries these tasks were done by trained human judgment, aided by books, precedent and argument. Artificial intelligence is now able to perform parts of them: reading and summarising documents, finding authorities, drafting submissions, predicting outcomes, estimating risks. This final chapter looks forward. It asks what the profession will look like in ten to twenty years, what AI can promise, what it cannot, and why a lawyer trained in Bayesian reasoning will be better placed than one who is not to use it well.
+
+\section{What will change}
+
+\subsection{The cost of legal information will fall}
+
+The most likely change is that legal information will become cheap. Questions that once required a junior lawyer's week, what the law is on a point, what the documents show, how similar cases came out, will be answered in minutes. The price of routine legal work will fall, and so will the price of access to legal advice for individuals and small businesses who cannot now afford it. The economic consequences are large: legal services are a substantial industry, and much of their cost is in tasks that could be automated; one industry study estimates that up to 74 percent of hourly billable tasks could be automated \citep{clio2024}.
+
+\subsection{Prediction will become explicit}
+
+Lawyers have always predicted, but implicitly: an experienced litigator's view that a claim has good prospects is a probability that is never stated. AI systems produce explicit probabilities. Clients, funders, insurers and courts will increasingly expect them. When probabilities are explicit, they can be checked against outcomes, and lawyers whose predictions are poorly calibrated will be found out. This is a large change in professional accountability, and it rewards exactly the skills this book teaches: understanding what a probability means, how it should be updated, and how to combine it with values to reach a decision.
+
+\subsection{Disputes will be selected differently}
+
+As Chapter~\ref{ch:becker} and Chapter~\ref{ch:lindleyai} explained, better prediction should lead to more settlements, since disputes go to trial when the parties disagree about the outcome. Courts will see a higher proportion of genuinely hard cases: novel questions of law, close questions of fact, and cases where one party has private information. The work of judges will become, on average, harder, and the cases that make precedent will be more concentrated at the frontier.
+
+\subsection{Evidence will change}
+
+AI changes evidence itself. Deepfakes pull the likelihood ratio of a recording toward one; machine analysis of communications produces new kinds of evidence with their own error rates; algorithmic decisions by employers, lenders and governments become the subject of litigation, with the algorithm's behaviour as the evidence. Courts will need experts who can explain the likelihood ratios of machine outputs, and lawyers who can cross examine them.
+
+\subsection{Courts will triage}
+
+Overloaded courts, from the Crown Court in England and Wales to the district courts of India, will use AI to schedule, triage and manage cases, as Chapter~\ref{ch:india} described for India and Chapter~\ref{ch:systemcosts} for the costs of delay. Online dispute resolution for small claims will expand. The routine end of the justice system will become faster and cheaper; the question is whether it will also become more accurate and fair, which depends on how the systems are built and governed.
+
+\section{What AI can promise}
+
+\subsection{Consistency}
+
+Human judgment is noisy. Similar cases receive different outcomes depending on the judge and irrelevant anchors, as Chapter~\ref{ch:hume} discussed (the evidence on the time of day is disputed). A deterministic system gives the same output for the same input. Consistency is not justice, since a consistently wrong system is worse than an inconsistently right one, but in domains where the right answer is reasonably well understood, reducing noise is a large gain. Sentencing ranges, damages tariffs and benefit calculations are candidates.
+
+\subsection{Coherence}
+
+A machine can be built to reason coherently: to update by Bayes' rule, to combine evidence without double counting, to apply decision thresholds that match stated losses. Lindley's challenge, the subject of Chapter~\ref{ch:lindleyai}, was that such a machine would decide at least as well as an unaided person. The promise of AI in law is the promise of coherence at scale.
+
+\subsection{Access}
+
+In California, for example, the 2024 Justice Gap Study found that 85 percent of civil legal problems received no or inadequate legal help \citep{calbar2024}. AI can provide information, prepare documents and guide people through procedures at a cost close to zero. If it is accurate, this could be the largest expansion of access to justice\index{access to justice} in history. The Bayesian discipline of calibration and explanation, discussed in Chapter~\ref{ch:xai}, is what makes the difference between a guide people can trust and one that misleads them.
+
+\subsection{Verification}
+
+As Chapter~\ref{ch:lean} argued, formal verification can check the logical and arithmetical parts of legal reasoning. Combined with language models that propose arguments, it offers a model of legal work in which machines draft, verifiers check and people judge. In mathematics this model is already producing verified formal results to which both people and machines contribute. Law may be next.
+
+\section{What AI cannot promise}
+
+\subsection{Values}
+
+AI cannot tell a society what to value. The ratio of losses that sets a standard of proof, the purposes of sentencing, the weight given to liberty against safety, are choices that belong to legitimate institutions. A machine can implement any choice coherently, and can show the consequences of each, but it cannot make the choice. Lindley said the utilities must come from people; that remains true.
+
+\subsection{Facts not in the data}
+
+A model trained on past cases knows only what the past contains. A new kind of fraud, a new technology, a new social arrangement, may lie outside its experience, and it may not know that it does not know. Human judges, with their general understanding of the world, may be better at recognising novelty. A well designed system flags cases that look unlike its training data; a poorly designed one confidently misclassifies them.
+
+\subsection{Legitimacy}
+
+People accept legal decisions partly because they are made by persons accountable to them, through processes they recognise as fair. Whether people will accept decisions made or shaped by machines is an empirical question, and the answer may depend on how the machines are used: as tools of transparent human judgment, or as opaque substitutes for it. The requirements set out in Chapter~\ref{ch:lindleyai}, among them probabilities rather than verdicts, explicit utilities, verifiable computation, contestability and human responsibility, are designed to preserve legitimacy.
+
+\section{The lawyer of the future}
+
+What should a lawyer trained today know? We believe the answer includes the subject of this book. A lawyer who understands likelihood ratios can read a forensic report and cross examine its author. One who understands base rates will not be misled by a striking statistic, by the prosecutor's fallacy or the Dershowitz fallacy. One who understands decision theory can advise a client whether to sue, settle or appeal in terms the client can act on, and can explain to a court what a standard of proof implies about the costs of error. One who understands calibration can evaluate an AI tool's outputs and know when to trust them. One who understands hierarchical models can read the empirical literature that increasingly shapes policy. These are not specialist skills. They are the core competence of a profession whose daily work is reasoning under uncertainty.
+
+This is why we wrote the book for students. Our goal, as stated at the front of the book, is this: ``Every student at the University of Chicago Law School who takes the course built on this book should leave it well versed in Bayes: able to state a prior, compute a likelihood ratio, set a decision threshold from the costs of error, spot the fallacies, and explain each to a client, a jury and a judge.'' The tools are simple; the habits take practice. The cases in this book, from \emph{Collins} and \emph{Simpson} to Greensill and Letby, are the practice.
+
+\section{A closing argument}
+
+Laplace wrote that probability theory is common sense reduced to calculus. Hume wrote that a wise person proportions belief to the evidence. Lindley wrote that we should all be taught probability, utility and the maximisation of expected utility, and act accordingly. These are not new ideas. What is new is that the law can now act on them at scale, with machines that compute and verify, and with data that let us check whether our probabilities are right. The future of law will be shaped by whether lawyers understand these tools well enough to use them wisely. We hope this book helps.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Which tasks in your area of law are most likely to be automated in the next decade? Which least? Explain using the distinctions drawn in this chapter between what AI can and cannot promise.
+\item A client asks you for the probability of winning. What do you need to know to answer, and how would you explain your answer?
+\item Design a calibration study for a law firm's predictions of case outcomes. What would you do with the results?
+\item Will better prediction make courts' work harder or easier? Use the Priest and Klein model.
+\item Write a short essay on the proposition that the law should be decided by whoever, or whatever, reasons most coherently.
+\end{enumerate}

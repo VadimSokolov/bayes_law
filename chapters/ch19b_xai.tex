@@ -1,0 +1,115 @@
+\chapter{Verifying AI, Explaining AI and the Ethics of Legal Machines}
+\label{ch:xai}
+
+\section{Three questions}
+
+Chapter~\ref{ch:lean} asked how formal verification could check the logical and arithmetical steps of legal decisions. Chapter~\ref{ch:lindleyai} described how artificial intelligence is changing court decisions and set out requirements for a Bayesian machine in court. This chapter takes up three questions that bridge the two. How can the outputs of AI systems, especially language models, be verified before courts and lawyers rely on them? How can the reasoning of an AI system be explained to the people its decisions affect? And what ethical principles should govern the use of AI in legal decision making? Each question has a Bayesian answer, and each answer connects to an emerging body of law.
+
+\section{Verification with AI}
+
+\subsection{The verification problem}
+
+A language model asked a legal question produces fluent text. Some of it is correct, some is subtly wrong, and some, as \emph{Mata v Avianca} showed \citep{mata2023}, is invented. The model's fluency is not evidence of its accuracy; the likelihood ratio of a fluent answer, for the proposition that it is correct, may be little more than one. Verification is the process of raising that likelihood ratio by checking the output against sources and constraints that the model did not control.\index{verification!of AI outputs}
+
+We distinguish four layers of verification, from the most mechanical to the most judgmental.
+
+\paragraph{Existence and citation} Every authority cited must exist and say what the output claims. This can be checked automatically against databases of judgments and statutes. A citation that does not resolve to a real document is a certain error. A citation that resolves but does not support the proposition requires reading. Tools that retrieve the cited passage and display it next to the claim make the second check fast.
+
+\paragraph{Logical structure} The output's argument must have the form required by the law: the elements of a claim addressed, the exceptions considered, the conclusion following from the findings. This is the layer that formal verification addresses. A language model that proposes an argument and a checker that verifies its structure against an encoding of the rules form a loop now increasingly used in mathematics, where models propose proof steps and Lean checks them.
+
+\paragraph{Arithmetic and probability} Any computation in the output, a damages figure, a limitation period, a likelihood ratio, must be recomputed by a trusted tool. Language models are unreliable at arithmetic, and their errors can be large. The interval certificates of Chapter~\ref{ch:lean} apply.
+
+\paragraph{Judgment} Finally, the output's characterisation of facts, its interpretation of open textured terms and its weighing of considerations must be assessed by a person. Verification cannot replace this layer, but by removing errors in the first three it lets the person concentrate on it.
+
+\subsection{Retrieval and grounding}
+
+The most common technical response to invented authority is retrieval augmented generation: the model is given relevant documents retrieved from a trusted database and instructed to answer from them, citing passages. Grounding reduces but does not eliminate error, because the model may misread or misrepresent the retrieved text, and the retrieval may miss the most relevant authority. A Bayesian evaluation of such systems measures their error rates on realistic tasks: the probability that a cited passage does not support the claim, the probability that a controlling authority is missed. These rates determine the likelihood ratio of the system's output and therefore how much a lawyer may rely on it without independent checking.
+
+\subsection{Calibration and conformal guarantees}
+
+A system that reports its confidence is more useful than one that does not, provided its confidence is calibrated: among answers given with ninety per cent confidence, about ninety per cent should be correct. Language models are often poorly calibrated, expressing high confidence in wrong answers. Calibration can be measured and improved, and it should be reported for any system used in legal work, as Chapter~\ref{ch:lindleyai} required for risk tools.\index{calibration}
+
+Conformal prediction offers a stronger guarantee under mild assumptions. Given a set of past cases with known answers, a conformal procedure constructs, for a new case, a set of possible answers that contains the correct one with a specified probability, such as ninety five per cent, whatever the underlying model \citep{angelopoulos2023}. The guarantee holds on average over cases, not for each case separately. For legal classification tasks, such as predicting which of several issues will be decisive or which category a document belongs to, conformal sets give the user a guarantee of coverage: if the set contains several answers, the system is uncertain and the user knows to look harder. The guarantee depends on the new case being exchangeable with the calibration cases, an assumption that fails when the law changes or the case is unusual, so conformal methods must be recalibrated as the law develops.\index{conformal prediction}
+
+\subsection{Adversarial checking}
+
+The adversarial system of the common law is itself a verification procedure: each side checks the other's claims. AI can be used the same way. A second model, or the same model prompted differently, can be asked to find errors in an output, to argue the opposite position, or to identify authorities the first output missed. Agreement between independent checks raises confidence; disagreement flags a point for human attention. The Bayesian caution is that two models trained on similar data are not independent, so their agreement is weaker evidence than agreement between independent human reviewers. Independence must be engineered, by using different models, different sources or different prompts, and its degree estimated.
+
+\subsection{Audit trails}
+
+Verification after the fact requires a record. A system used in legal decision making should keep a log of its inputs, the documents it retrieved, its outputs and the checks performed, so that a party challenging a decision can see how it was produced. The European Union's AI Act requires high risk systems, including those intended to assist judicial authorities, to keep logs enabling traceability \citep{euaiact2024}. Logs also make it possible to measure error rates in practice, closing the loop between deployment and evaluation.
+
+\section{Explainable AI}
+
+\subsection{What an explanation is for}
+
+A person affected by a decision is entitled, in most legal systems, to reasons. Reasons serve several purposes: they let the person understand why the decision was made, assess whether it was correct, and challenge it if not; they discipline the decision maker, who must articulate a justification; and they let others learn from the decision, which in the common law is how precedent is made. An AI system that produces decisions without reasons, or with reasons that do not reflect how the decision was actually reached, defeats all of these purposes.\index{explainable AI}
+
+Explainable AI is the field that seeks to make the outputs of machine learning models understandable. It is useful to distinguish explanations of a model in general, which describe how it uses its inputs across all cases, from explanations of an individual decision, which describe why this case received this output. Legal reasons are mostly of the second kind.
+
+\subsection{Feature attribution}
+
+The most widely used methods attribute an individual prediction to the input features. LIME fits a simple local model to perturbed samples around the case and reports its coefficients \citep{ribeiro2016}. SHAP assigns each feature a contribution based on Shapley values from cooperative game theory, so that the contributions sum to the difference between the prediction and a baseline \citep{lundberg2017}. These methods are general and widely implemented. They also have limitations: attributions can change with the choice of baseline, can be unstable for correlated features, and describe the model's behaviour, not the world. An attribution that says a defendant's postcode contributed heavily to a high risk score explains the model, and may reveal that the model is using a proxy for race, but it does not justify the score.
+
+\subsection{Counterfactual explanations}
+
+Wachter, Mittelstadt and Russell proposed counterfactual explanations: statements of the smallest change to the input that would have changed the decision, such as (our illustration) your loan would have been approved if your income had been five thousand pounds higher \citep{wachter2018}. Counterfactual explanations have attractive legal properties. They tell the person what would have made a difference, which is what they need to contest or act on the decision, and they do not require disclosing the model. They correspond closely to the but for reasoning of causation discussed in Chapter~\ref{ch:tort}. Their weakness is that many counterfactuals may exist, and the one reported may not be the most useful or the most realistic.\index{counterfactual explanations}
+
+\subsection{Weight of evidence as explanation}
+
+A Bayesian model offers a native form of explanation that predates the field of explainable AI by decades. When a decision depends on a posterior, and the posterior is built from a prior and likelihood ratios for items of evidence, the explanation is the ledger of weights. Good's weight of evidence, introduced in Chapter~\ref{ch:odds}, decomposes the log posterior odds into a prior term and a sum of contributions, one for each item:
+\begin{equation}
+\label{eq:woe-ledger}
+10\log_{10}\odds(H\given E_1,\ldots,E_k) = 10\log_{10}\odds(H) + \sum_{i=1}^k W(H : E_i \given E_1,\ldots,E_{i-1}),
+\end{equation}
+where $W(H : E_i \given E_1,\ldots,E_{i-1})$ is ten times the base ten logarithm of the likelihood ratio for $E_i$ given the earlier items, in decibans as in Chapter~\ref{ch:odds}. For conditionally independent items the conditioning drops away and the weights are those of the items taken one at a time. Such an explanation is faithful by construction: it is the computation the model performed, not an approximation to it. It is also in a form lawyers can engage with: each weight is a claim about how much more probable an item is under one hypothesis than the other, which can be contested with evidence. Good and Card studied the expected weight of evidence as a quasi-utility in the analysis of diagnostic error \citep{goodcard1971}, and the case made here for weights as the language of explanation applies with equal force in law.\index{weight of evidence!as explanation}
+
+This is a strong reason to prefer, for high stakes legal decisions, models whose structure is Bayesian and interpretable over black box models explained after the fact. Cynthia Rudin has argued that for high stakes decisions one should use inherently interpretable models rather than attempt to explain black boxes \citep{rudin2019}, and work on certifiably optimal rule lists reports that for recidivism prediction an interpretable model can match a complex one in accuracy \citep{angelino2018}. The Bayesian networks of Chapter~\ref{ch:graphs}, the hierarchical models of Chapters~\ref{ch:llsv} and~\ref{ch:africa}, and the weight of evidence ledgers of Chapter~\ref{ch:stories} are interpretable in this sense.
+
+\subsection{The legal right to an explanation}
+
+Article 22 of the European Union's General Data Protection Regulation gives individuals a right not to be subject to decisions based solely on automated processing that produce legal or similarly significant effects, subject to exceptions with safeguards. Whether the regulation also confers a right to an explanation of such decisions was debated for years. The AI Act now provides, in Article 86, that a person subject to a decision taken by a deployer on the basis of the output of a high risk AI system listed in Annex III (other than the systems in point 2 of that Annex), which produces legal effects or similarly significantly affects the person in a way they consider adverse to their health, safety or fundamental rights, has the right to obtain clear and meaningful explanations of the role of the AI system in the decision procedure and the main elements of the decision taken, unless Union or national law provides otherwise \citep{euaiact2024}. Article 13 requires high risk systems to be designed so that deployers can interpret their output, and Article 14 requires effective human oversight.\index{right to explanation}
+
+These provisions do not specify a method of explanation. A Bayesian reading of the requirement of clear and meaningful explanations of the main elements of the decision suggests that a weight of evidence ledger, or a counterfactual statement of what would have changed the outcome, satisfies it, while a list of feature attributions from a post hoc approximation may not, if it does not faithfully reflect the decision. Courts will have to decide.
+
+\section{Ethics of legal AI}
+
+\subsection{Principles}
+
+Many bodies have issued principles for the ethical use of AI. For courts specifically, the European Commission for the Efficiency of Justice of the Council of Europe adopted in 2018 a European Ethical Charter on the use of artificial intelligence in judicial systems, setting out five principles: respect for fundamental rights; non discrimination; quality and security, including the use of certified sources and secure environments; transparency, impartiality and fairness, including making methods accessible and understandable; and user control, meaning that users must be informed actors in control of their choices \citep{cepej2018}. UNESCO's 2021 Recommendation on the Ethics of Artificial Intelligence and the Council of Europe's 2024 Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law state broader principles applicable to all public uses.\index{ethics of AI}\index{CEPEJ ethical charter}
+
+These principles converge on a few themes: fairness, transparency, accountability, human oversight, privacy and respect for rights. They are stated at a high level of generality, and their application to particular systems requires judgment. A Bayesian framework helps by translating several of them into measurable requirements.
+
+\subsection{Fairness as calibration and as utility}
+
+Chapter~\ref{ch:lindleyai} explained the impossibility results. Kleinberg, Mullainathan and Raghavan showed that a risk score cannot simultaneously be calibrated within groups and balanced for the positive class and for the negative class (equal mean score among actual reoffenders, and among non-reoffenders, across groups) unless prediction is perfect or base rates are equal \citep{kleinberg2017}. Chouldechova showed that a yes or no classification with equal positive predictive value across groups cannot also have equal false positive and equal false negative rates when prevalences differ, unless its positive predictive value is zero or one \citep{chouldechova2017}. The ethical question is which property to prioritise, and the Bayesian answer is to separate the two. Probabilities should be calibrated, because only calibrated probabilities support coherent decisions. Error rates are properties of decisions, determined by thresholds, which are determined by utilities. If society judges that the costs of errors differ across groups, for instance because historical disadvantage makes detention more harmful for some, it can set different thresholds, and must say so openly; as Chapter~\ref{ch:lindleyai} noted, one threshold per group cannot in general equalise both error rates, and a threshold that depends on race invites equal protection scrutiny in the United States and claims of disparate treatment elsewhere. Fairness then becomes a matter of explicit utilities, debated and decided by legitimate institutions, not of hidden adjustments to probabilities.
+
+\subsection{Accountability}
+
+When an AI system contributes to a wrong decision, who is responsible? The deployer, the developer, the judge who relied on it? Legal accountability requires that some person be answerable. The requirement in Chapter~\ref{ch:lindleyai} that a human adopt the decision and give reasons is partly an accountability requirement. It must not become a formality, in which a judge rubber stamps machine output. Automation bias, the tendency to defer to automated recommendations, is well documented \citep{parasuraman2010}, and, in our reading, its strength grows as systems become more accurate in ordinary cases, since people learn to trust them. An ethical deployment must therefore include measures that keep human judgment active: requiring the judge to record her own assessment before seeing the machine's, periodically auditing cases where the judge followed the machine, and training judges in the system's failure modes.\index{automation bias}
+
+\subsection{Dignity and the right to a human judge}
+
+Some argue that there is a right to be judged by a human being, independent of accuracy, grounded in human dignity: a person facing a court is entitled to be heard by someone who can understand his situation as a fellow person. Lindley's challenge confronts this argument directly. If a machine decides more accurately and more consistently, is the insistence on a human judge a preference for ritual over justice? There are several answers. The right to be heard by a person may be part of what makes a decision legitimate in the eyes of those subject to it, and legitimacy has consequences for compliance and for trust in law. A human judge can recognise circumstances outside the model, the novel fact that no training data anticipated. And the values that determine utilities, as Lindley said, must come from people. A reasonable synthesis is that machines may compute and recommend, while persons must decide, hear and take responsibility, at least where liberty, family or fundamental rights are at stake.
+
+\subsection{Privacy and data}
+
+Legal AI is trained on legal data: judgments, filings, records of proceedings. These contain personal information, often sensitive. Using them for training raises questions of data protection, confidentiality and consent. The French restriction on analytics about judges, discussed in Chapter~\ref{ch:commoncivil}, is one response; anonymisation of published judgments is another. The Bayesian perspective adds a point about information: the value of legal data for learning is high, and restrictions on its use impose a cost in less accurate systems. The trade off between privacy and accuracy should be made explicitly, with techniques such as differential privacy used where they allow useful learning with formal privacy guarantees.
+
+\subsection{Ethics as expected utility}
+
+Finally, it is worth saying what a Bayesian ethics of legal AI is not. It is not the claim that every ethical question reduces to a calculation. It is the claim that once a society has stated its values, as utilities, and its knowledge, as probabilities, coherent action follows, and that departures from coherence are errors. Many ethical failures of AI systems, in the law and elsewhere, are failures of this kind: systems whose implied utilities were never stated or examined, whose probabilities were never calibrated, whose decisions could not be explained because no one knew what they were maximising. Making the structure explicit is itself an ethical act, because it subjects the system to scrutiny. That, again, was Lindley's point.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Design a verification protocol for a law firm's use of a language model to draft research memoranda. Which of the four layers can be automated, and what error rates would you require before relying on each?
+\item Explain the difference between a feature attribution and a counterfactual explanation for a bail decision. Which better serves a defendant wishing to challenge the decision?
+\item Write the weight of evidence ledger for the Adams case of Chapter~\ref{ch:odds}. Is it a sufficient explanation of the posterior?
+\item Article 86 of the AI Act requires clear and meaningful explanations of the main elements of a decision. Would a SHAP plot satisfy it? A weight of evidence ledger?
+\item Assess a risk assessment tool used in your jurisdiction against the five principles of the CEPEJ charter.
+\item Is there a right to be judged by a human being? Argue both sides, and say how your answer depends on the kind of decision.
+\end{enumerate}
+
+\section*{Further reading}
+Rudin on interpretable models \citep{rudin2019}; Wachter, Mittelstadt and Russell on counterfactual explanations \citep{wachter2018}; Lundberg and Lee on SHAP \citep{lundberg2017}; Angelopoulos and Bates on conformal prediction \citep{angelopoulos2023}; the CEPEJ charter \citep{cepej2018}.

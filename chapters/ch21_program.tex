@@ -1,0 +1,53 @@
+\chapter{A Bayesian Program for the Law}
+\label{ch:program}
+
+\section{What we have argued}
+
+This book has made a single argument in many settings. Legal decisions are decisions under uncertainty. The coherent way to make such decisions is to measure uncertainty by probability, to update probabilities by Bayes' rule, to measure consequences by utility, and to choose the action that maximises expected utility. The law already does much of this implicitly. Standards of proof are posterior thresholds set by ratios of losses. Relevance is a likelihood ratio different from one. Negligence is a failure to minimise expected cost given reasonable beliefs. Misrepresentation is a gap between conveyed and warranted belief. Stories are generative models compared by their marginal likelihoods. Solvency is a probability of default at a past date. Skill is a share of variance. Procedure is a strategy for acquiring information. Courts are queues. Deterrence is expected sanction. And machines are useful in courts exactly to the extent that they make these structures explicit and checkable.
+
+Where the law departs from coherent reasoning, it pays a price. Statistical fallacies, the prosecutor's fallacy among them, helped convict Sally Clark. The Dershowitz fallacy misdirected public argument in Simpson. The all or nothing rule in \emph{Gregg v Scott} denies compensation for real losses and gives doctors the wrong incentives. Hindsight bias distorts fraudulent transfer litigation. The refusal to quantify the effect of contamination left the Kercher courts reweighing the same two items for more than seven years. Delay in India punishes the presumed innocent. Each departure has an identifiable cost, and each can be reduced.
+
+\section{Ten proposals}
+
+We close with ten proposals, each of which follows from earlier chapters and could be adopted without changing the fundamental structure of any legal system.
+
+\paragraph{1. Report likelihood ratios with ranges} Every forensic report presented in court should state a likelihood ratio, or range of likelihood ratios, for the propositions in issue, with the inputs and their sources, including laboratory error rates and transfer probabilities. Verbal scales may accompany the numbers but should not replace them. (Chapters~\ref{ch:odds},~\ref{ch:classic} and~\ref{ch:bf}.)
+
+\paragraph{2. Direct juries on conditioning} Judicial directions should explain the difference between the probability of the evidence given innocence and the probability of innocence given the evidence, and should warn against conditioning on the wrong event. Model directions could use the island problem and the Simpson argument as illustrations. (Chapters~\ref{ch:odds},~\ref{ch:classic} and~\ref{ch:fallacies}.)
+
+\paragraph{3. Separate activity from source} Courts should require experts to address separately whose trace was found and how it got there, and should recognise that the second question, which turns on transfer and contamination, often determines the case. (Chapters~\ref{ch:bf} and~\ref{ch:stories}.)
+
+\paragraph{4. Proportionate remedies where causation is probabilistic} English law should extend proportionate recovery for lost chances to clinical negligence, as French law and the English law of lost commercial chances already do, and as the Insurance Act 2015 does for breaches of the duty of fair presentation that are neither deliberate nor reckless. (Chapters~\ref{ch:tort},~\ref{ch:misrep} and~\ref{ch:commoncivil}.)
+
+\paragraph{5. Judge representations by their implied distributions} Representations about the safety of investments should be assessed by what they imply about the probability of large losses, not only by expected values, and chains of reliance should be analysed for their weakest link. (Chapter~\ref{ch:greensill}.)
+
+\paragraph{6. Combine market and expert evidence of solvency} In fraudulent transfer and wrongful trading cases, courts should combine contemporaneous market evidence with expert analysis, weighting each by its reliability and correcting expert evidence for hindsight. (Chapter~\ref{ch:bankruptcy}.)
+
+\paragraph{7. Use single joint experts and require distributions} Courts should make greater use of single joint or court appointed experts, and should require all experts to report distributions and sensitivity analyses rather than point estimates. (Chapters~\ref{ch:fienberg} and~\ref{ch:kadane}.)
+
+\paragraph{8. Triage by expected cost of delay} Overloaded court systems should schedule cases using estimates of the cost of delay and the time to decision, published and open to challenge, and should recognise in bail decisions that the cost of detention grows with expected delay. (Chapter~\ref{ch:india}.)
+
+\paragraph{9. Publish law as code where it is computation} Statutory rules that compute entitlements and liabilities should be published in a formal language alongside the text, and administrative software should be tested against them. Computations presented in court should be machine checkable. (Chapter~\ref{ch:lean}.)
+
+\paragraph{10. Hold machines to Bayesian standards} Machine tools used in courts should report calibrated probabilities, separate probability from decision, state their utilities, document their data, allow verification and contestation, and leave responsibility with an accountable person. (Chapter~\ref{ch:lindleyai}.)
+
+\section{Objections revisited}
+
+The objections to Bayesian legal reasoning set out in Chapter~\ref{ch:why} have been addressed throughout. The presumption of innocence is consistent with a prior of $1/N$. Probabilities of single events are degrees of belief, made coherent by the rules of probability and informed by frequencies. Numbers need not overwhelm soft evidence if the soft evidence is quantified too. To the objection that the law values reasons, not calculations, the reply is that a likelihood ratio is a reason. And the difficulty juries have with arithmetic is an argument for better presentation and better tools, not for abandoning coherence.
+
+One objection deserves a final word. It is said that the law is a human practice, embedded in history, culture and politics, and that a mathematical theory of it misses what matters. We agree that the law is a human practice, and the chapters on comparative law, on Corsica and Sicily, on Cameroon and India, have tried to show how much of legal life lies outside any model. But a theory of rational belief and action is not a theory of everything. It is a discipline that applies wherever people must decide under uncertainty, which in law is almost everywhere. It does not tell us what to value; it tells us how to act consistently with what we value, given what we know. That is a modest claim, and it is enough to justify the program.
+
+\section{The future}
+
+Lindley expected that we would all be Bayesian by 2020. The law has been slower, for good reasons: its institutions are old, its practitioners are trained in words rather than numbers, and its legitimacy depends on public understanding. But the pressures are building. Forensic guidance in Europe has moved to likelihood ratios. Insurance law has adopted proportionate remedies. Courts weigh market evidence of solvency. Machine learning is entering every stage of litigation, and its outputs are probabilities. The question is no longer whether the law will use probability but whether it will use it well. Chapter~\ref{ch:future} returns to this question in closing.
+
+We hope this book helps lawyers, statisticians and policy makers to use it well. The tools are old: Bayes' rule, expected utility, the weight of evidence. The settings are new: deepfakes, overloaded courts, global supply chains, machine judges. What remains constant is the obligation to reason coherently about what we do not know when the stakes are someone's liberty, property or life.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Choose one of the ten proposals and draft a rule of court or statutory provision implementing it. What objections would you expect, and how would you answer them?
+\item Which proposal would have changed the outcome of a case discussed in this book? Explain how.
+\item Rank the ten proposals by their expected benefit relative to cost in your jurisdiction. What evidence would you need to make the ranking reliable?
+\item Is there a domain of law in which Bayesian reasoning is inappropriate? Make the strongest case you can.
+\end{enumerate}

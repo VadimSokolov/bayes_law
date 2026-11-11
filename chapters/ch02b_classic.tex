@@ -1,0 +1,264 @@
+\chapter{Classic Problems: Simpson, the Island and the Search}
+\label{ch:classic}
+
+\begin{quote}\itshape
+The question is not the probability that a batterer goes on to murder his wife. The question is the probability that a batterer murdered his wife, given that she has been murdered.
+\par\hfill\normalfont after I. J. Good, 1995
+\end{quote}
+
+This chapter collects three problems that every student of evidence should be able to work. The first is the argument made for the defence in the criminal trial of O. J. Simpson about the significance of prior domestic violence, which we use in our Booth course on Bayes and artificial intelligence as the cleanest example of conditioning on the wrong event. The second is the island problem, the canonical model of forensic identification, in the coherent form given by Philip Dawid and Julia Mortera. The third is the problem of search, which shows how the way a suspect was found changes the analysis. We close with the graphical tools that Dawid, Mortera and Jim Smith have developed for cases too complex to work by hand, and with their recent comparison of methods on the Kercher evidence. Later sections name the error in the Simpson argument as the Dershowitz fallacy and set out the work of Balding and Donnelly on DNA evidence. The level is that of a first year evidence class that is willing to do arithmetic.
+
+\section{The Simpson argument}
+
+\begin{casebox}{People v Simpson (Los Angeles Superior Court, 1995)}
+On 12 June 1994 Nicole Brown Simpson and Ronald Goldman were stabbed to death outside her home in Brentwood. Her former husband, O. J. Simpson, was charged with both murders. The prosecution's case combined blood and DNA evidence, a glove found at his home, and a history of domestic violence: he had pleaded no contest to spousal battery in 1989, and there were recorded calls to the police. The defence attacked the collection and handling of the physical evidence and the credibility of a detective. On 3 October 1995 the jury acquitted. In a civil action brought by the victims' families, a jury in Santa Monica found him liable for wrongful death in 1997 and awarded damages of about thirty three million dollars. The two verdicts are consistent with a posterior probability between the civil and criminal thresholds, a point we return to below.
+\end{casebox}
+
+\subsection{Dershowitz's statistic}
+
+Alan Dershowitz, a member of the defence team, argued in public and later in his book \emph{Reasonable Doubts} that the evidence of battering was nearly irrelevant to the question of murder \citep{dershowitz1996}. Roughly four million women are battered by their partners each year in the United States, he said, and only about fifteen hundred are murdered by them. So fewer than one battered woman in 2,500 is killed by her batterer in a given year. The prosecution's suggestion that battering is a prelude to murder was, on this view, statistically baseless.\index{Simpson, O. J.}\index{Dershowitz, Alan}
+
+The figure may be roughly right. The inference is wrong. Let $B$ denote the event that a woman was battered by her partner, $K$ the event that she was killed by her partner, and $M$ the event that she was murdered by someone. Dershowitz computed
+\[
+\Prob(K \given B) \approx \frac{1}{2{,}500}.
+\]
+This answers the question: how likely is it that a battered woman will be killed by her partner? But Nicole Brown Simpson had been killed. The jury already knew $M$. The relevant question was
+\[
+\Prob(K \given B, M),
+\]
+the probability that a battered woman who has been murdered was murdered by her batterer.
+
+\subsection{Good's correction}
+
+I. J. Good wrote a short note in \emph{Nature} in 1995 making exactly this point \citep{good1995}, and Merz and Caulkins made a similar analysis with American homicide data \citep{merz1995}. The calculation is a direct application of Bayes' rule. A battered woman who is murdered was either killed by her batterer or by someone else. Over a year,
+\[
+\Prob(K \given B) \approx \frac{1}{2{,}500}
+\]
+on Dershowitz's own numbers, while the probability that a woman is murdered by someone other than her partner is roughly the general rate of homicide of women by non partners, of the order of
+\[
+\Prob(M\cap\bar K \given B) \approx \frac{1}{20{,}000}
+\]
+per year. Hence
+\begin{equation}
+\begin{split}
+\Prob(K\given B, M) &= \frac{\Prob(K\given B)}{\Prob(K\given B) + \Prob(M \cap \bar K \given B)}\\
+&\approx \frac{1/2{,}500}{1/2{,}500 + 1/20{,}000} = \frac{8}{9} \approx 0.89 .
+\end{split}
+\label{eq:simpson}
+\end{equation}
+Among battered women who are murdered, the large majority were murdered by their batterers. The history of battering, far from being irrelevant, is strong evidence once the murder is taken into account. The likelihood ratio of the battering for the proposition that the husband was the killer, comparing murdered women killed by partners with those killed by others, is large, because battering is far more common among the former.\index{Good, I. J.}
+
+\begin{keybox}
+The Simpson lesson. Conditioning on the wrong event is as dangerous as transposing the conditional. Dershowitz's figure was $\Prob(K\given B)$. The relevant figure was $\Prob(K\given B, M)$. The fact of the murder is part of the evidence, and it changes the reference class from all battered women to murdered battered women.
+\end{keybox}
+
+\subsection{Teaching the example}
+
+In class we present Simpson in three steps. First students compute Dershowitz's figure and are asked whether it shows that the battering is irrelevant. Most say yes. Then we draw a tree: battered women, divided into those killed by their partner this year, those killed by someone else, and those not killed. The branch that matters is the union of the first two, because the woman is dead. Finally we ask students to state the likelihood ratio of the battering evidence for the hypothesis that the husband is the killer, using the base rates of partner and non partner homicide, and to see that it is of order ten or more. The tree is shown in Figure~\ref{fig:simpsontree}.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[grow=right, level distance=3.2cm, sibling distance=1.3cm,
+  every node/.style={font=\small},
+  edge from parent/.style={draw, -{Stealth[length=2mm]}, nightblue}]
+\node[draw, rounded corners, fill=softgray] {Battered woman}
+  child {node[draw, rounded corners] {Not murdered} edge from parent node[below, sloped, font=\scriptsize] {$\approx 0.99955$}}
+  child {node[draw, rounded corners, fill=starlight!30] {Killed by other} edge from parent node[above, sloped, font=\scriptsize] {$1/20{,}000$}}
+  child {node[draw, rounded corners, fill=starlight!60] {Killed by partner} edge from parent node[above, sloped, font=\scriptsize] {$1/2{,}500$}};
+\end{tikzpicture}
+\caption{The Simpson tree for one year. The evidence that the woman was murdered removes the bottom branch. Of the remaining probability, eight ninths lies on the branch in which the partner is the killer.}
+\label{fig:simpsontree}
+\end{figure}
+
+\subsection{Two verdicts}
+
+The criminal and civil verdicts in Simpson are often cited as contradictory. They are not. A jury that put the probability of guilt at $0.8$ should acquit under a criminal threshold of $0.9$ or more and find liability under the civil threshold of $0.5$. The civil trial also differed in its evidence: Simpson testified and was cross examined, and photographs emerged of him wearing shoes of the rare type whose prints were found at the scene, which he had denied owning. Different evidence and a different threshold can lead to different verdicts without inconsistency. Chapter~\ref{ch:standards} develops the standards of proof that the Simpson cases illustrate.
+
+\subsection{Defence arguments about the laboratory}
+
+The defence also argued that the blood evidence could have been contaminated or planted. In the language of Chapter~\ref{ch:odds}, the defence was attacking the denominator of the likelihood ratio. If there is a probability $c$ that an innocent defendant's blood ends up on an item through contamination or planting, the likelihood ratio of a match cannot exceed roughly $1/c$, however rare the profile. The prosecution's emphasis on vanishingly small match probabilities was beside the point if the jury believed $c$ was of order one in a hundred. A Bayesian analysis would have focused the trial on the right question: not how rare the profile was, but how likely it was that the profile could appear on the items for reasons other than the defendant's presence at the scene.
+
+\section{The island problem}
+
+\subsection{Statement}
+
+A crime is committed on an island with $N+1$ inhabitants. The criminal is one of them. A trace left at the scene shows a characteristic, such as a DNA profile, that the criminal is known to have. Each inhabitant other than the criminal independently has the characteristic with probability $p$. A suspect $S$ is found, by means that are independent of the characteristic, and is found to have it. What is the probability that $S$ is the criminal?\index{island problem}
+
+\subsection{The coherent solution}
+
+Dawid gave a careful treatment of the problem in a volume in honour of Lindley \citep{dawid1994}, and Dawid and Mortera extended it to cover uncertainty about $p$ and different search strategies \citep{dawid1996}. Balding and Donnelly gave a parallel analysis in the same period \citep{balding1995}. With a uniform prior over the inhabitants, so that $\Prob(G) = 1/(N+1)$ where $G$ is the event that $S$ is guilty, the likelihood ratio of the match is $1/p$, and
+\begin{equation}
+\Prob(G\given \text{match}) = \frac{1}{1 + Np}.
+\label{eq:islandsimple}
+\end{equation}
+This is equation~\eqref{eq:island} of Chapter~\ref{ch:odds}, except that here $N$ counts only the alternatives to $S$ (there it counted everyone, $S$ included) and the match probability is written $p$ rather than $\gamma$. Several features deserve emphasis. It depends on $N p$, the expected number of innocent people with the characteristic, and not on $p$ alone. The likelihood ratio $1/p$ is the same whether $S$ was chosen at random or identified by other evidence, provided that evidence is independent of the characteristic; but such evidence changes the prior, and then \eqref{eq:islandgeneral} below replaces \eqref{eq:islandsimple}. And it ignores the possibility that other inhabitants have been tested.
+
+\subsection{Uncertainty about the match probability}
+
+In practice $p$ is not known. It is estimated from a database, and different experts may disagree about the relevant population. Dawid and Mortera showed that the coherent answer replaces $p$ with a function of its distribution. Suppose $p$ has a prior distribution with mean $\mu$ and variance $\sigma^2$, and write $\E$ for expectation. The probability that an innocent inhabitant has the characteristic, given that the criminal does, is the predictive probability of a further match given one observed match, which is
+\begin{equation}
+\E(p\given \text{one match}) = \frac{\E(p^2)}{\E(p)} = \mu + \frac{\sigma^2}{\mu}.
+\label{eq:dawidmortera}
+\end{equation}
+The relevant match probability is not the mean of $p$ but its size biased mean, which is always at least as large. Uncertainty about $p$ always weakens the identification evidence. Then
+\begin{equation}
+\Prob(G\given \text{match}) = \frac{1}{1 + N(\mu + \sigma^2/\mu)} .
+\end{equation}
+This is a striking and practically important result. A laboratory that reports only its best estimate of $p$ overstates the strength of a match when that estimate is uncertain. Equation \eqref{eq:dawidmortera} is also the reason the subpopulation correction, which Chapter~\ref{ch:bf} develops, raises the match probability: relatedness within a subpopulation makes allele frequencies uncertain from the point of view of the analyst.\index{Dawid, Philip}\index{Mortera, Julia}
+
+\subsection{Search}
+
+Now suppose $S$ was not found independently of the characteristic but by a search: inhabitants were tested in random order until one matched. Dawid and Mortera, and Balding and Donnelly, showed that the posterior probability of guilt is then larger than \eqref{eq:islandsimple}, because the search has eliminated those tested before $S$. If $k$ inhabitants were tested and excluded before $S$ matched, the effective population of alternatives falls from $N$ to $N - k$, and
+\begin{equation}
+\Prob(G\given \text{search}) = \frac{1}{1 + (N-k)p}.
+\end{equation}
+In the extreme case where all other inhabitants are tested and none match, $S$ is certainly guilty. This is the formal content of the Balding and Donnelly argument that a database search slightly strengthens the case against the person found. The intuition that searching through many people to find a match is a fishing expedition that should weaken the evidence is correct only for a different question: how probable it is that the search finds some innocent match. For the question the court must decide, whether this person is the criminal, the excluded inhabitants are evidence for guilt. Table~\ref{tab:island} gives numerical examples.\index{database search}
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lccc}
+\toprule
+Scenario & $N$ & effective $p$ & $\Prob(G\given\cdot)$\\
+\midrule
+Independent identification, $p$ known & $10^5$ & $10^{-6}$ & $0.909$\\
+Same, $p$ uncertain, $\sigma = \mu$ & $10^5$ & $2\times 10^{-6}$ & $0.833$\\
+Search, $50{,}000$ excluded & $10^5$ & $10^{-6}$ & $0.952$\\
+Independent identification, larger island & $10^6$ & $10^{-6}$ & $0.500$\\
+\bottomrule
+\end{tabular}
+\caption{Island problem variants. Uncertainty about the match probability weakens the evidence; search through a population that excludes others strengthens it; a larger island weakens it.}
+\label{tab:island}
+\end{table}
+
+\subsection{Relatives and other complications}
+
+The island model assumes that innocent inhabitants have the characteristic independently. For DNA this fails for relatives: a brother of the criminal has a far higher chance of sharing the profile than a stranger. If the suspect has a brother on the island who is not excluded, the posterior probability of guilt is substantially reduced, because the brother is a credible alternative. The coherent analysis sums over the population with individual match probabilities $p_i$:
+\begin{equation}
+\Prob(G\given \text{match}) = \frac{\pi_S}{\pi_S + \sum_{i\ne S} \pi_i\, p_i},
+\label{eq:islandgeneral}
+\end{equation}
+where $\pi_i$ is the prior probability that inhabitant $i$ is the criminal. This general form, in which each alternative contributes its prior weight times its probability of matching, is the cleanest statement of how identification evidence should be weighed. It also shows that the law's habit of asking whether a match is unique to the defendant is the wrong question. What matters is the total weight $\sum_{i\ne S}\pi_i p_i$ of alternative explanations.
+
+\section{Jim Smith and the structure of evidence}
+
+Jim Smith of the University of Warwick has worked on Bayesian decision analysis for four decades, and his textbook sets out a careful methodology for eliciting probabilities and utilities from decision makers and checking their coherence \citep{smith2010}. In forensic and legal work his distinctive contribution is the chain event graph, a graphical model built from an event tree rather than from a set of variables \citep{smith2008,collazo2018}.\index{Smith, Jim Q.}\index{chain event graph}
+
+\subsection{Why event trees}
+
+A Bayesian network, the subject of Chapter~\ref{ch:graphs}, represents a problem as a set of variables with conditional independence relations encoded by a directed acyclic graph. It works best when every variable is defined in every scenario. Legal stories are not like that. If the defendant was at home all evening, the variable describing how he travelled to the scene is undefined. If the knife was never at the scene, the variable describing its contamination at the scene is meaningless. The prosecution and defence accounts have different shapes. Forcing them into a common set of variables introduces artificial states and obscures the structure.
+
+An event tree describes the ways the story can unfold. Each path from the root is a possible history; each branching is a point of uncertainty, with probabilities on its edges. The prosecution's histories and the defence's histories are different subtrees, and evidence is a set of leaves. Chain event graphs compress the tree by merging nodes whose future development is probabilistically identical, so that conditional independence becomes visible as shared structure. Riccomagno and Smith showed how to represent causal manipulations on such graphs \citep{riccomagno2007}, which in legal terms means representing interventions, such as what would have happened had the defendant not acted.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=1.1cm and 1.9cm, every node/.style={font=\scriptsize},
+ st/.style={circle, draw=nightblue, fill=softgray, minimum size=5mm, inner sep=1pt},
+ sink/.style={rectangle, rounded corners, draw=nightblue, fill=starlight!35, inner sep=3pt},
+ ar/.style={-{Stealth[length=1.6mm]}, nightblue}]
+\node[st] (r) {$w_0$};
+\node[st, above right=0.6cm and 1.8cm of r] (a) {$w_1$};
+\node[st, below right=0.6cm and 1.8cm of r] (b) {$w_2$};
+\node[st, right=of a] (c) {$w_3$};
+\node[st, right=of b] (d) {$w_4$};
+\node[sink, right=1.6cm of c] (p) {high trace found};
+\node[sink, right=1.6cm of d] (q) {low trace found};
+\draw[ar] (r) -- node[above, sloped] {handled drugs} (a);
+\draw[ar] (r) -- node[below, sloped] {did not} (b);
+\draw[ar] (a) -- node[above] {notes in pocket} (c);
+\draw[ar] (b) -- node[below] {notes circulated} (d);
+\draw[ar] (c) -- node[above] {high trace} (p);
+\draw[ar] (c) -- node[pos=0.3, above, sloped] {low trace} (q);
+\draw[ar] (d) -- node[below] {low trace} (q);
+\draw[ar] (d) -- node[pos=0.3, below, sloped] {high trace} (p);
+\end{tikzpicture}
+\caption{A stylised chain event graph for an activity level question about drug traces on banknotes, in the spirit of Robertson, Wilson and Smith. Histories are routed to two sinks fixed by the finding. The likelihood ratio of a high trace compares the probability of reaching the high-trace sink from $w_1$ with the probability of reaching it from $w_2$.}
+\label{fig:ceg}
+\end{figure}
+
+\subsection{Activity level propositions}
+
+Forensic science distinguishes source level propositions, whose DNA is this, from activity level propositions, how did it get there. Most of the difficult questions in modern trials are at the activity level. Robertson, Wilson and Smith have applied chain event graphs to a drug trafficking case involving traces of drugs on banknotes, where the question was whether high levels of contamination indicated involvement in dealing or could be explained by general circulation \citep{robertson2024}. Their modification of the standard chain event graph introduces two sink nodes, one for each possible finding about the traces. The likelihood ratio is then the ratio of the probability of reaching the observed sink given the prosecution proposition (the suspect handled drugs), that is from $w_1$, to the probability of reaching it given the defence proposition, from $w_2$. Figure~\ref{fig:ceg} sketches the idea.\index{activity level propositions}
+
+\section{Object oriented networks: Dawid and Mortera on DNA}
+
+Dawid and Mortera, with Lauritzen, Pascali, van Boxel and Vicard, developed probabilistic expert systems for forensic genetics \citep{dawid2002pes,mortera2003,dawid2007oobn}. The building blocks are Bayesian networks for the inheritance of alleles at a genetic marker: nodes for the paternal and maternal genes of each person, for the genotype, and for observed typing results. These blocks are combined in object oriented networks in which a person, a marker or a mixture is a reusable class. The approach handles problems that are intractable by hand: disputed paternity with missing parents, identification of victims in mass disasters using relatives' profiles, mixtures with several contributors, and mutation.
+
+The method illustrates a general principle. Complex evidence should be analysed by building a model from well understood components and letting the computer do the bookkeeping. The analyst's judgment goes into the structure and the parameters, which can be argued about; the arithmetic is mechanical and can be checked. This is the division of labour we will defend in Chapter~\ref{ch:lean} when we discuss formal verification.
+
+\section{Three methods on one case: Kercher}
+
+In 2024 Dawid, Dotto, Mortera, Graves, Kadane, Robertson, Smith and Wilson compared three graphical methods, Wigmore charts, Bayesian networks and chain event graphs, on part of the evidence in the first trial of Amanda Knox and Raffaele Sollecito for the murder of Meredith Kercher \citep{dawid2024kercher}. Their conclusion is that the methods serve different audiences. Wigmore charts suit lawyers, because they display the argumentative structure of the case, the chain from evidence to ultimate proposition, without requiring numbers. Bayesian networks suit forensic scientists, who need to compute likelihood ratios for specific items such as a DNA trace. Chain event graphs suit the police, because they show how events could have unfolded in time and which scenarios different findings would distinguish. A complete analysis of a case might use all three.
+
+We return to the Kercher case in Chapter~\ref{ch:stories}, where it is the worked example for our theory of stories. The point here is that several of the leading Bayesian statisticians of the law, working together, reached a pluralist conclusion: there is no single correct picture of a case, but there is a single correct calculus for combining the pieces once they are drawn.
+
+\section{The Dershowitz fallacy}
+
+The error in the Simpson argument deserves its own name, and we call it the Dershowitz fallacy. It is a form of what Thompson and Schumann called the defense attorney's fallacy \citep{thompson1987}, and it is distinct from the prosecutor's fallacy of Chapter~\ref{ch:odds}. The prosecutor's fallacy transposes a conditional, reading $\Prob(E\given \bar G)$, with $E$ the evidence, as $\Prob(\bar G\given E)$. The Dershowitz fallacy conditions on too little: it computes a probability within a reference class that ignores part of what is known. In Simpson the omitted fact was the murder itself. The general form is
+\[
+\text{report } \Prob(H\given E_1) \quad\text{when the question is}\quad \Prob(H \given E_1, E_2),
+\]
+where $E_2$ is evidence that both sides accept and that changes the reference class. Because $E_2$ is uncontroversial, its omission is easy to miss.\index{Dershowitz fallacy}
+
+The fallacy is persuasive because the reported number is true. Fewer than one battered woman in 2,500 is killed by her partner in a given year. A juror who checks the number will find it correct. The error lies in the question the number answers, and that error is invisible unless one asks what event the probability is conditioned on. This is why we teach students always to write down the conditioning event in full before interpreting any probability offered in court.
+
+\subsection{Other instances}
+
+The same structure appears in many settings.
+\begin{description}
+\item[{\mdseries Medical negligence}] An expert testifies that a particular complication follows a procedure in only one case in a thousand, so the surgeon's technique was probably not at fault. But the patient suffered the complication. The relevant question is the probability that a complication which has occurred was caused by poor technique, which depends on how often poor technique occurs and on the rate of complications with poor technique relative to the rate with good technique.
+\item[{\mdseries Product liability}] A manufacturer shows that its product fails in only one unit in a million. The claimant's unit failed. The question is whether this failure was caused by a defect in manufacture, design or use, and the rarity of failure in general does not answer it.
+\item[{\mdseries Fraud detection}] A bank shows that fewer than one in ten thousand accounts flagged by its system turn out to be fraudulent. A particular account has been found to have been used for fraud and was flagged. The question is whether the flag was informative given the fraud, not how often flags are followed by fraud.
+\end{description}
+In each case the defence quotes a true, small, unconditional or wrongly conditioned probability, and the correct analysis conditions on the event that brought the case to court.
+
+\subsection{Why the jury may have been right anyway}
+
+The Dershowitz fallacy does not show that the Simpson jury reached the wrong verdict. The battering evidence was relevant and strong, but the criminal standard is high, and the jury also had reasons, rightly or wrongly, to doubt the integrity of the physical evidence. A Bayesian analysis says how much weight each item should carry; it does not say the verdict was wrong. The fallacy concerns one argument, not the outcome.
+
+\section{Balding and Donnelly}
+
+David Balding and Peter Donnelly, working first together at Queen Mary and Westfield College, London, and then separately, did much to bring coherent Bayesian reasoning about DNA evidence into English courts. Their work has three strands.\index{Balding, David}\index{Donnelly, Peter}
+
+\subsection{The prosecutor's fallacy and DNA}
+
+In a 1994 article in the \emph{Criminal Law Review} Balding and Donnelly set out the prosecutor's fallacy in the specific form it took in DNA cases, where experts and counsel described a match probability of one in several million as the chance that the defendant was innocent, or as the chance that someone other than the defendant left the stain \citep{balding1994}. They showed how such statements arise naturally from the way experts summarised their results, and proposed forms of words that avoid the transposition. Their analysis influenced the Court of Appeal's guidance in \emph{Doheny}, discussed in Chapter~\ref{ch:odds}, that the expert should state the match probability and the number of people who might be expected to share the profile, leaving the jury to consider the rest of the evidence.
+
+\subsection{Inference in forensic identification}
+
+Their 1995 paper in the \emph{Journal of the Royal Statistical Society} gave a general Bayesian framework for identification evidence, treating the island problem and the protocols by which suspects are found \citep{balding1995}. The posterior probability that the defendant is the source, in the form of our equation \eqref{eq:islandgeneral}, is his prior weight divided by the sum over all possible sources of prior weight times match probability, and the framework rests on getting the terms of that sum right. The paper was read before the Society with a discussion that included many of the leading figures in the field, and it remains a clear account of why the question is never just how rare the profile is.
+
+\subsection{Database searches}
+
+The database controversy, to which Chapter~\ref{ch:bf} returns, pitted Balding and Donnelly against the second National Research Council report, which recommended that the match probability be multiplied by the number of profiles searched \citep{nrc1996}. Donnelly and Friedman restated the Bayesian position for an American legal audience in the \emph{Michigan Law Review} \citep{donnelly1999}. Stockmarr had argued that the relevant likelihood ratio after a search is divided by the database size, because the hypothesis is that the source is in the database \citep{stockmarr1999}. Balding and Donnelly's reply is that this changes the hypothesis: the court must decide whether this defendant is the source, not whether the source is somewhere in the database, and for that question the search, which excludes all other database members, slightly strengthens the evidence. The Dawid and Mortera treatment of search in the island problem reaches the same conclusion. On this point the coherent analysis is now generally accepted among forensic statisticians, though the frequentist correction persists in some courts.
+
+\subsection{Adams and the courtroom}
+
+Donnelly's role as an expert for the defence in \emph{R v Adams}, described in Chapter~\ref{ch:odds}, was the most direct attempt to put the framework before an English jury, and the Court of Appeal's reaction set limits on such attempts that remain in force. Balding's later book \emph{Weight of Evidence for Forensic DNA Profiles}, revised with Steele, explains for lawyers and scientists how to compute likelihood ratios for modern profiles, including mixtures and low template samples, and how to present them \citep{balding2005,balding2015}. Together their work defines the standard of coherent reasoning against which DNA evidence in English courts can be judged.
+
+\begin{keybox}
+Three questions to ask of any DNA statistic in court.
+\begin{enumerate}[label=\arabic*.]
+\item What is it conditioned on? A match probability is $\Prob(\text{match}\given \text{not source})$, not $\Prob(\text{not source}\given\text{match})$.
+\item What are the alternatives? Relatives, members of the same subpopulation, and contamination each add terms to the Balding and Donnelly sum.
+\item How was the defendant found? Independent investigation, a cold database hit and a search of a small local pool imply different priors, and a search excludes alternatives.
+\end{enumerate}
+\end{keybox}
+
+\section{Summary}
+
+The Simpson argument teaches that the evidence includes the event to be explained. The island problem teaches that identification evidence depends on the number and prior weight of alternative sources, that uncertainty about match probabilities weakens it, and that searches which exclude alternatives strengthen it. The work of Dawid, Mortera and Smith shows how to scale these ideas to real cases with networks and event trees. These are the foundations on which the rest of the book builds.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Redo the Simpson calculation \eqref{eq:simpson} with a non partner homicide rate of one in ten thousand and with one in fifty thousand. How sensitive is the conclusion?
+\item Dershowitz might reply that the jury should consider the probability that a batterer becomes a murderer, because that is the prosecution's theory of motive. Is there any legitimate use of $\Prob(K\given B)$ at trial?
+\item In the island problem with $N = 10^5$ and $p$ having a beta distribution with mean $10^{-5}$ and standard deviation $2\times 10^{-5}$, compute the effective match probability and the posterior probability of guilt.
+\item Use \eqref{eq:islandgeneral} for an island of $10^4$ unrelated people, each with $p = 10^{-6}$, plus one brother with $p = 1/100$, all with equal prior. What is the probability that the matching suspect is guilty?
+\item Draw an event tree for the prosecution and defence accounts of a case in which a defendant's fingerprint is found on a glass at a party where a theft occurred. Which nodes could be merged in a chain event graph?
+\item Read the Dawid et al.\ comparison of graphical methods in the Kercher case. Which method would you use to explain the evidence to a jury, and why?
+\item The Simpson civil and criminal verdicts are said to be consistent with a single posterior. Give the range of posteriors consistent with both verdicts under thresholds of $0.5$ and $0.9$.
+\end{enumerate}
+
+\section*{Further reading}
+Good's note is one page and worth reading in full \citep{good1995}. Dawid's island paper \citep{dawid1994}, Dawid and Mortera \citep{dawid1996} and Balding and Donnelly \citep{balding1995} are the essential trio. Smith's \emph{Bayesian Decision Analysis} \citep{smith2010} and the monograph on chain event graphs by Collazo, G\"orgen and Smith \citep{collazo2018} develop the graphical ideas.

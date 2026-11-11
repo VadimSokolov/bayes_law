@@ -1,0 +1,107 @@
+\chapter{Pleadings in Practice: Worked Cases}
+\label{ch:pleadingscases}
+
+\section{From the game to the file}
+
+Chapter~\ref{ch:pleadings} described Gordon's Pleadings Game and our proposal to build a deep generative Bayesian network on it. This chapter applies the method to worked examples drawn from leading cases in five areas: negligence, contract, misrepresentation, employment discrimination and competition. For each we set out the pleaded positions, the issues the exchange produces and, where the facts allow, the probabilities a reasoned analysis would attach to each issue, and the resulting probability of success and value of the claim. The numbers are illustrative, chosen to be defensible on the reported facts; their purpose is to show the method, not to second guess the courts. Each example ends with the step the analysis supports, such as settling, mediating, proceeding to discovery or appealing on a point of law.
+
+The general recipe has six steps.
+\begin{enumerate}[label=\arabic*.]
+\item List the elements of the cause of action and the available defences.
+\item Map the pleadings onto the elements: which are admitted, which denied, which not addressed.
+\item For each issue in dispute, assign a prior probability of resolution for the claimant, based on the type of claim and the pleaded facts.
+\item Identify dependencies between issues, so that correlated issues are not treated as independent.
+\item Compute the probability that the claim succeeds, and the expected recovery.
+\item Compare the expected value of continuing with the alternatives, using the costs of each.
+\end{enumerate}
+The worked examples follow this recipe.
+
+\section{Negligence: a product injury}
+
+\begin{casebox}{The facts, after Donoghue v Stevenson}
+A consumer is made ill by a contaminated drink bought by a friend from a retailer. She sues the manufacturer in negligence. She pleads that the manufacturer owed her a duty of care, that it breached the duty by failing to keep its bottling process clean, that the contamination caused her illness, and that she suffered loss.
+\end{casebox}
+
+\paragraph{The exchange} The manufacturer admits that it manufactured the drink and that the claimant was ill. It denies that it owed a duty to a consumer with whom it had no contract, denies breach, and denies causation, pleading that the illness may have had another source.
+
+\paragraph{Issues} Duty, breach and causation are in issue; loss is not seriously disputed. After \emph{Donoghue v Stevenson} \citep{donoghue1932}, the duty question is a question of law resolved in the claimant's favour with probability close to one. Breach depends on evidence of the bottling process: the manufacturer controls that evidence, and contamination of a sealed bottle is itself evidence of carelessness. With an inference akin to \emph{res ipsa loquitur}, a prior of about $0.75$ is reasonable. Causation depends on medical evidence: if the illness is of a kind the contaminant produces and the timing fits, about $0.8$.
+
+\paragraph{Dependence} Breach and causation are positively related: evidence that the contaminant was in the bottle supports both. Treating them as independent gives a success probability of $1.0\times 0.75\times 0.8 = 0.6$; allowing positive correlation raises it, perhaps to $0.65$.
+
+\paragraph{Decision} With damages of twenty thousand pounds and costs of fifteen thousand each side under the English rule, the expected value of proceeding is positive for the claimant and the expected cost of defending is high for the manufacturer. A settlement around twelve thousand is in the zone where both gain relative to trial.
+
+\section{Contract: an exclusion clause}
+
+\begin{casebox}{The facts, after Photo Production v Securicor}
+A factory owner contracts with a security firm for night patrols. The firm's patrolman, on duty, starts a fire that destroys the factory. The contract contains a clause excluding the firm's liability for any injurious act or default by any employee unless it could have been foreseen and avoided by due diligence on the firm's part. The owner sues for the loss.
+\end{casebox}
+
+\paragraph{The exchange} The firm admits the contract, the patrolman's act and the loss. It pleads the exclusion clause. The owner replies that the clause cannot apply to a breach so fundamental, and that it does not on its true construction cover deliberate acts.
+
+\paragraph{Issues} The issue is the construction and effect of the clause. In \emph{Photo Production v Securicor} the House of Lords rejected the doctrine that a fundamental breach automatically defeats an exclusion clause, holding that the question is one of construction, and that between commercial parties of equal bargaining power the clause should be given effect \citep{photo1980}. Before that decision, the owner's argument had substantial support in the Court of Appeal. The probability of the owner succeeding therefore depends on the state of the law: contested while the Court of Appeal applied a rule of law, low after the House of Lords spoke.
+
+\paragraph{The lesson} Pleadings analysis must represent uncertainty about the law as well as the facts. A prior on the legal question, informed by the authorities and the composition of the appellate court, is part of the model. When the law is unsettled, the value of an appeal is high, and the expected value of a claim depends on the probability that the higher court will adopt one view or the other. This is where judgment about precedent enters the Bayesian calculation.
+
+\section{Misrepresentation: an adviser's statement}
+
+\paragraph{The facts} An investment advisory firm tells a client that a fund holds only short dated receivables of investment grade companies. The client invests. The fund collapses, and it emerges that it held concentrated and prospective receivables. The client sues the adviser in negligent misstatement, after \emph{Hedley Byrne} \citep{hedleybyrne1964}. Section 2(1) of the Misrepresentation Act 1967 is not available, since the client contracts with the fund and not with the adviser.
+
+\paragraph{The exchange} The adviser admits the statement and the investment. It denies that the statement was false when made, pleads that it relied on the fund manager's documents, and pleads that the loss was caused by events outside the scope of its duty.
+
+\paragraph{Issues} Falsity at the time of the statement; breach, that is, whether the adviser had reasonable grounds for its belief; and scope of duty and causation. The Greensill analysis of Chapter~\ref{ch:greensill} bears directly. Falsity is likely if the fund's holdings were concentrated at the time, perhaps $0.8$. Breach depends on what a competent adviser would have checked, and the burden is on the claimant; the probability of establishing it might be $0.6$. Scope of duty, after \emph{Manchester Building Society v Grant Thornton} \citep{mbs2021}, depends on whether the adviser undertook responsibility for the composition of the fund, which the statement suggests; $0.7$.
+
+\paragraph{Decision} The claim requires falsity, breach and scope: $0.8\times 0.6\times 0.7\approx 0.34$. With loss of one million pounds, the expected value is about one third of a million before costs. A strike out application by the adviser would fail; summary judgment for either side is inappropriate. Mediation is indicated.
+
+\section{Employment: pleading discrimination}
+
+\begin{casebox}{Swierkiewicz v Sorema N.A., 534 U.S. 506 (2002)}
+A Hungarian employee alleged that he was demoted and dismissed because of his national origin and age. The lower courts dismissed his complaint because it did not plead facts establishing a prima facie case under \emph{McDonnell Douglas}. The Supreme Court unanimously reversed, holding that the prima facie case is an evidentiary standard, not a pleading requirement, and that the complaint need only give fair notice of the claim and its grounds \citep{swierkiewicz2002}.
+\end{casebox}
+
+\paragraph{After Twombly} \emph{Twombly} \citep{twombly2007} and \emph{Iqbal} \citep{iqbal2009} raised the pleading standard to plausibility\index{plausibility pleading} without overruling \emph{Swierkiewicz}. A discrimination complaint must now plead facts making discrimination plausible, though not a full prima facie case. In Bayesian terms, the complaint must raise the posterior above a threshold given the pleaded facts, taken as true.
+
+\paragraph{An example} A complaint alleges that the claimant, aged fifty eight, was dismissed and replaced by a thirty year old, that her performance reviews were good, and that her manager made remarks about the need for fresh energy. The base rate of age discrimination among dismissals of older workers is modest, perhaps one in ten. The replacement by a much younger worker has a likelihood ratio of perhaps two; good reviews, two; the remarks, three. Treating the three facts as independent given the hypothesis, the posterior odds are $1/9\times 2\times 2\times 3 \approx 1.3$, a posterior probability of about $0.57$. The claim is plausible, clearing any plausibility threshold at or below one half, and should survive a motion to dismiss. Discovery will reveal whether the employer has a documented, non discriminatory reason, which would carry a likelihood ratio favouring the employer.
+
+\section{Competition: pleading conspiracy}
+
+\paragraph{The facts} After \emph{Twombly}, a complaint alleging a price fixing conspiracy must plead more than parallel conduct. Suppose a complaint alleges that four suppliers raised prices by the same percentage within a week, that the increase was not explained by costs, and that senior executives attended an industry meeting shortly before.
+
+\paragraph{The analysis} Parallel price increases in a concentrated market have a likelihood ratio close to one, as the Supreme Court recognised in \emph{Twombly} \citep{twombly2007}. The absence of a cost explanation raises it, perhaps to two. The meeting, which provided an opportunity to agree, multiplies it again, by perhaps three, though meetings are common in many industries. With a prior of one in twenty for collusion in such markets, treating the facts as independent given the hypothesis, the posterior odds are $1/19\times 2\times 3\approx 0.32$, a probability of about one quarter. Whether this suffices depends on the plausibility threshold, which, as Chapter~\ref{ch:pleadings} argued, should depend on the cost of discovery and the value of the claim. A court applying a threshold of one third would dismiss; one applying a threshold of one fifth, in light of the value of the claim, would not. Plus factors such as communications about prices, which have much larger likelihood ratios, are what typically carry such complaints past the motion to dismiss.
+
+\section{A table of decisions}
+
+Table~\ref{tab:pleadingdecisions} summarises the worked examples. The point of the table is not the particular numbers but the structure: each claim reduces to a small number of issues, each issue has a probability, and the decision follows from the combination of probabilities with values and costs. A court managing a docket, a lawyer advising a client and a funder assessing a portfolio all need the same table.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{p{2.3cm}p{2.9cm}cp{2.0cm}}
+\toprule
+Claim & Issues in dispute & Success & Indicated step\\
+\midrule
+Product negligence & breach, causation & $0.65$ & settle\\
+Exclusion clause & construction & law dependent & appeal on law\\
+Misstatement & falsity, grounds, scope & $0.34$ & mediate\\
+Age discrimination & intent & $0.57$ at pleading & proceed to discovery\\
+Price fixing & agreement & $0.25$ & depends on threshold\\
+\bottomrule
+\end{tabular}
+\caption{Worked pleadings examples and the decisions they support. Illustrative.}
+\label{tab:pleadingdecisions}
+\end{table}
+
+\section{Training the network}
+
+The worked examples show what a Bayesian pleadings network must learn: the mapping from the pattern of assertions, admissions, denials and exceptions to probabilities on issues, and from issues to outcomes. Our paper proposes to learn it by simulation from a generative model of disputes, calibrated to data from real cases \citep{polson_sokolov_pleadings}. Each worked example above is one training case, labelled by an expert. A network trained on many thousands of such cases, simulated and real, could produce the table for a new case in seconds, with uncertainty. That is the practical promise: early, consistent and explicit case assessment, available to courts and to parties who cannot afford teams of lawyers to produce it.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item In the product injury example, construct a joint distribution for breach and causation with marginals $0.75$ and $0.8$ and correlation $0.3$. What is the probability both are found?
+\item Before \emph{Photo Production}, what probability would you have attached to the owner's argument? How should a claimant price a claim whose success depends on an unsettled question of law?
+\item Recompute the age discrimination posterior with a base rate of one in twenty. Does the claim remain plausible?
+\item Identify plus factors that would raise the likelihood ratio of a price fixing complaint above ten. Which could be pleaded before discovery?
+\item Take a reported case of your choice and produce a row of Table~\ref{tab:pleadingdecisions} for it.
+\end{enumerate}
+
+\section*{Further reading}
+Gordon's \emph{The Pleadings Game} \citep{gordon1995}; our paper on the Pleadings Game \citep{polson_sokolov_pleadings}; \emph{Photo Production} \citep{photo1980}; \emph{Swierkiewicz} \citep{swierkiewicz2002}.

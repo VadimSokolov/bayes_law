@@ -1,0 +1,92 @@
+\chapter{Antitrust Under Uncertainty}
+\label{ch:antitrust}
+
+\section{Predicting harm}
+
+Antitrust law asks courts and agencies to predict. Will this merger raise prices? Did this pattern of prices result from a cartel or from competition? Would this conduct by a dominant firm exclude rivals who would otherwise have competed? The answers depend on counterfactuals that can never be observed: the prices that would have prevailed without the merger, without the agreement, without the conduct. Antitrust is therefore a field of law that leans heavily on statistics, and one in which the Chicago tradition of Becker, Stigler and Posner (Chapter~\ref{ch:becker} treats Becker and Stigler on enforcement) has been influential. This chapter treats antitrust as decision making under uncertainty, examines the statistical methods used to detect cartels, estimate damages and predict merger effects, and argues that a Bayesian framework clarifies both the economics and the law.\index{antitrust}
+
+\section{Error costs}
+
+Frank Easterbrook argued in 1984 that antitrust should be designed with error costs in mind \citep{easterbrook1984}. Courts will sometimes condemn conduct that was in fact procompetitive, false positives, and sometimes permit conduct that was anticompetitive, false negatives. Easterbrook claimed that false positives are more costly, because a mistaken prohibition is enforced by precedent across the economy and persists, while a mistaken permission is eroded by market entry, since monopoly profits attract competitors. He concluded that antitrust rules should be cautious, intervening only where harm is clear.\index{error costs}
+
+This is the decision theory of Chapter~\ref{ch:standards} (the threshold of Equation~\eqref{eq:threshold}) applied to antitrust. The threshold for intervention depends on the ratio of the losses from the two errors. Easterbrook's argument is a claim about that ratio. Critics have argued that conservative error cost reasoning of this kind underestimates the persistence of market power \citep{baker2015}, especially in digital markets with network effects, where entry may not erode dominance for decades. The disagreement is about a ratio of losses and about the prior probability that conduct of a given type is harmful. It can be informed by evidence: studies of the effects of past mergers, of the durability of dominant positions, and of the consequences of past interventions.
+
+\section{Detecting cartels}
+
+\subsection{The problem}
+
+Cartels are secret. Their members agree to fix prices or divide markets, and they conceal their agreements because they are criminal in many jurisdictions. Many cartels are discovered through leniency programmes, which offer immunity to the first member to confess, or through complaints from customers. Statistical screens offer a third route: patterns in prices, bids or market shares that are more probable under collusion than under competition.\index{cartels}
+
+\subsection{Screens as likelihood ratios}
+
+A screen is a statistic computed from market data, with a threshold above which the market is flagged for investigation. Abrantes Metz and colleagues proposed a variance screen: prices under collusion tend to be less variable than under competition, because cartel members avoid price changes that might trigger a price war, so an unusual reduction in price variance is a signal \citep{abrantes2006}. Bid rigging screens look for patterns in procurement auctions: losing bids that are suspiciously close to each other or consistently far above the winning bid (cover bids), rotation of winners, and bidders who never compete in each other's territories.
+
+In Bayesian terms, a screen is a test with a likelihood ratio: the probability of a flag under collusion divided by its probability under competition. As with the polygraph of Chapter~\ref{ch:fienberg}, what a flag implies about a given market depends on the base rate of collusion in the markets screened. If collusion is rare and the screen's false positive rate is not tiny, most flags will be false. Screens are useful for directing investigative resources, not for proving guilt. A flagged market should be investigated, and the investigation should look for evidence with much larger likelihood ratios, such as communications between competitors.
+
+\subsection{LIBOR}
+
+The London Interbank Offered Rate was set by a trimmed average of the rates at which panel banks reported they could borrow. In 2008 journalists, notably in a Wall Street Journal article of 29 May 2008, noted that some banks' submissions seemed implausibly low relative to other measures of their credit risk, such as credit default swap spreads. Statistical work found some anomalous individual submissions but concluded that the evidence was inconsistent with a material manipulation of one month dollar LIBOR, and that statistical methods alone do not prove manipulation \citep{abrantes2012}. Regulatory investigations later established that traders at several banks had sought to manipulate submissions for profit, and that during the financial crisis some banks had submitted low rates to appear healthier. Banks paid billions in fines, and several traders were prosecuted, with mixed results on appeal. The statistical evidence was an early signal; the decisive evidence was messages between traders and submitters, whose likelihood ratio for manipulation was overwhelming.
+
+\section{Damages}
+
+\subsection{The overcharge}
+
+A purchaser injured by a cartel can recover damages equal to the overcharge: the difference between the price paid and the price that would have prevailed without the cartel, multiplied by the quantity purchased. In the United States, damages are trebled. Estimating the counterfactual price is the central problem. Common methods compare prices before, during and after the cartel period; compare prices in the cartelised market with prices in a similar market that was not cartelised, the yardstick method; and fit a regression of prices on cost and demand variables with an indicator for the cartel period.\index{overcharge}
+
+Each method produces an estimate with uncertainty, and each depends on assumptions: that nothing else changed when the cartel began and ended, that the yardstick market is comparable, that the regression captures the determinants of price. A Bayesian approach combines the methods, weighting each by its credibility, and reports a posterior distribution for the overcharge. Where the methods disagree, a model that allows each method its own bias gives a wide posterior, which is a fact the court should know; simple precision weighting, which assumes every method is unbiased, does not.
+
+\subsection{Class certification}
+
+In \emph{Comcast Corp v Behrend} the Supreme Court held in 2013 that a plaintiff seeking class certification must show that damages are capable of measurement on a class wide basis, and that the damages model must measure only the damages attributable to the theory of liability accepted for class action treatment \citep{comcast2013}. The plaintiffs' expert had estimated damages from four theories of antitrust impact, but only one had been accepted, and his model did not separate its effect. The case illustrates a general point: a damages model must correspond to the causal structure of the claim. In the language of Chapter~\ref{ch:graphs}, the model must estimate the effect of the specific intervention alleged, not a combination of effects.
+
+\subsection{Pass on}
+
+When a direct purchaser passes some of the overcharge on to its own customers, who has been injured? In the United States, \emph{Illinois Brick} held that indirect purchasers generally cannot recover under federal law, and \emph{Hanover Shoe} that defendants cannot reduce direct purchasers' damages by showing pass on. In the United Kingdom and the European Union, pass on is a defence and indirect purchasers can sue. The Supreme Court of the United Kingdom considered the issues in the interchange fee litigation against card schemes. The estimation of pass on rates is another counterfactual exercise, and the Bayesian approach of combining evidence with stated uncertainty applies.
+
+\section{Mergers}
+
+\subsection{The prediction problem}
+
+Merger control requires agencies to predict, before a merger, whether it will substantially lessen competition. The prediction is made under uncertainty about demand, costs, the response of rivals and the likelihood of entry. Agencies in the United States, the United Kingdom and the European Union use a combination of market definition, measures of concentration, and direct predictions of price effects.
+
+\subsection{Market definition and the hypothetical monopolist}
+
+Market definition asks what products and areas constrain the merging firms' prices. The hypothetical monopolist test asks whether a hypothetical monopolist of a candidate set of products could profitably impose a small but significant and non transitory increase in price, conventionally five or ten per cent. If so, the set is a relevant market; if not, it must be widened. The test is a thought experiment that requires estimates of demand elasticities and margins, and its answer is uncertain when those estimates are.
+
+\subsection{Upward pricing pressure}
+
+Farrell and Shapiro proposed upward pricing pressure as an alternative to market definition for differentiated products \citep{farrell2010}. When two firms merge, each firm's price increase diverts some customers to the other, whose sales now benefit the merged firm. The incentive to raise price depends on the diversion ratio, the fraction of lost sales captured by the partner, and on the partner's margin. For firm 1, upward pricing pressure is $\mathrm{UPP}_1 = D_{12}(P_2 - C_2) - E_1 C_1$, where $D_{12}$ is the diversion ratio from firm 1 to firm 2, $P_2 - C_2$ is the partner's margin in money terms, and $E_1$ is the efficiency gain expressed as a fraction of firm 1's marginal cost $C_1$. Gross upward pricing pressure, GUPPI, is the first term alone divided by firm 1's price, $D_{12}(P_2 - C_2)/P_1$, the pressure before any efficiency credit. Upward pricing pressure is positive when the value of diverted sales exceeds the efficiency gain. The measure uses quantities that can be estimated from data on customer switching and from margins, and it avoids the binary choice of market definition.
+
+\subsection{Merger simulation and Bayesian demand}
+
+Merger simulation goes further: it estimates a model of demand and supply, simulates the post merger equilibrium, and predicts price changes. The standard demand model for differentiated products is the random coefficients logit model of Berry, Levinsohn and Pakes \citep{blp1995}, which allows consumers to differ in their tastes and so produces realistic substitution patterns. Estimating it is demanding, and estimates can be sensitive to choices of instruments and specification.
+
+Bayesian estimation of such models, as in the work of Jiang, Manchanda and Rossi \citep{jiang2009} and in our own work on a Bayesian version of the Berry, Levinsohn and Pakes framework for antitrust \citep{polson_sokolov_blp}, produces a posterior distribution for the demand parameters and therefore for the predicted price effects of a merger. Instead of a single predicted price increase, the agency obtains a distribution: the probability that prices rise by more than five per cent, the probability that they fall. This is exactly what the decision requires. If the agency's losses from blocking a beneficial merger and from clearing a harmful one are known, the optimal decision is the one that minimises expected loss under the posterior, as in Chapter~\ref{ch:standards}. Bayesian merger simulation can turn the substantial lessening of competition test into an explicit decision rule once the losses are stated.\index{merger simulation}\index{Berry Levinsohn Pakes}
+
+\begin{keybox}
+A merger decision as a Bayesian problem. Let $\Delta$ be the post merger change in average price. The agency's posterior for $\Delta$ comes from a demand model estimated with Bayesian methods. Let $L_B(\Delta)$ be the loss from blocking, which is large if $\Delta$ is negative because consumers lose efficiencies, and $L_C(\Delta)$ the loss from clearing, which is large if $\Delta$ is positive. Block if $\E[L_C(\Delta)] > \E[L_B(\Delta)]$ under the posterior. Uncertainty about $\Delta$ enters directly, rather than being replaced by a single point prediction.
+\end{keybox}
+
+\subsection{Retrospectives}
+
+The most useful evidence for setting priors in merger control comes from retrospective studies of past mergers, which compare post merger prices with what a control group suggests would have happened. Such studies have found that a meaningful share of mergers that were cleared led to price increases, which suggests that agencies' priors or thresholds may have been too permissive in some industries. A Bayesian agency would use retrospective evidence to update its priors on the effects of mergers of different types, in a hierarchical model across industries.
+
+\section{Dominance in digital markets}
+
+The largest antitrust cases of the 2020s have concerned digital platforms. In the United States, the government's case against Google over search distribution led a federal court in 2024 to find that Google had unlawfully maintained a monopoly in general search, with remedies decided in September 2025 that stopped short of requiring divestiture of the Chrome browser, barred exclusive distribution contracts, and required Google to share certain search data with rivals. In the United Kingdom, the Competition and Markets Authority's review of Microsoft's acquisition of Activision Blizzard initially blocked the deal on cloud gaming grounds in 2023, then cleared a restructured transaction in which cloud streaming rights were sold to a third party. The European Union's Digital Markets Act imposes ex ante obligations on designated gatekeepers rather than relying on case by case enforcement.
+
+These cases raise in acute form the question of error costs. If dominance in digital markets is durable because of network effects and data advantages, false negatives are more costly than Easterbrook supposed. If digital markets are dynamic and today's dominant firm can be displaced by a new technology, intervention risks false positives. The arrival of generative AI, which has created new competition in search and threatens to reshape several platforms, is a test case for this question. A Bayesian approach would treat the durability of dominance as an uncertain parameter, update it with evidence from such episodes, and let the posterior inform the threshold for intervention.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item A variance screen flags ten per cent of competitive markets and sixty per cent of cartelised ones. If one market in fifty is cartelised, what fraction of flagged markets are cartelised?
+\item Three methods estimate a cartel overcharge at eight, twelve and twenty per cent, with standard errors of three, four and eight per cent. Combine them by precision weighting. What does the spread of the estimates suggest about the assumptions?
+\item Explain the holding in \emph{Comcast Corp v Behrend} in terms of the causal structure of a damages model.
+\item Two merging firms have equal prices, a diversion ratio of thirty per cent from each to the other and margins of forty per cent. Compute the gross upward pricing pressure as a fraction of price. What efficiency gain would offset it?
+\item Formulate the merger decision as in the keybox with a posterior for $\Delta$ that is normal with mean two per cent and standard deviation three per cent, and losses linear in $\Delta$ on each side, with slopes $c_C$ for clearing and $c_B$ for blocking. For what ratio $c_C/c_B$ should the agency block?
+\item Easterbrook argued that false positives are costlier than false negatives in antitrust. What evidence would you collect to test this claim for digital markets?
+\end{enumerate}
+
+\section*{Further reading}
+Easterbrook on the limits of antitrust \citep{easterbrook1984}; Farrell and Shapiro on upward pricing pressure \citep{farrell2010}; Berry, Levinsohn and Pakes \citep{blp1995}; Jiang, Manchanda and Rossi on Bayesian random coefficients logit \citep{jiang2009}; Abrantes Metz and colleagues on the variance screen \citep{abrantes2006}; our Bayesian version of the Berry, Levinsohn and Pakes framework \citep{polson_sokolov_blp}.

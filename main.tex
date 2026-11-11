@@ -1,0 +1,136 @@
+\documentclass[11pt,openany,twoside]{book}
+\input{preamble}
+
+\begin{document}
+\frontmatter
+\pagestyle{empty}
+
+% Half title
+\begin{center}
+\vspace*{2.2in}
+{\Huge\color{nightblue} Bayes and Law}\\[1.2em]
+\end{center}
+\clearpage
+
+% Title page
+\begin{center}
+\vspace*{1.2in}
+{\Huge\color{nightblue} Bayes and Law}\\[1em]
+{\Large\itshape Evidence, Expected Utility and Machines\\[0.2em] in the Courtroom}\\[0.6in]
+{\color{starlight}\rule{2in}{0.8pt}}\\[0.6in]
+{\Large\scshape Nick Polson}\\[0.6em]
+{\Large\scshape Vadim Sokolov}\\
+\vfill
+\end{center}
+\clearpage
+
+% Goal of the book
+\vspace*{2.0in}
+\begin{center}
+{\large\scshape The Goal of This Book}\\[1.2em]
+\begin{minipage}{0.82\linewidth}\centering\itshape
+Every student at the University of Chicago Law School who takes the course built on this book should leave it well versed in Bayes: able to state a prior, compute a likelihood ratio, set a decision threshold from the costs of error, spot the fallacies, and explain each to a client, a jury and a judge.
+\end{minipage}
+\end{center}
+\clearpage
+
+% Copyright page
+{\small
+\vspace*{\fill}
+\noindent Bayes and Law: Evidence, Expected Utility and Machines in the Courtroom\\[0.5em]
+Copyright \copyright\ 2026 Nick Polson and Vadim Sokolov\\[0.5em]
+This book is a work of scholarship. Nothing in it is legal advice. Descriptions of cases and litigation are drawn from public judgments, official statements and press reports available at the time of writing, and readers should consult primary sources before relying on any statement of law or fact.\\[0.5em]
+Cover image: Vincent van Gogh, \emph{Prisoners' Round (after Gustave Dor\'e)}, 1890, oil on canvas, Pushkin Museum, Moscow (detail). Public domain.\\[0.5em]
+Typeset in Palatino.\\[0.5em]
+First edition, \BookYear.%
+\ifx\BookDOIline\empty\else\\[0.5em]\BookDOIline\fi
+\\[0.5em]License: distributed under the Creative Commons Attribution 4.0 International License (CC BY 4.0), \url{https://creativecommons.org/licenses/by/4.0/}: you may copy, share and adapt this book for any purpose, provided you credit the authors. The code is released under the MIT License.
+}
+\clearpage
+
+% Dedication
+\vspace*{2.4in}
+\begin{center}
+\itshape For Dennis Lindley, Stephen Fienberg and Jay Kadane,\\
+who took the court seriously as a place for reasoning.
+\end{center}
+\clearpage
+
+\pagestyle{fancy}
+\tableofcontents
+\listoffigures
+\input{chapters/preface}
+
+\mainmatter
+\part{Foundations}
+\input{chapters/ch01_why_bayes}
+\input{chapters/ch01b_decisions}
+\input{chapters/ch02_odds}
+\input{chapters/ch02b_classic}
+\input{chapters/ch03_bayes_factors}
+\input{chapters/ch03b_fallacies}
+\input{chapters/ch04_standards}
+\input{chapters/ch04b_evidence}
+
+\part{The English Common Law}
+\input{chapters/ch05_tort}
+\input{chapters/ch05b_masstorts}
+\input{chapters/ch05c_damages}
+\input{chapters/ch06_misrep}
+\input{chapters/ch06b_contract}
+\input{chapters/ch06d_family}
+\input{chapters/ch07_greensill}
+\input{chapters/ch07b_bankruptcy}
+
+\part{Stories, Graphs and Pleadings}
+\input{chapters/ch08_stories}
+\input{chapters/ch09_graphs}
+\input{chapters/ch10_pleadings}
+\input{chapters/ch10b_pleadings_cases}
+
+\part{Statisticians in the Courtroom}
+\input{chapters/ch11_fienberg}
+\input{chapters/ch12_kadane}
+\input{chapters/ch12b_discrimination}
+\input{chapters/ch12c_securities}
+\input{chapters/ch12d_medical}
+\input{chapters/ch12e_ip}
+\input{chapters/ch12f_digital}
+
+\part{Comparative Law}
+\input{chapters/ch13_common_civil}
+\input{chapters/ch14_llsv}
+\input{chapters/ch15_africa}
+\input{chapters/ch16_india}
+\input{chapters/ch16b_arbitration}
+
+\part{Order Without the State}
+\input{chapters/ch17_gould}
+
+\part{Costs, Verification and Machines}
+\input{chapters/ch18_becker}
+\input{chapters/ch18b_antitrust}
+\input{chapters/ch18c_systemcosts}
+\input{chapters/ch18d_funding}
+\input{chapters/ch18e_sentencing}
+\input{chapters/ch18f_regulation}
+\input{chapters/ch19_lean}
+\input{chapters/ch20_lindley_ai}
+\input{chapters/ch19b_xai}
+\input{chapters/ch20a_hume}
+\input{chapters/ch21_program}
+\input{chapters/ch22_future}
+
+\appendix
+\input{chapters/appA_toolkit}
+\input{chapters/appB_code}
+\input{chapters/appC_cases}
+\input{chapters/appD_solutions}
+\input{chapters/appE_glossary}
+\input{chapters/appF_teaching}
+\input{chapters/appG_exam}
+
+\backmatter
+\input{chapters/references}
+\printindex
+\end{document}

@@ -1,0 +1,44 @@
+\chapter{Arbitration, Mediation and Private Adjudication}
+\label{ch:arbitration}
+
+\section{Choosing a forum}
+
+Courts are not the only adjudicators. Commercial parties routinely agree to resolve disputes by arbitration, choosing their arbitrators, procedure, seat and governing law. Investors and states arbitrate under bilateral investment treaties. Consumers and employees, particularly in the United States, are often bound by arbitration clauses in standard contracts. Mediation, in which a neutral helps the parties reach their own agreement, has become a routine step in civil litigation in many systems. Each of these forums makes decisions under uncertainty, and the choice among them is itself a decision. This chapter applies the framework of the book to private adjudication and to the choice of forum.\index{arbitration}\index{mediation}
+
+\section{Why parties arbitrate}
+
+Parties choose arbitration for several reasons: neutrality, especially in international disputes where neither party trusts the other's courts; expertise, since arbitrators can be chosen for knowledge of the industry; confidentiality; speed and finality, since grounds for setting aside an award are narrow; and enforceability, since the New York Convention\index{New York Convention} of 1958 makes arbitral awards enforceable in more than one hundred and fifty countries. Each reason can be expressed in the terms of this book. Neutrality and expertise affect the accuracy of the decision, the location of the ROC curve in Chapter~\ref{ch:decisions}. Speed reduces the cost of delay. Finality trades the error correcting value of appeals, taken up in Chapter~\ref{ch:systemcosts}, for lower cost and certainty. Enforceability raises the probability that a favourable decision produces a recovery.
+
+\section{Arbitrator selection as a game}
+
+In a three member tribunal, each party appoints one arbitrator and the two, or an institution, choose the chair. In international arbitration, party appointed arbitrators are required to be independent and impartial, but each party will appoint someone it expects to be receptive to its arguments. The setting resembles the adversarial expert problem of Chapter~\ref{ch:fienberg}: each side selects from a distribution of possible arbitrators, and the outcome depends heavily on the chair. Research on investment arbitration has examined whether arbitrators' prior decisions predict their votes, and whether repeat appointments create incentives to favour the parties who appoint. A Bayesian analysis treats each arbitrator's tendencies as a parameter estimated from past decisions, with shrinkage toward the mean for arbitrators with few decisions, and asks how much the composition of a tribunal changes the predicted outcome.
+
+\section{Consumer and employment arbitration}
+
+In the United States, the Supreme Court has enforced arbitration clauses in consumer and employment contracts, including clauses that waive class actions, under the Federal Arbitration Act, in decisions such as \emph{AT\&T Mobility v Concepcion} and \emph{Epic Systems v Lewis} \citep{concepcion2011,epic2018}. Critics argue that such clauses suppress small claims, which are uneconomic to arbitrate individually, and so reduce the deterrent effect of consumer and employment law. The analysis developed in Chapter~\ref{ch:funding} explains why: aggregation is what makes small claims viable, and a class waiver removes it. In decision theory terms, if individual claims have expected value below their cost, none is brought, and the expected liability of a firm that causes many small harms falls toward zero, weakening its incentive to avoid them, as in the Becker framework developed in Chapter~\ref{ch:becker}.
+
+\section{Mediation and the zone of agreement}
+
+Mediation succeeds when the parties' settlement ranges overlap and fails when they do not. The settlement model developed in Chapter~\ref{ch:becker} shows that the range exists when the parties' disagreement about the outcome, multiplied by the stakes, is less than their combined costs of continuing. A mediator can create or widen the zone in three ways: by narrowing the parties' disagreement about the probability of success, often by testing each side's view of the evidence in private sessions; by adding terms that create value for both, which enlarges the joint gain from agreement; and by making the costs of continuing salient. The first is Bayesian updating guided by a neutral: a mediator who shows each party the weaknesses in its case moves its posterior toward the other's.
+
+The English courts have encouraged mediation through costs sanctions for unreasonable refusal, and in \emph{Churchill v Merthyr Tydfil County Borough Council} the Court of Appeal held in 2023 that courts may lawfully order parties to engage in non court based dispute resolution \citep{churchill2023}. The decision theoretic justification is that mediation is cheap relative to trial and has a real chance of producing settlement, so its expected value is positive in many cases even if it often fails.
+
+\section{Investment arbitration and states}
+
+Investment treaty arbitration allows foreign investors to bring claims against states for expropriation and unfair treatment before international tribunals. Awards can be very large, and states have criticised the system for inconsistency and for the influence of arbitrators who also act as counsel. Reforms under discussion include an appellate mechanism and a permanent investment court. The analysis of appeals developed in Chapter~\ref{ch:systemcosts} applies: an appellate body would reduce inconsistency, a form of noise, and correct errors, at the cost of finality and delay. Whether the trade off is worthwhile depends on the size of the errors and inconsistency in the current system, which can be estimated from the record of awards.
+
+\section{Online dispute resolution}
+
+For small disputes, online dispute resolution\index{online dispute resolution} offers faster and cheaper resolution than courts. Marketplaces resolve millions of disputes between buyers and sellers each year through online processes, mostly automated. Public bodies have adopted similar approaches, such as British Columbia's Civil Resolution Tribunal taken up in Chapter~\ref{ch:lindleyai}. These systems are where machine assisted adjudication is most advanced, because the stakes per case are small and volumes large. They show what is possible and what must be guarded against: decisions that are fast but opaque, consistent but not contestable. The requirements that Chapter~\ref{ch:lindleyai} sets out for machine adjudication, transparency and contestability among them, apply here first.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item A commercial party estimates that a court would decide its dispute correctly with probability $0.85$ after three years and costs of two million, and an arbitral tribunal with probability $0.80$ after eighteen months and costs of one and a half million, with no appeal. Which forum should it prefer for a claim of twenty million with a true probability of success of $0.7$?
+\item Explain why class action waivers in consumer arbitration clauses can reduce deterrence. Use the expected value of an individual claim.
+\item In a mediation, the claimant believes it will win with probability $0.7$ and the defendant believes $0.4$, with stakes of one million and costs of one hundred thousand each. Is there a zone of agreement? What must the mediator change to create one?
+\item Should investment arbitration have an appellate body? Frame your answer as a value of information calculation.
+\end{enumerate}
+
+\section*{Further reading}
+\emph{AT\&T Mobility v Concepcion} \citep{concepcion2011}; \emph{Churchill v Merthyr Tydfil} \citep{churchill2023}.

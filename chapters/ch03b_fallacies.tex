@@ -1,0 +1,114 @@
+\chapter{Fallacies of Classical Inference}
+\label{ch:fallacies}
+
+\section{Significance in the courtroom}
+
+Most statistical evidence presented in courts is classical. Experts report p values, significance levels, confidence intervals and standard deviations, the vocabulary of the frequentist statistics that dominated the twentieth century. Michael Finkelstein, a lawyer who did much to bring statistics into American legal education, built his casebooks, \emph{Quantitative Methods in Law} and, with the biostatistician Bruce Levin, \emph{Statistics for Lawyers}, around this vocabulary, because it is the vocabulary courts encounter \citep{finkelstein2015}. Finkelstein was also, with William Fairley, the author of the 1970 proposal to show juries Bayesian calculations that provoked Tribe's reply, discussed in Chapter~\ref{ch:why} \citep{finkelstein1970}. His casebook is an essential companion to this one: it teaches the methods courts actually see, with hundreds of problems drawn from real cases. Our concern in this chapter is with what happens when those methods are misread, and with cases in which a Bayesian analysis of the same data leads to a different conclusion.\index{Finkelstein, Michael}\index{classical inference}
+
+We identify ten fallacies, each common in litigation. For each we state the fallacy, explain why it is an error, and give an example in which a Bayesian analysis would overturn the classical reading. The examples are constructed to be realistic, and some follow the pattern of decided cases.
+
+\section{1. The p value is the probability that the null is true}
+
+\paragraph{The fallacy} An expert reports that a disparity has a p value of $0.01$, and counsel tells the court that there is only a one per cent chance the disparity is due to chance, so a ninety nine per cent chance of discrimination.
+
+\paragraph{Why it is wrong} The p value is the probability, assuming the null hypothesis, of data at least as extreme as those observed. It is $\Prob(\text{data this extreme}\given H_0)$, not $\Prob(H_0\given\text{data})$. The error is the prosecutor's fallacy of Chapter~\ref{ch:odds} in a different setting. The posterior probability of the null depends on its prior probability and on how probable the data are under the alternatives, neither of which the p value addresses.
+
+\paragraph{Bayes overturns} By the Sellke, Bayarri and Berger bound \citep{sellke2001} of Chapter~\ref{ch:bf} (equation~\eqref{eq:sbb}), a p value of $0.01$ corresponds to a Bayes factor against the null of at most about eight. If the prior probability of discrimination, given the employer's practices and the industry, is one in five, the posterior probability is at most $8\times 0.25/(1 + 8\times 0.25) = 2/3$, not ninety nine per cent. With a prior of one in twenty, the posterior is at most about thirty per cent. A finding that would be presented as near certain is, on a coherent reading, wrong at least one time in three, and with the lower prior more likely than not.
+
+\section{2. Not significant means no effect}
+
+\paragraph{The fallacy} A small study finds that patients taking a drug suffered a serious adverse event at three times the rate of controls, but the difference is not statistically significant. The defendant argues, and a court accepts, that there is no evidence the drug causes the event.
+
+\paragraph{Why it is wrong} Failure to reject a null hypothesis is not evidence for it. A small study has low power; even a real and large effect will often fail to reach significance. Absence of significance is absence of a particular kind of proof, not proof of absence.
+
+\paragraph{Bayes overturns} Suppose six of one hundred patients on the drug and two of one hundred controls suffered the event. Fisher's exact test gives a two sided p value of about $0.28$, far from significant. With uniform priors on the two event rates, the posterior probability that the rate on the drug exceeds the rate on placebo is about $0.91$, and the posterior probability that the relative risk exceeds two is about $0.62$. The data favour a harmful effect, substantially. A court asking whether the evidence makes harm more probable than not, the civil question, should answer yes, even though no significance test was passed.\index{statistical significance}
+
+\begin{casebox}{Matrixx Initiatives v Siracusano, 563 U.S. 27 (2011)}
+Investors sued a company that sold a zinc based cold remedy, alleging that it had failed to disclose reports that users had lost their sense of smell. The company argued that the reports were not material because they did not establish a statistically significant association. The Supreme Court unanimously rejected a bright line rule requiring statistical significance for materiality. Medical professionals and regulators, the Court observed, act on evidence that is not statistically significant and that suggests but does not prove causation, and reasonable investors would too. The decision is a judicial recognition of the second fallacy \citep{matrixx2011}.
+\end{casebox}
+
+The First Circuit's decision in \emph{Milward v Acuity Specialty Products}, which accepted an expert's weight of evidence methodology for inferring that benzene exposure can cause a rare leukaemia despite the paucity of statistically significant epidemiological studies, rests on the same insight \citep{milward2011}. Evidence accumulates from many sources, none of which need be significant on its own.
+
+\section{3. Significant means important}
+
+\paragraph{The fallacy} In a large employment dataset, the promotion rate for one group is $29.7$ per cent and for another $30.0$ per cent. With a million employees in each group, the difference is about four and a half standard errors from zero, highly significant. The claimant argues that the employer's promotion system is discriminatory.
+
+\paragraph{Why it is wrong} Statistical significance measures whether a difference can be distinguished from zero, not whether it matters. With enough data, any nonzero difference becomes significant. The ratio of promotion rates here is $0.99$, far above the four fifths guideline, under which a group's selection rate below four fifths of the most favoured group's rate is taken as evidence of adverse impact; Chapter~\ref{ch:discrimination} returns to it.
+
+\paragraph{Bayes overturns} A Bayesian analysis compares substantively specified hypotheses: no meaningful disparity, say a ratio above $0.95$, against meaningful disparity, a ratio below $0.95$. With a million observations per group, the posterior for the ratio is concentrated within a fraction of a per cent of $0.99$, and the posterior probability of a meaningful disparity is negligible. The same data that are highly significant against exact equality are overwhelming evidence against discrimination of any practical size. This is the large sample problem behind Lindley's paradox, discussed in Chapter~\ref{ch:bf}, applied to a discrimination claim.
+
+\section{4. The confidence interval contains the parameter with ninety five per cent probability}
+
+\paragraph{The fallacy} An expert reports a ninety five per cent confidence interval for damages of four to twelve million, and the court treats this as a ninety five per cent probability that damages lie in that range.
+
+\paragraph{Why it is wrong} In classical theory, the parameter is fixed and the interval random. The ninety five per cent describes the procedure: in repeated samples, ninety five per cent of intervals so constructed would contain the parameter. It does not describe the probability that this interval does. In simple problems with flat priors the Bayesian credible interval and the confidence interval coincide numerically, and the misreading is harmless. In other problems they differ.
+
+\paragraph{Bayes overturns} Suppose an overcharge is estimated from a small number of cartel transactions, with a confidence interval of minus two to ten per cent. A negative overcharge, a cartel that lowered prices, is economically implausible. A Bayesian analysis with a prior that puts negligible weight on negative overcharges gives a credible interval of perhaps one to ten per cent and a posterior median of five per cent, while the confidence interval, read naively, suggested that zero was a plausible value. The court that reads ``the interval contains zero'' as showing no overcharge, which is the error of the second fallacy, would wrongly conclude that the claimant had not shown an overcharge to be more likely than not. The gain here comes from the informative prior, not from reading the interval as a probability statement, which for a flat prior would be harmless.
+
+\section{5. Multiple comparisons ignored}
+
+\paragraph{The fallacy} An expert examines a company's pay data by department, job grade, year and protected characteristic, runs a hundred comparisons, and presents the five that are significant at the five per cent level as evidence of discrimination.
+
+\paragraph{Why it is wrong} With a hundred independent comparisons and no discrimination at all, about five would be significant by chance. Selecting the significant ones and presenting them without the others is the Texas sharpshooter fallacy, drawing the target around the bullet holes after firing, to which Chapter~\ref{ch:clusters} returns. Classical corrections such as Bonferroni's divide the significance level by the number of tests; they are crude but recognise the problem.
+
+\paragraph{Bayes overturns} A hierarchical model treats the hundred department level disparities as draws from a common distribution, estimates its mean and variance, and shrinks each department's estimate toward the mean. If the overall mean is close to zero and the between department variance is small, the five apparently significant departments are shrunk nearly to zero, and their posterior probabilities of real disparity are modest. If, instead, the model finds a negative overall mean with tight variance, the evidence is of a firm wide pattern, stronger than any single comparison. Either way, the hierarchical analysis answers the right question, whether there is discrimination and where, rather than whether some comparisons cross a threshold.\index{multiple comparisons}
+
+\section{6. The stopping rule matters}
+
+\paragraph{The fallacy} An auditor samples transactions until three errors are found, which happens after twelve transactions. A second auditor samples exactly twelve transactions and finds three errors. Classical analysis gives them different p values for the hypothesis that the error rate is one half or more: the first auditor's design yields one, the second auditor's another, because the probability of more extreme outcomes depends on what the auditor would have done.
+
+\paragraph{Why it is wrong} The two auditors observed the same data. The likelihood function for the error rate is the same, proportional to $\theta^3(1-\theta)^9$, whichever design was used. The likelihood principle, which follows from Bayesian reasoning, says that inferences should depend on the data only through the likelihood. A legal conclusion that depends on what an auditor intended to do, rather than on what she observed, is hard to defend.
+
+\paragraph{Bayes overturns} Take the textbook case of nine successes and three failures (the failures being the errors of the audit). Under a fixed sample of twelve, the one sided p value against a rate of one half is about $0.073$, not significant. Under sampling until three failures, it is about $0.033$, significant. Two experts could reach opposite conclusions from the same data. The Bayesian posterior for the rate, with any given prior, is the same in both cases. A court relying on the classical analysis would decide differently depending on an unrecorded intention; a Bayesian court would not.\index{likelihood principle}\index{stopping rule}
+
+\section{7. Two or three standard deviations}
+
+\paragraph{The fallacy} Following \emph{Castaneda} and \emph{Hazelwood} \citep{castaneda1977,hazelwood1977}, a court treats any disparity of more than two or three standard deviations as establishing a prima facie case of discrimination, and anything less as insufficient.
+
+\paragraph{Why it is wrong} The number of standard deviations measures how surprising the data would be under random selection, but not how much more probable they are under discrimination. In a small sample, a substantial and real disparity may fall short of two standard deviations; in a large sample, a trivial one will exceed three.
+
+\paragraph{Bayes overturns} A small employer has hired twenty people from a pool that is thirty per cent women and has hired two women. The expected number is six with a standard deviation of about two; two is just under two standard deviations below, borderline. With a prior that if the employer discriminates its effective rate of hiring women is uniformly distributed between zero and the pool share, the Bayes factor for discrimination is about five and a half. In combination with other evidence, such as remarks by the hiring manager, that may well carry a civil claim. Conversely, in a national dataset, a disparity of four standard deviations may correspond to a hiring ratio of $0.97$, with a Bayes factor favouring the absence of any meaningful discrimination. The standard deviation rule decides both cases wrongly.
+
+\section{8. One tail or two}
+
+\paragraph{The fallacy} An expert chooses a one tailed test, which halves the p value, after seeing which direction the data point, and reports significance.
+
+\paragraph{Why it is wrong} The choice between one and two tailed tests is a choice about which alternatives are entertained, and it must be made before seeing the data. Choosing after the fact is a form of selection. Courts have argued about tails for decades, and Finkelstein and Levin discuss the cases \citep{finkelstein2015}.
+
+\paragraph{Bayes overturns} In a Bayesian analysis the question does not arise. The prior over the alternatives says which directions are plausible; if a disparity favouring the protected group is implausible, the prior gives it low weight, and the analysis is in effect one sided, but openly so and fixed before the data. The Bayes factor does not change when an expert changes his mind about tails.
+
+\section{9. Combining p values}
+
+\paragraph{The fallacy} An expert combines evidence from several sources by multiplying their p values, or by Fisher's method, and reports an astronomically small combined p value.
+
+\paragraph{Why it is wrong} Multiplying p values does not produce a p value; the product of uniformly distributed quantities is not uniform. Fisher's method correctly combines independent p values into a test of the global null, but it tests only whether at least one source departs from the null, not whether the combined evidence favours a particular alternative. Neither method accounts for dependence between sources or for how they were selected. The case of Lucia de Berk, a Dutch nurse convicted of murdering patients and later exonerated, to which Chapter~\ref{ch:clusters} returns, turned partly on an improper combination of p values across wards.
+
+\paragraph{Bayes overturns} Bayes factors for independent items multiply; their logarithms add. This is the correct way to combine evidence, and it requires each item's likelihood ratio, not its p value. In the de Berk case, reanalyses of the association between the nurse's shifts and incidents, accounting for the selection of incidents and for the heterogeneity between wards, found far weaker evidence than the combined p value suggested \citep{meester2006,gill2018}. Those reanalyses were classical, recomputing corrected p values; a likelihood ratio analysis would go further.
+
+\section{10. Testing without an alternative}
+
+\paragraph{The fallacy} An analysis rejects the hypothesis of innocence because the evidence is improbable under it, without asking how probable the evidence is under guilt.
+
+\paragraph{Why it is wrong} Every observation is improbable under some hypothesis. A particular shuffled deck of cards has probability one in $52!$, yet no one infers that the shuffle was rigged. Evidence supports guilt only if it is more probable under guilt than under innocence. A significance test that considers only the null cannot tell whether the data favour the alternative.
+
+\paragraph{Bayes overturns} In \emph{People v Collins} \citep{collins1968}, treated in Chapter~\ref{ch:odds}, the prosecutor's probability of one in twelve million for the characteristics of a random couple was presented as if it showed guilt. A Bayesian analysis asks how probable it is that the guilty couple has those characteristics, near one if the description is accurate, and how many innocent couples share them, the island problem. The answer, as the California Supreme Court saw, did not support conviction. Every case in Chapter~\ref{ch:classic} is a case in which asking about the alternative changes the conclusion.
+
+\section{Why the fallacies persist}
+
+These fallacies are not the result of ignorance on the part of statisticians; most are discussed in most introductory textbooks. They persist in litigation for institutional reasons. Courts have adopted significance thresholds as rules of thumb, and experts who depart from them must explain why. Classical methods appear objective, because they do not require a prior, while Bayesian methods appear subjective. And the adversarial system rewards experts whose analyses favour their clients, which the flexibility of classical procedures, the choice of tests, tails, subgroups and stopping rules, makes easy to provide.
+
+The Bayesian answer to the objectivity concern is that the prior is not hidden in classical methods but absent, and its absence is what produces the fallacies. A p value of five per cent means different things in a case where discrimination is common and in one where it is rare, and a method that ignores the difference is not objective but blind. The remedy is to make the prior explicit, show how the conclusion depends on it, and let the court judge. That is what Fienberg and Kadane recommended in 1983 \citep{fienberg_kadane1983}, and what Finkelstein and Fairley proposed in 1970. The courts have been slow to listen, but \emph{Matrixx} shows that they can abandon a rigid significance rule.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item Using the Sellke, Bayarri and Berger bound, find the maximum posterior probability of the alternative for a p value of $0.05$ when the prior probability is one half, one fifth and one twentieth.
+\item In the adverse event example, compute the posterior probability that the relative risk exceeds two under a prior that puts half its mass on no effect and half on a uniform relative risk between one and five, and a uniform prior on the placebo rate.
+\item Show that the likelihoods for nine successes and three failures under binomial and negative binomial sampling are proportional. Why does the classical p value differ?
+\item Read \emph{Matrixx Initiatives v Siracusano}. Which other fallacies in this chapter does the Court's reasoning address?
+\item Construct a dataset with a hundred department level comparisons in which a hierarchical model finds a firm wide disparity although no single department is significant.
+\item Choose a problem from Finkelstein and Levin's \emph{Statistics for Lawyers}. Solve it classically and with Bayesian methods. Do the conclusions differ? Why?
+\end{enumerate}
+
+\section*{Further reading}
+Finkelstein and Levin's \emph{Statistics for Lawyers} \citep{finkelstein2015}; Finkelstein and Fairley \citep{finkelstein1970}; Sellke, Bayarri and Berger \citep{sellke2001}; Lindley's paradox \citep{lindley1957}.

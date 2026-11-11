@@ -1,0 +1,63 @@
+\chapter{Sentencing, Bail and Parole as Decisions}
+\label{ch:sentencing}
+
+\section{After the verdict}
+
+A conviction is not the end of the decisions a criminal justice system makes about a person. Before trial, a court decides whether to release or detain. After conviction, it chooses a sentence. During custody, a parole board decides whether to release early. After release, probation officers decide whether to recall. Each decision is made under uncertainty about the person's future conduct, and each has costs on both sides: the cost of detention to the person, their family and the state, and the cost to potential victims of release. These are the clearest examples in law of decisions with explicit Type I and Type II errors, and they are where risk assessment\index{risk assessment} tools and machine learning have entered the courts most directly. This chapter applies the framework of Chapter~\ref{ch:decisions}.\index{sentencing}\index{parole}
+
+\section{Objectives of sentencing}
+
+Sentencing serves several purposes. Section 57 of the Sentencing Act 2020 in England and Wales lists them: the punishment of offenders, the reduction of crime including by deterrence, the reform and rehabilitation of offenders, the protection of the public, and the making of reparation. American statutes list similar purposes. These objectives conflict. Punishment proportional to culpability may be shorter or longer than protection of the public requires; rehabilitation may be better served in the community than in custody; whether deterrence depends more on the certainty or the severity of punishment turns on the offender's attitude to risk, as Chapter~\ref{ch:becker} discussed.\index{objectives}
+
+Decision theory does not resolve these conflicts, which are matters of value. It makes them explicit by asking the sentencer to state the loss from each outcome. A sentence that is too lenient, relative to culpability, imposes a loss on the value of proportionate punishment; one that is too severe imposes a loss on the offender and the state. A sentence that releases a dangerous offender too soon imposes a loss on future victims; one that holds a person who would not reoffend imposes a loss on that person. Separating the retributive component, which depends on the offence, from the incapacitative component, which depends on predicted risk, clarifies which decisions turn on probabilities and which do not.
+
+\section{Guidelines as decision rules}
+
+In England and Wales, courts must follow sentencing guidelines issued by the Sentencing Council unless it would be contrary to the interests of justice to do so. The guidelines specify categories of harm and culpability, starting points and ranges, and aggravating and mitigating factors. In the United States, the federal Sentencing Guidelines were mandatory until \emph{United States v Booker} made them advisory in 2005 \citep{booker2005}. Guidelines are decision rules: they map features of the case to a recommended action. Their purpose is to reduce noise, the unwarranted variation between sentencers that Chapter~\ref{ch:hume} examines, while preserving the sentencer's ability to depart in unusual cases.\index{sentencing guidelines}
+
+A Bayesian view of guidelines treats them as priors: the guideline range is the default, and the sentencer departs when the specific facts provide strong enough evidence that the default is wrong for this case. This is one way to read the English statutory test. It also suggests how guidelines should be revised: by comparing outcomes, such as reoffending, across sentences for similar cases, and updating the guideline when the evidence shows that a different sentence would better serve the purposes.
+
+\section{Bail}
+
+\subsection{The decision}
+
+Chapter~\ref{ch:decisions} worked a bail example: release if the probability of failure $r$ is below $D/(H+D)$, where $D$ is the cost of detention for the expected time to trial and $H$ the cost of a failure. The threshold rises with delay, since detention costs more the longer it lasts. In systems with long delays, such as the Crown Court backlog in England or the Indian courts of Chapter~\ref{ch:india}, the threshold for detention should be high. In practice, remand populations grow as trials are postponed, though much of that growth is the same detainees being held longer, which says nothing about whether the threshold has moved. The decision theory says the threshold for detention should rise with delay.\index{bail}
+
+\subsection{Type I and Type II errors in bail}
+
+For bail, the Type I error, taking the null hypothesis to be no failure, is detaining someone who would not have failed; the Type II error is releasing someone who does. Type II errors are visible: a released defendant who commits a serious offence makes headlines, and the decision maker may be blamed. Type I errors are invisible: a detained defendant who would not have failed cannot show it. This asymmetry in visibility pushes decision makers toward detention, beyond what the costs justify. A Bayesian bail system makes both error rates visible, by estimating the failure probability of detained defendants from comparable released ones, as Kleinberg and colleagues did with the quasi random assignment of judges \citep{kleinberg2018}.
+
+\subsection{Reform}
+
+Several American jurisdictions have reformed bail to rely less on money and more on risk assessment. New Jersey's reform, effective in 2017, largely eliminated cash bail and required courts to use a risk assessment in deciding release, with a presumption of release for most defendants. Pretrial detention fell sharply, and the state judiciary's reports found small increases in failure to appear and in new criminal activity, which officials said did not amount to the spike that had been feared. The New Jersey experience is evidence that the previous system was making many Type I errors: detaining people who would not have failed. It also shows, as a general point, the importance of the decision rule as well as the risk estimate: the same tool, with different thresholds, produces very different detention rates.
+
+\section{Parole and recall}
+
+Parole boards decide whether a prisoner serving an indeterminate sentence, or one eligible for discretionary release, may be released. In England and Wales, the Parole Board must be satisfied that it is no longer necessary for the protection of the public that the prisoner be confined. The test is a threshold on risk, which the Court of Appeal has said is not to be treated as a matter of burden of proof \citep{sim2003}, but which reflects a view that releasing a dangerous person is worse than detaining a safe one. The ratio of losses implied by the test, and its consequences for the number of people held beyond their tariff, have been controversial, particularly for those serving sentences of imprisonment for public protection, which were abolished prospectively in 2012 but left thousands in custody long after their minimum terms.\index{parole}
+
+A Bayesian parole decision would estimate the prisoner's risk with a calibrated model, combine it with the board's assessment of the individual, and compare the posterior with a threshold set by the stated ratio of losses. The board's reasons would show each step. The model's calibration would be monitored by following released prisoners. As with bail, the visibility asymmetry matters: a released prisoner who reoffends is a public failure, a detained prisoner who would not have reoffended is not, and the system drifts toward over detention unless both errors are measured.
+
+\section{The cost of custody}
+
+Imprisonment is expensive. In England and Wales the direct cost of a prison place runs to tens of thousands of pounds a year, and the indirect costs, lost earnings, effects on families, reduced employment after release, are by some estimates several times the direct costs across a whole system, though such estimates are rough and are not per place figures. These costs belong in the loss function. A sentencing system that ignores them treats custody as free to society, which biases decisions toward it. Several jurisdictions now require or encourage courts to consider the cost and effectiveness of sentences. A Bayesian sentencer would weigh the expected reduction in crime from incapacitation, the deterrent effect of the sentence on others, and the retributive value of proportionate punishment against these costs, with the probabilities estimated from evidence on reoffending and deterrence.
+
+\section{Evidence on what works}
+
+The probabilities in sentencing decisions should come from evidence. Randomised and quasi experimental studies have estimated the effects of incarceration, probation, drug courts, electronic monitoring and other interventions on reoffending. Many find that short custodial sentences have little or no benefit in reducing reoffending compared with community sentences, and some find harm. An Independent Sentencing Review in England and Wales, reporting in 2025, recommended legislation so that custodial sentences of twelve months or less are used only in exceptional circumstances, and expanding alternatives, drawing on such evidence \citep{gauke2025}. A Bayesian sentencing policy would update its estimates as studies accumulate, using hierarchical models to combine evidence across settings, as in the meta analysis of Chapter~\ref{ch:masstorts}.
+
+\section{Machines in sentencing}
+
+Risk assessment tools are the most common use of statistical prediction in criminal courts. Chapter~\ref{ch:lindleyai} discusses their fairness and the impossibility results, and Chapter~\ref{ch:xai} their explanation. The decision theoretic point of this chapter is that a risk tool supplies only one input, the probability of failure, and that the decision depends equally on the losses, through the threshold. A tool that is accurate and calibrated can still produce bad decisions if the threshold is wrong, and a mediocre tool used with a well chosen threshold can improve on unaided judgment. Debates about risk tools that focus only on their accuracy miss half of the problem.
+
+\section*{Notes and Questions}
+\addcontentsline{toc}{section}{Notes and Questions}
+\begin{enumerate}[label=\arabic*.]
+\item A bail decision has $H = 30$ and $D = 1$ per month of detention. Find the release threshold if the expected time to trial is three months, and if it is eighteen months.
+\item Explain why the visibility of Type II errors in bail and parole pushes decision makers toward detention. How could a system measure Type I errors?
+\item A guideline recommends a starting point of two years. Under what evidence should a sentencer depart? Express the answer as a Bayesian update.
+\item New Jersey's reform reduced pretrial detention with only small increases in failures. What does this imply about the previous system's error rates?
+\item Write a parole decision for a hypothetical prisoner that states the estimated risk, the threshold and the reasons for each, in the style recommended in this chapter.
+\end{enumerate}
+
+\section*{Further reading}
+Kleinberg and colleagues on bail \citep{kleinberg2018}; \emph{United States v Booker} \citep{booker2005}; the reports of the Sentencing Council; and the Independent Sentencing Review \citep{gauke2025}.

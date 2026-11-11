@@ -1,0 +1,12 @@
+Simpson P(partner | battered, murdered) = 0.889
+Island N=1e5, p=1e-6: 0.909
+Island with brother: 0.98
+Blackstone threshold: 0.909
+SBB bounds p=.05, .01: 2.46 7.99
+Lindley BF01 z=2 n=1e4: 13.5
+Castaneda log10 BF: 141.6
+Castaneda sd from mean: 29.1
+Merton PD sigma=.2/.4: 0.168 0.37
+Solvency combination: [0.051, 0.019]
+Insurance Act payment: 4.0
+Cab problem: 0.414
